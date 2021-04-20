@@ -15,8 +15,9 @@ export default function GetPlanterDetails() {
     plantId: 1,
     seedId: 1,
   };
+  let errorMsg="Unable to fetch the planter"
   const idRef = React.createRef();
-  let [state, setformState] = useState({
+  let [state, setNewState] = useState({
     id: undefined,
     planter: undefined,
     errMsg: undefined,
@@ -31,14 +32,21 @@ export default function GetPlanterDetails() {
       id:fieldValue,
       planter: undefined,
       errMsg: undefined,
-    };
-    setformState(newState);
-  };
+      
+    }
+    setNewState(newState);
+  }
   const submitHandler = (event) => {
     console.log("Inside Submit Handler");
     event.preventDefault();
-    
+    let newState = {
+      ...state,
+      planter: undefined,
+      errMsg: errorMsg,
+    }
+    setNewState(newState);
   };
+
 
   return (
   <div>

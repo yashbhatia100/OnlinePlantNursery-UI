@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import DisplayPlanter from "./DisplayPlanter";
 
 export default function AddPlanter() {
-  const planter= {
+  const planter = {
     id: 1,
     planterHeight: 10,
     planterCapacity: 100,
@@ -14,6 +14,7 @@ export default function AddPlanter() {
     plantId: 1,
     seedId: 1,
   };
+  let errorMsg = "Cannot add the Planter";
 
   const planterHeightRef = React.createRef();
   const planterCapacityRef = React.createRef();
@@ -42,11 +43,13 @@ export default function AddPlanter() {
   const [state, setNewState] = useState(initialState);
 
   const submitHandler = (event) => {
+    console.log("Inside submit Handler");
     event.preventDefault();
     setNewState({ ...state, formstatus: "Form is submitted Successfully" });
   };
 
   const changeHandler = (ref) => {
+    console.log("Inside changeHandler");
     const field = ref.current;
     const fieldName = field.name;
     const fieldValue = field.value;
@@ -175,7 +178,7 @@ export default function AddPlanter() {
       {state.planter ? (
         <div>
           <h3>Planter Added Successfully</h3>
-          <DisplayPlanter planter={ state.planter} />
+          <DisplayPlanter planter={state.planter} />
         </div>
       ) : (
         ""

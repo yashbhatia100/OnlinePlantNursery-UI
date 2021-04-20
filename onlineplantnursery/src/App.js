@@ -3,6 +3,7 @@ import AddPlanter from "./component/Planter/AddPlanter";
 import DisplayPlanter from "./component/Planter/DisplayPlanter";
 import DisplayPlanters from "./component/Planter/DisplayPlanters";
 import GetPlanterDetails from "./component/Planter/GetPlanterDetails";
+import UpdateCost from "./component/Planter/UpdateCost";
 
 function App() {
   const planter1 = {
@@ -30,19 +31,15 @@ function App() {
     seedId: 1,
   };
 
-const planters=[planter1,planter2];
+  const planters = [planter1, planter2];
 
   return (
     <div>
-      <h2>Welcome To Online Plant Nursery</h2>
-      
       {/*<DisplayPlanter planter={planter1} />*/}
-      <GetPlanterDetails/>
-       {/*<AddPlanter/>*/}
-    
-       {/* <DisplayPlanters planters={planters}/>*/}
-      
-     
+      {/*<GetPlanterDetails/>*/}
+      {/*  <AddPlanter/>*/}
+      <UpdateCost />
+      {/* <DisplayPlanters planters={planters}/>*/}
     </div>
   );
 }
