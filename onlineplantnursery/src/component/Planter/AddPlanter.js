@@ -36,6 +36,7 @@ export default function AddPlanter() {
     planterCostRef: undefined,
     plantIdRef: undefined,
     seedIdRef: undefined,
+    product: undefined,
     errMsg: undefined,
     planter: undefined,
     formstatus: "",
@@ -63,7 +64,7 @@ export default function AddPlanter() {
   };
 
   return (
-    <div>
+    <div className="form-group">
       <form onSubmit={(event) => submitHandler(event)}>
         <div>
           <label>Enter the planterHeight</label>
@@ -72,90 +73,153 @@ export default function AddPlanter() {
             type="number"
             ref={planterHeightRef}
             onChange={() => changeHandler(planterHeightRef)}
+            className="form-control"
           />
         </div>
 
-        <div>
+        <div className="form-group">
           <label>Enter the planterCapacity</label>
           <input
             name="planterCapacity"
             type="number"
             ref={planterCapacityRef}
             onChange={() => changeHandler(planterCapacityRef)}
+            className="form-control"
           />
         </div>
 
-        <div>
+        <div className="form-group">
           <label>Enter the planterDrainageHoles</label>
           <input
             name="planterDrainageHoles"
             type="number"
             ref={planterDrainageHolesRef}
             onChange={() => changeHandler(planterDrainageHolesRef)}
+            className="form-control"
           />
         </div>
 
-        <div>
+        <div className="form-group">
           <label>Enter the PlanterColor</label>
           <input
             name="planterColor"
             type="number"
             ref={planterColorRef}
             onChange={() => changeHandler(planterColorRef)}
+            className="form-control"
           />
         </div>
 
-        <div>
+        <div className="form-group">
           <label>Enter the PlanterShape</label>
           <input
             name="planterShape"
             type="text"
             ref={planterShapeRef}
             onChange={() => changeHandler(planterShapeRef)}
+            className="form-control"
           />
         </div>
 
-        <div>
+        <div className="form-group">
           <label>Enter the PlanterStock</label>
           <input
             name="planterStock"
             type="number"
             ref={planterStockRef}
             onChange={() => changeHandler(planterStockRef)}
+            className="form-control"
           />
         </div>
 
-        <div>
+        <div className="form-group">
           <label>Enter the PlanterCost</label>
           <input
             name="planterCost"
             type="number"
             ref={planterCostRef}
             onChange={() => changeHandler(planterCostRef)}
+            className="form-control"
           />
         </div>
-
-        <div>
+        {/*
+        <div className="form-group">
           <label>Enter the PlantId</label>
           <input
             name="plantId"
             type="number"
             ref={plantIdRef}
             onChange={() => changeHandler(plantIdRef)}
+            className="form-control"
           />
         </div>
-        <div>
+        </div>    
+        <div  className="form-group">
           <label>Enter the SeedId</label>
           <input
             name="seedId"
             type="number"
             ref={seedIdRef}
             onChange={() => changeHandler(seedIdRef)}
+            className="form-control"
           />
+        </div>
+          */}
+        <div>
+          <p>Select an option</p>
+
+          <div>
+            <label>Plant</label>
+            <input
+              name="product"
+              type="radio"
+              value="plant"
+              onChange={() => {
+                let newState = { ...state, product: "plant" };
+                setNewState(newState);
+              }}
+            />
+          </div>
+
+          <div>
+            <label>Seed</label>
+            <input
+              name="product"
+              type="radio"
+              value="seed"
+              onChange={() => {
+                let newState = { ...state, product: "seed" };
+                setNewState(newState);
+              }}
+            />
+          </div>
+
+          {state.product == "plant" ? (
+            <div>
+              <label>Plant</label>
+
+              <input type="text" />
+            </div>
+          ) : (
+            ""
+          )}
+
+          {state.product == "seed" ? (
+            <div>
+              <label>Seed</label>
+
+              <input type="text" />
+            </div>
+          ) : (
+            ""
+          )}
         </div>
 
         <br />
-        <button type="submit"> Add Planter</button>
+        <button className="btn btn-primary" type="submit">
+          {" "}
+          Add Planter
+        </button>
       </form>
       <h2>{state.formstatus}</h2>
       <h3>Details Entered are </h3>

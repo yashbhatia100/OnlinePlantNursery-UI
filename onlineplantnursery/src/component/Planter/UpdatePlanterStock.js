@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DisplayPlanter from "./DisplayPlanter";
-export default function UpdateCost() {
+export default function UpdatePlanterStock() {
   const planter = {
     id: 1,
     planterHeight: 10,
@@ -15,9 +15,9 @@ export default function UpdateCost() {
   };
 
   let errMsg = "Cannot process this response";
-  const planterCostRef = React.createRef();
+  const planterStockRef = React.createRef();
   const initialState = {
-    planterCost: undefined,
+    planterStock: undefined,
     planter: undefined,
     errMsg: undefined,
   };
@@ -29,12 +29,12 @@ export default function UpdateCost() {
     setNewState(newState);
   };
 
-  const setUpdateCostHandler = (event) => {
-    const field = planterCostRef.current;
+  const setUpdateStockHandler = (event) => {
+    const field = planterStockRef.current;
     const fieldValue = field.value;
     const newState = {
       ...state,
-      planterCost: fieldValue,
+      planterStock: fieldValue,
       planter: undefined,
       errMsg: undefined,
     };
@@ -43,20 +43,20 @@ export default function UpdateCost() {
 
   return (
     <div>
-      <h2>Update Planter Cost</h2>
+      <h2>Update Planter Stock</h2>
       <form on onSubmit={submitHandler}>
-        <label>Enter Planter Cost</label>
+        <label>Enter Planter Stock</label>
         <input
-          name="planterCost"
+          name="planterStock"
           type="number"
-          ref={planterCostRef}
-          onChange={() => setUpdateCostHandler()}
+          ref={planterStockRef}
+          onChange={() => setUpdateStockHandler()}
         />
         <br />
         <button>Submit</button>
       </form>
-      <div>Planter Cost is {state.planterCost}</div>
-      <h3>Updated Planter Cost response</h3>
+      <div>Planter Stock is {state.planterCost}</div>
+      <h3>Updated Planter Stock response</h3>
       {state.planter ? (
         <div>
           <DisplayPlanter planter={state.planter} />

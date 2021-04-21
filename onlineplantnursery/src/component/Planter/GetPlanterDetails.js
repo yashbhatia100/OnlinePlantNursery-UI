@@ -49,19 +49,20 @@ export default function GetPlanterDetails() {
 
 
   return (
-  <div>
+  <div className="container">
       <h2>Get Planter Details</h2>
       <form onSubmit={(event)=>submitHandler(event)}>
-          <div>
+          <div className="form-group">
               <label>Enter the Planter ID</label>
               <input
               name="id"
               type="number"
               ref={idRef}
               onChange={()=>setIdHandler()}
+              className="form-control"
               />
           </div>
-          <button>Get Planter</button>
+          <button className="btn btn-primary">Get Planter</button>
       </form>
 
       {state.planter ? (
