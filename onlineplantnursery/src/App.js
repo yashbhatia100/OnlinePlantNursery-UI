@@ -1,10 +1,16 @@
 
 import './App.css';
+import AddSeed from './component/AddSeed';
+import DisplaySeedDetails from './component/DisplaySeedDetails';
+import GetSeedById from './component/GetSeedById';
 
 function App() {
+
   return (
     <div >
-      Welcome To Online Plant Nursery
+      {/*<DisplaySeedDetails seed={seed}/>*/}
+      {/*<GetSeedById />*/}
+      <AddSeed />
     </div>
   );
 }
