@@ -2,7 +2,8 @@ export default function DisplayPlanter({ planter }) {
   return (
     <span>
       <div class="container-fluid">
-        <table className="table  table-striped"> 
+        <h3>Get Planter By ID</h3>
+        <table className="table  table-striped">
           <tr>
             <th> Id </th>
             <th> Height </th>

@@ -42,36 +42,40 @@ export default function UpdatePlanterStock() {
   };
 
   return (
-    <div>
-      <h2>Update Planter Stock</h2>
-      <form on onSubmit={submitHandler}>
-        <label>Enter Planter Stock</label>
-        <input
-          name="planterStock"
-          type="number"
-          ref={planterStockRef}
-          onChange={() => setUpdateStockHandler()}
-        />
-        <br />
-        <button>Submit</button>
-      </form>
-      <div>Planter Stock is {state.planterCost}</div>
-      <h3>Updated Planter Stock response</h3>
-      {state.planter ? (
-        <div>
-          <DisplayPlanter planter={state.planter} />
-        </div>
-      ) : (
-        ""
-      )}
-      {state.errMsg ? (
-        <div>
-          Request was not successful <br />
-          {state.errMsg}
-        </div>
-      ) : (
-        ""
-      )}
+    <div className="container">
+      <div className="form-group">
+        <h2>Update Planter Stock</h2>
+        <form on onSubmit={submitHandler}>
+          <label>Enter Planter Stock</label>
+          <input
+            name="planterStock"
+            type="number"
+            placeholder="Enter the Planter Stock"
+            ref={planterStockRef}
+            onChange={() => setUpdateStockHandler()}
+            className="form-control"
+          />
+          <br />
+          <button className="btn btn-primary">Submit</button>
+        </form>
+        <div>Planter Stock is {state.planterCost}</div>
+        <h3>Updated Planter Stock response</h3>
+        {state.planter ? (
+          <div>
+            <DisplayPlanter planter={state.planter} />
+          </div>
+        ) : (
+          ""
+        )}
+        {state.errMsg ? (
+          <div>
+            Request was not successful <br />
+            {state.errMsg}
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
     </div>
   );
 }

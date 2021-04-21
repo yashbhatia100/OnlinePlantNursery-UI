@@ -2,8 +2,9 @@ import "./App.css";
 import AddPlanter from "./component/Planter/AddPlanter";
 import DisplayPlanter from "./component/Planter/DisplayPlanter";
 import DisplayPlanters from "./component/Planter/DisplayPlanters";
+import GetAllPlanters from "./component/Planter/GetAllPlanters";
 import GetPlanterDetails from "./component/Planter/GetPlanterDetails";
-import UpdateCost from "./component/Planter/UpdatePlanterStock";
+import UpdatePlanterStock from "./component/Planter/UpdatePlanterStock";
 
 function App() {
   const planter1 = {
@@ -34,18 +35,16 @@ function App() {
   const planters = [planter1, planter2];
 
   return (
-    <div classname="conatiner"> 
-      {/*  <GetPlanterDetails/>*/}
-      
-      {/* UpdatePlanterStock />*/}
-    
+    <div>
+      <GetPlanterDetails />
+
+      <UpdatePlanterStock />
       {/*  <DisplayPlanters planters={planters}/> */}
-      <AddPlanter/>
-     
-     
-      
-      {/*<DisplayPlanter planter={planter1}/>*/}
-      
+
+      <AddPlanter />
+      <GetAllPlanters />
+
+      <DisplayPlanter planter={planter1} />
     </div>
   );
 }
