@@ -39,7 +39,7 @@ function App() {
      <GetCustomer/>
      <br/>
      <Addcustomer/>
-     <DisplayCustomer customer = {customer1}c/>
+     
      </div>
   );
 }
@@ -48,27 +48,3 @@ export default App;
      
 
 
-{/*</div>function App() {
-  const customer1 = {
-    customerId : 1,
-    customerName : "Saurabh",
-    customerEmail : "abc@gmail.com",
-    userName: "saurabh123",
-    password : "xyz421",
-    houseNo : 119,
-    colony : "ipsum",
-    city  : "chennai",
-    State: "TamilNadu",
-    pincode : 600001,
-  };
-  return (
-    <div >
-      Welcome To Online Plant Nursery<br/><br/>
-      <AddCustomer/>
-      <DisplayCustomer customer = {customer1}c/>
->>>>>>> 9cfee63596f929ca00be706b9a2ff34f863a2ca1
-    </div>
-  );
-}
-
-export default App;*/}
