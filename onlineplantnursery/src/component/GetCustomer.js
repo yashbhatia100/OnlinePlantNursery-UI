@@ -37,13 +37,19 @@ export default function GetCustomer() {
   };
   return (
     <div>
+      <h3> Get Customer By ID</h3>
+      <br/>
       <form onSubmit={submitHandler}>
         <div>
           <label> Enter Id</label>
           <input name="id" type="number" ref={idRef} onChange={setFieldState} />
+          
         </div>
+        <br/>
         <button>Get Customer</button>
       </form>
+      <br/>
+
       {currentState.customer ? (
         <div>
           <DisplayCustomer customer={currentState.customer} />

@@ -62,6 +62,8 @@ const changeHandler = (ref) => {
 
   return(
     <div>
+      <h3> Add Customer</h3>
+      <br/>
     <form onSubmit = {(event) => submitHandler(event)}>
     <div>
     <label>Name</label>
@@ -121,6 +123,7 @@ const changeHandler = (ref) => {
  {state.customer ? (
    <div>
      <h3>Customer Added Successfully</h3>
+     <br/>
      <DisplayCustomer customer={ state.customer} />
    </div>
  ) : (

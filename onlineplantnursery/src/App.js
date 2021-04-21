@@ -25,6 +25,7 @@ function App() {
      <h2>Welcome To Online Plant Nursery</h2> 
      
      <GetCustomer/>
+     <br/>
      <Addcustomer/>
      </div>
   );
