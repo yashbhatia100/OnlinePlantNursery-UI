@@ -1,21 +1,20 @@
 import React, { useState } from "react";
 import commonStyle from "./commonStyle.module.css";
-import DisplayCustomer from './DisplayCustomer';
+import DisplayCustomer from "./DisplayCustomer";
 
 export default function GetCustomer() {
-    let customer1={
-        id: 1,
-        customerName: "haha",
-        customerEmail: "haha@gmail.com",
-        username:"haha123",
-        addressId:234,
-        houseNo:"M56",
-        colony:"danger",
-        city:"Chennai",
-        state:"Tamil Nadu",
-        pincode:123456
-    
-      }
+  let customer1 = {
+    id: 1,
+    customerName: "haha",
+    customerEmail: "haha@gmail.com",
+    username: "haha123",
+    addressId: 234,
+    houseNo: "M56",
+    colony: "danger",
+    city: "Chennai",
+    state: "Tamil Nadu",
+    pincode: 123456,
+  };
   const idRef = React.createRef();
 
   const initialState = {
@@ -38,17 +37,16 @@ export default function GetCustomer() {
   return (
     <div>
       <h3> Get Customer By ID</h3>
-      <br/>
+      <br />
       <form onSubmit={submitHandler}>
-        <div>
+        <div className="form-group">
           <label> Enter Id</label>
-          <input name="id" type="number" ref={idRef} onChange={setFieldState} />
-          
+          <input name="id" type="number" ref={idRef} onChange={setFieldState} className="form-control"/>
         </div>
-        <br/>
-        <button>Get Customer</button>
+        <br />
+        <button className= "btn btn-primary">Get Customer</button>
       </form>
-      <br/>
+      <br />
 
       {currentState.customer ? (
         <div>

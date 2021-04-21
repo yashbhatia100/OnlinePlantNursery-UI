@@ -3,11 +3,14 @@ import DisplayCustomer from "./DisplayCustomer";
 
 export default function  AddCustomer(){
 const customer = {
-    customerName : "Saurabh",
+
+    id : 1,
+    customerName : "abc",
     customerEmail : "abc@gmail.com",
-    userName: "saurabhkg",
+    username: "abckg",
     password : "xyz421",
     houseNo : 119,
+    addressId : 123,
     colony : "ipsum",
     city  : "chennai",
     State: "TamilNadu",
@@ -35,7 +38,7 @@ const initialState = {
     cityref: undefined,
     stateref : undefined,
     pincoderef: undefined,
-    customer: undefined,
+    customer: customer,
     errMsg: undefined,
     formstatus : "",
 };
