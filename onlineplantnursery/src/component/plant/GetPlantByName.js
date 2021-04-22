@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import DisplayPlant from "./DisplayPlant";
+import commonStyle from './commonStyle.module.css';
 
-export default function GetPlantByName(){
+export default function GetPlantByName(props){
 
     let mockPlant={
         plantHeight:100, 
         plantSpread:"2m", 
-        commonName:"Rose", 
+        commonName:"Rose",  
         bloomTime:"2 months",
         plantUse:"decoration",
         difficultyLevel:"easy",
@@ -16,47 +17,29 @@ export default function GetPlantByName(){
         plantStock:10,
         plantCost:50
     }
+    
+    const response = {plant:mockPlant, errMsg:undefined};
 
-    const nameRef = React.createRef();
-
-    const initialState = {name:undefined, plant:undefined, errMsg:undefined};
-
-    const [currentState, setNewState] = useState(initialState);
-
-    const submitHandler=(event)=>{
-        event.preventDefault();
-    }
-
-    const changeHandler=()=>{
-        const fieldValue= nameRef.current.value;
-        const newState = {...currentState, name:fieldValue};
-        setNewState(newState);
-    }
+    //const [currentState, setNewState]=useState({name:undefined});
 
     return(
         <div>
-            <h3>Get Plant By Name</h3><br/>
-            <form onSubmit={submitHandler}>
-                <div className="form-group">
-                <label>Enter Plant Name: </label>
-                <input type="text" name="commonName" ref={nameRef} onChange={changeHandler} className="form-control"/><br/>
-                <button className="btn btn-primary">Get Plant</button>
-                </div>
-            </form>
-            <br/>
-
-            {currentState.plant?(
+            <h3>Get Plant By Name</h3>
+            <div className="mt-5">
+            {response.plant?(
                 <div>
-                    <DisplayPlant plant={currentState.plant}/>
+                    <DisplayPlant plant={response.plant}/>
                 </div>
             ):''}
-            {currentState.errMsg?(
-                <div>
+
+            {response.errMsg?(
+                <div className={commonStyle.error}>
                     Request cannot be processed
                     <br/>
-                    {currentState.errMsg}
+                    {response.errMsg}
                 </div>
             ):''}
+            </div>
         </div>
     );
 }
