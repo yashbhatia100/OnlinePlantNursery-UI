@@ -1,11 +1,13 @@
 import  React,{ useState } from "react";
 import DisplayCustomer from "./DisplayCustomer";
+import validationMessage from '../validationMessage';
+import commonStyle from "./commonStyle.module.css";
 
 export default function  AddCustomer(){
 const customer = {
 
-    id : 1,
-    customerName : "abc",
+    id : 2,
+    customerName : "Saurabh",
     customerEmail : "abc@gmail.com",
     username: "abckg",
     password : "xyz421",
@@ -38,10 +40,12 @@ const initialState = {
     cityref: undefined,
     stateref : undefined,
     pincoderef: undefined,
-    customer: customer,
-    errMsg: undefined,
     formstatus : "",
+    validations: { customerName: undefined, pincode: undefined },
+    
 };
+
+const response = {customer: customer, errMsg: undefined};
 
 const [state, setNewState] = useState(initialState);
 
@@ -54,89 +58,130 @@ const changeHandler = (ref) => {
     const field = ref.current;
     const fieldName = field.name;
     const fieldValue = field.value;
-    let newState = {
+    let validationMsg;
+    if (ref === customerNameref) {
+      validationMsg = validateCustomerName(fieldValue);
+    }
+
+    if (ref === pincoderef) {
+      validationMsg = validatePincode(fieldValue);
+    }
+
+    const newValidations = { ...state.validations, [fieldName]: validationMsg };
+    const newState = {
       ...state,
       [fieldName]: fieldValue,
       customer: undefined,
       errMsg: undefined,
+      validations: newValidations
     };
-    setNewState(newState);
-  };
 
+    setNewState(newState);
+   
+  };
+  const validateCustomerName = (customerName) => {
+    if (customerName.length < 1) {
+      return validationMessage.invalidName;
+    }
+    return undefined;
+  }
+  const validatePincode = (pincode) => {
+    if (pincode.length < 6) {
+      return validationMessage.invalidPincode;
+    }
+    return undefined;
+  }
+   
   return(
     <div>
       <h3> Add Customer</h3>
       <br/>
     <form onSubmit = {(event) => submitHandler(event)}>
-    <div>
+    <div className="form-group">
     <label>Name</label>
-    <input name="customerName" type = "text" ref={customerNameref} onChange={()=> changeHandler(customerNameref) } />
-    </div><br/>
+    <input name="customerName" type = "text" ref={customerNameref} onChange={()=> changeHandler(customerNameref) }className="form-control" />
+    
+    {state.validations.customerName ? (
+      <div className={commonStyle.error}>
+        {state.validations.customerName} 
+      </div>
+    ) : (
+      ""
+    )}
+  </div>
 
    
-    <div>
+    <div className="form-group">
     <label>Email</label>
-    <input name="customerEmail" type = "email" ref={customerEmailref} onChange={()=> changeHandler(customerEmailref) } />
-    </div><br/>
+    <input name="customerEmail" type = "email" ref={customerEmailref} onChange={()=> changeHandler(customerEmailref) }className="form-control" />
+    </div>
 
-    <div>
+    <div className="form-group">
     <label>UserName</label>
-    <input name="userName" type = "text" ref={userNameref} onChange={()=> changeHandler(userNameref) } />
-    </div><br/>
+    <input name="userName" type = "text" ref={userNameref} onChange={()=> changeHandler(userNameref) }className="form-control" />
+    </div>
 
-    <div>
+    <div className="form-group">
     <label>Password</label>
-    <input name="password" type = "password" ref={passwordref} onChange={()=> changeHandler(passwordref) } />
-    </div><br/>
+    <input name="password" type = "password" ref={passwordref} onChange={()=> changeHandler(passwordref) }className="form-control" />
+    </div>
 
-    <div>
+    <div className="form-group">
     <label>House No.</label>
-    <input name="houseNo" type = "number"  ref={houseNoref} onChange={()=> changeHandler(houseNoref) } /><br/>
-    </div><br/>
+    <input name="houseNo" type = "number"  ref={houseNoref} onChange={()=> changeHandler(houseNoref) }className="form-control" /><br/>
+    </div>
 
-    <div>
+    <div className="form-group">
     <label>Colony</label>
-    <input name="colony" type = "text" ref={colonyref} onChange={()=> changeHandler(colonyref) } /><br/>
-    </div><br/>
+    <input name="colony" type = "text" ref={colonyref} onChange={()=> changeHandler(colonyref) }className="form-control" /><br/>
+    </div>
 
-    <div>
+    <div className="form-group">
     <label>City</label>
-    <input name="city" type = "text" ref={cityref} onChange={()=> changeHandler(cityref) } /><br/>
-    </div><br/>
+    <input name="city" type = "text" ref={cityref} onChange={()=> changeHandler(cityref) }className="form-control" /><br/>
+    </div>
 
-    <div>
+    <div className="form-group">
     <label>State</label>
-    <input name="State" type = "text" ref={stateref} onChange={()=> changeHandler(stateref) } /><br/>
-    </div><br/>
+    <input name="State" type = "text" ref={stateref} onChange={()=> changeHandler(stateref) }className="form-control" /><br/>
+    </div>
 
-    <div>
+    <div className="form-group">
     <label>Pincode</label>
-    <input name="pincode" type = "number" ref={pincoderef} onChange={()=> changeHandler(pincoderef) } /><br/>
-    </div> <br/>
+    <input name="pincode" type = "number" ref={pincoderef} onChange={()=> changeHandler(pincoderef) }className="form-control" /><br/>
+     
+    {state.validations.pincode ? (
+      <div className={commonStyle.error}>
+        {state.validations.pincode} 
+      </div>
+    ) : (
+      ""
+    )}
+  </div>
 
     <br/>
 
-    <button >AddCustomers</button>
+    <button className= "btn btn-primary" >AddCustomers</button>
  </form>
  <h2>{state.formstatus}</h2><br/>
  <h3>Details: <br/></h3>
  
 
  <br />
- {state.customer ? (
+ {response.customer ? (
    <div>
      <h3>Customer Added Successfully</h3>
      <br/>
-     <DisplayCustomer customer={ state.customer} />
+     <DisplayCustomer customer={ response.customer} />
    </div>
  ) : (
    ""
  )}
- {state.errMsg ? (
+ {response.errMsg ? (
    <div>
      <h3> Customer not Added Successfully</h3>
      <br />
-     {state.errMsg}
+     {response.errMsg}
    </div>
  ) : (
    ""

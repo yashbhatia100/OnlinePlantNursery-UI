@@ -18,7 +18,7 @@ function App() {
     pincode:123456
 
   }*/
-  const customer1 = {
+ /* const customer1 = {
     customerId : 1,
     customerName : "Saurabh",
     customerEmail : "abc@gmail.com",
@@ -29,7 +29,7 @@ function App() {
     city  : "chennai",
     State: "TamilNadu",
     pincode : 600001,
-  };
+  };*/
 
 
   return (
@@ -38,7 +38,7 @@ function App() {
      
      <GetCustomer/>
      <br/>
-     <Addcustomer/>
+     {<Addcustomer/>}
      
      </div>
   );
