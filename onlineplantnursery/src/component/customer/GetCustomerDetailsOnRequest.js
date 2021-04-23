@@ -4,7 +4,7 @@ import DisplayCustomer from "./DisplayCustomer";
 import validationMessage from '../../validationMessage';
 
 export default function GetCustomerDetailsOnRequest() {
- /* let customer1 = {
+ let customer1 = {
     id: 1,
     customerName: "haha",
     customerEmail: "haha@gmail.com",
@@ -15,15 +15,16 @@ export default function GetCustomerDetailsOnRequest() {
     city: "Chennai",
     state: "Tamil Nadu",
     pincode: 123456,
-  };*/
+  }
 
   const idRef = React.createRef();
 
-  const response = { customer:undefined , errMsg: undefined };
+  const response = { customer:customer1 , errMsg: undefined };
 
   const initialState = {
     id: undefined,
     errMsg:undefined,
+    customer: undefined,
     validations: {id:undefined },
   };
 
