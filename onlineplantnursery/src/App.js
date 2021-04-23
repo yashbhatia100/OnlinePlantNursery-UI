@@ -14,11 +14,9 @@ function App() {
   return (
     <div className="container mt-5">
      <h2>Welcome To Online Plant Nursery</h2> 
-
-    
-    
      <br/>
-     {<Addcustomer/>} 
+     {/*<Addcustomer/>*/}
+     <GetCustomerDetailsOnRequest/>
      </div>
   );
 }
