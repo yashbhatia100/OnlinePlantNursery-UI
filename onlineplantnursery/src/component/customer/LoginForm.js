@@ -26,7 +26,7 @@ export default function LoginForm (){
           username:undefined,
           password:undefined,
           errMsg: undefined,
-          validations: {username: undefined, password:undefined},
+          validations: {username: undefined, password:undefined}
       };
 
       const [currentState, setNewState]=useState(initialState);

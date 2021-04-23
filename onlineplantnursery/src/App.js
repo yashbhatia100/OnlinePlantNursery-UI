@@ -5,6 +5,7 @@ import GetCustomer from './component/customer/GetCustomer';
 import Addcustomer from './component/customer/Addcustomer';
 import GetCustomerDetailsOnRequest from './component/customer/GetCustomerDetailsOnRequest';
 import LoginForm from './component/customer/LoginForm';
+import ChangePassword from './component/customer/ChangePassword';
 
 function App() {
 
@@ -16,7 +17,8 @@ function App() {
      <h2>Welcome To Online Plant Nursery</h2> 
      <br/>
      {/*<Addcustomer/>*/}
-     <GetCustomerDetailsOnRequest/>
+     {/*<GetCustomerDetailsOnRequest/>*/}
+     <ChangePassword/>
      </div>
   );
 }

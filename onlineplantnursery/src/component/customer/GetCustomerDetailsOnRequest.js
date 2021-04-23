@@ -97,6 +97,7 @@ export default function GetCustomerDetailsOnRequest() {
       <div className="mt-5">
         {response.customer ? (
           <div>
+            <h3>Details</h3>
             <DisplayCustomer customer={response.customer} />
           </div>
         ) : (
