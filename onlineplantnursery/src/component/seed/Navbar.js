@@ -1,4 +1,4 @@
-import { BrowserRouter as Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 export default function Navbar() {
 
@@ -13,7 +13,7 @@ export default function Navbar() {
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item">
                             <Link to="/allseeds" className="nav-link">
-                                Get All Plants
+                                Get All Seeds
                             </Link>
                         </li>
                         <li className="nav-item">
@@ -23,7 +23,7 @@ export default function Navbar() {
                         </li>
                         <li className="nav-item">
                             <Link to="/seedbyid/:seedId" className="nav-link">
-                                Get Seed By Name
+                                Get Seed By Id
                             </Link>
                         </li>
                         <li className="nav-item">

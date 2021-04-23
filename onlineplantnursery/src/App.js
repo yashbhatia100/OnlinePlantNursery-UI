@@ -1,4 +1,4 @@
-import { BrowserRouter as Route, Router, Switch } from 'react-router-dom';
+import { BrowserRouter as  Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import AddSeed from './component/seed/AddSeed';
 import GetAllSeeds from './component/seed/GetAllSeeds';
