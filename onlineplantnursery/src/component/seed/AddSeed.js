@@ -269,7 +269,7 @@ export default function AddSeed() {
         </div>
         <div className="form-group">
           <label>Enter the seedsCost</label>
-          <input
+          <input 
             name="seedsCost"
             type="number"
             ref={seedsCostRef}

@@ -11,26 +11,31 @@ export default function Navbar() {
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
-                        <li className="nav-item">
-                            <Link to="/allseeds" className="nav-link">
-                                Get All Seeds
-                            </Link>
-                        </li>
-                        <li className="nav-item">
+                    <   li className="nav-item">
                             <Link to="/addseed" className="nav-link">
                                 Add Seed
                             </Link>
                         </li>
+
                         <li className="nav-item">
                             <Link to="/seedbyid/:seedId" className="nav-link">
                                 Get Seed By Id
                             </Link>
                         </li>
+
                         <li className="nav-item">
                             <Link to="seedbyidonrequest" className="nav-link">
                                 Get Seed By id On Request
                             </Link>
                         </li>
+
+                        <li className="nav-item">
+                            <Link to="/allseeds" className="nav-link">
+                                Get All Seeds
+                            </Link>
+                        </li>
+                        
+                        
                         <li className="nav-item">
                             <Link to="/seedsbytype" className="nav-link">
                                 Get Seeds By Type

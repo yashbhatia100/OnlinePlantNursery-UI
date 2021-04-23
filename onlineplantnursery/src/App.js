@@ -20,9 +20,11 @@ function App() {
 
             <div className="col-md-9">
         <Switch>
-          
+          <Route exact path="/addseed" component={AddSeed} />
           <Route exact path="/seedbyid/:seedId" component={GetSeedById} />
-          
+          <Route exact path="/seedbyidonrequest" component={GetSeedByIdRequest} />
+          <Route exact path="/allseeds" component={GetAllSeeds} />
+          <Route exact path="/seedsbytype" component={GetAllSeedsByType} />
         </Switch>
         </div>
         </div>
