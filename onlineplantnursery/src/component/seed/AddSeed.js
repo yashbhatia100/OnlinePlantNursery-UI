@@ -30,22 +30,27 @@ export default function AddSeed() {
   const seedsPerPacketRef = React.createRef();
 
   const initialState = {
-    commonNameRef: undefined,
-    bloomTimeRef: undefined,
-    wateringRef: undefined,
-    difficultyLevelRef: undefined,
-    temparatureRef: undefined,
-    typeOfSeedsRef: undefined,
-    seedsDescriptionRef: undefined,
-    seedsStockRef: undefined,
-    seedsCostRef: undefined,
-    seedsPerPacketRef: undefined,
-    formstatus: "",
-    validations:{commonName:undefined, seedsStock:undefined}
+    commonName: undefined,
+    bloomTime: undefined,
+    watering: undefined,
+    difficultyLevel: undefined,
+    temparature: undefined,
+    typeOfSeeds: undefined,
+    seedsDescription: undefined,
+    seedsStock: undefined,
+    seedsCost: undefined,
+    seedsPerPacket: undefined,
+    validations:{commonName:undefined, 
+      bloomTime: undefined,  
+      typeOfSeeds: undefined,
+      seedsStock:undefined,
+      seedsCost: undefined,
+    }
   };
-  const [state, setNewState] = useState(initialState);
 
-  const response ={seed:seed,error:""};
+  const response ={seed:seed,error:undefined};
+
+  const [state, setNewState] = useState(initialState);
 
   const submitHandler = (event) => {
     console.log("Inside submitHandler");
@@ -59,11 +64,23 @@ export default function AddSeed() {
     const fieldName = field.name;
     const fieldValue = field.value;
     let validationMsg;
+    
     if(ref===commonNameRef){
       validationMsg=validationCommonName(fieldValue);
     }
+    if(ref===bloomTimeRef){
+      validationMsg=validationBloomTime(fieldValue);
+    }
+    
+    if(ref===typeOfSeedsRef){
+      validationMsg=validationTypeOfSeeds(fieldValue);
+    }
+    
     if(ref===seedsStockRef){
       validationMsg=validationSeedsStock(fieldValue);
+    }
+    if(ref===seedsCostRef){
+      validationMsg=validationSeedsCost(fieldValue);
     }
     const newValidations={...state.validations,[fieldName]:validationMsg};
     const newState = {
@@ -78,17 +95,45 @@ export default function AddSeed() {
 
   const validationCommonName=(commonName)=>{
     console.log("inside validate common name");
-    if(commonName.length<0){
+    if(commonName.length<3){
       return validateMessage.commonNameNotFound;
 
     }
     return undefined;
   };
 
+  const validationBloomTime=(bloomTime)=>{
+    console.log("inside validate bloomTime");
+    if(bloomTime<0){
+      return validateMessage.bloomTimeLessThanZero;
+
+    }
+    return undefined;
+  };
+
+  const validationTypeOfSeeds=(typeOfSeeds)=>{
+    console.log("inside validate typeOfSeeds");
+    if(typeOfSeeds.length<3){
+      return validateMessage.typeOfSeedsLessThanThree;
+
+    }
+    return undefined;
+  };
+
+
   const validationSeedsStock=(seedsStock)=>{
-    console.log("inside validate seedsStock");
+    console.log("inside validate seeds Stock");
     if(seedsStock<0){
       return validateMessage.seedsStockLessThanZero;
+
+    }
+    return undefined;
+  };
+
+  const validationSeedsCost=(seedsCost)=>{
+    console.log("inside validate seeds cost");
+    if(seedsCost<0){
+      return validateMessage.seedsCostLessThanZero;
 
     }
     return undefined;
@@ -104,10 +149,11 @@ export default function AddSeed() {
             type="text"
             ref={commonNameRef}
             onChange={() => changeHandler(commonNameRef)}
+            required = "true" 
             />
-          {state.validations.customerName ? (
+          {state.validations.commonName ? (
             <div className={commonStyle.error}>
-              {state.validations.customerName} 
+              {state.validations.commonName} 
             </div>
           ) : (
             ""
@@ -121,7 +167,15 @@ export default function AddSeed() {
             type="number"
             ref={bloomTimeRef}
             onChange={() => changeHandler(bloomTimeRef)}
+            required = "true" 
           />
+          {state.validations.bloomTime ? (
+            <div className={commonStyle.error}>
+              {state.validations.bloomTime} 
+            </div>
+          ) : (
+            ""
+        )}
         </div>
 
         <div className="form-group">
@@ -131,20 +185,27 @@ export default function AddSeed() {
             type="text"
             ref={wateringRef}
             onChange={() => changeHandler(wateringRef)}
+            required = "true" 
           />
+          
         </div>
 
         <div className="form-group">
           <label>Enter the difficultyLevel</label>
-          <select name="select" onChange={changeHandler}>
-            <option disable selected>
-              select
-            </option>
-            <option value="easy">Easy</option>
-            <option value="moderate">Moderate</option>
-            <option value="difficult">Difficult</option>
-
-          </select>
+          <input 
+            type="text" 
+            name="difficultyLevel" 
+            ref={difficultyLevelRef} 
+            onChange={() => changeHandler(difficultyLevelRef)} 
+            required = "true" 
+            list="difficultyList"
+            autoComplete="off"
+            />
+            <datalist id="difficultyList">
+              <option value="Easy" />
+              <option value="Medium" />
+              <option value="Hard" />
+            </datalist>
           
         </div>
 
@@ -155,7 +216,9 @@ export default function AddSeed() {
             type="number"
             ref={temparatureRef}
             onChange={() => changeHandler(temparatureRef)}
+            required = "true" 
           />
+          
         </div>
 
         <div className="form-group">
@@ -165,7 +228,15 @@ export default function AddSeed() {
             type="text"
             ref={typeOfSeedsRef}
             onChange={() => changeHandler(typeOfSeedsRef)}
+            required = "true" 
           />
+          {state.validations.typeOfSeeds ? (
+            <div className={commonStyle.error}>
+              {state.validations.typeOfSeeds} 
+            </div>
+          ) : (
+            ""
+        )}
         </div>
 
         <div className="form-group">
@@ -175,6 +246,7 @@ export default function AddSeed() {
             type="text"
             ref={seedsDescriptionRef}
             onChange={() => changeHandler(seedsDescriptionRef)}
+            required = "true" 
           />
         </div>
 
@@ -185,6 +257,7 @@ export default function AddSeed() {
             type="number"
             ref={seedsStockRef}
             onChange={() => changeHandler(seedsStockRef)}
+            required = "true" 
           />
           {state.validations.seedsStock ? (
           <div className={commonStyle.error}>
@@ -201,7 +274,15 @@ export default function AddSeed() {
             type="number"
             ref={seedsCostRef}
             onChange={() => changeHandler(seedsCostRef)}
+            required = "true" 
           />
+          {state.validations.seedsCost ? (
+          <div className={commonStyle.error}>
+            {state.validations.seedsCost} 
+          </div>
+          ) : (
+            ""
+          )}
         </div>
         <div className="form-group">
           <label>Enter the seedsPerPacket</label>
@@ -210,6 +291,7 @@ export default function AddSeed() {
             type="number"
             ref={seedsPerPacketRef}
             onChange={() => changeHandler(seedsPerPacketRef)}
+            required = "true" 
           />
         </div>      
         <br />
@@ -220,16 +302,16 @@ export default function AddSeed() {
       {response.seed ? (
         <div>
           <h3>Seed Added Successfully</h3>
-          <DisplaySeedDetails seed={response.seed} />
+          <DisplaySeedDetails seed={seed} />
         </div>
       ) : (
         ""
       )}
       {response.errMsg ? (
-        <div>
+        <div >
           <h3> Seed was not Added Successfully</h3>
           <br />
-          {response.errMsg}
+          {state.errMsg}
         </div>
       ) : (
         ""
