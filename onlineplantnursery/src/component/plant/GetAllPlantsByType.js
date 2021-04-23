@@ -75,17 +75,16 @@ export default function GetAllPlantsByType() {
                             onChange={changeHandler}
                             ref={typeRef}
                             className="form-control"
+                            required = "true" 
                             list="plantTypeList"
                             autocomplete="off"
                         />
                         <datalist id="plantTypeList">
                             <option value="Herb" />
                             <option value="Shrub" />
-                            <option value="Tree" />
                             <option value="Ferns" />
                             <option value="Fruit" />
                             <option value="Climbers" />
-                            <option value="Aquatic" />
                         </datalist>
                     </div>
                     <button className="btn btn-primary">Get Plants</button>

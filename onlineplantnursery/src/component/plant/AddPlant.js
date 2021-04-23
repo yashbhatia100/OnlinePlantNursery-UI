@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import DisplayPlant from './DisplayPlant';
 import commonStyle from './commonStyle.module.css';
+import validationMessage from './validationMessage';
 
 export default function AddPlant() {
 
@@ -42,6 +43,17 @@ export default function AddPlant() {
         plantDescription: undefined,
         plantStock: undefined,
         plantCost: undefined,
+        validations: {plantHeight: undefined,
+                      plantSpread: undefined,
+                      commonName: undefined,
+                      bloomTime: undefined,
+                      plantUse: undefined,
+                      difficultyLevel: undefined,
+                      temperature: undefined,
+                      typeOfPlant: undefined,
+                      plantDescription: undefined,
+                      plantStock: undefined,
+                      plantCost: undefined,}
     };
 
     const response = { plant: mockPlant, errMsg: undefined };
@@ -50,6 +62,16 @@ export default function AddPlant() {
 
     const submitHandler = (event) => {
         event.preventDefault();
+        if(currentState.validations.plantHeight 
+        || currentState.validations.plantSpread 
+        ||currentState.validations.bloomTime 
+        || currentState.validations.difficultyLevel
+        || currentState.validations.temperature 
+        || currentState.validations.typeOfPlant
+        || currentState.validations.plantStock
+        || currentState.validations.plantCost){
+            return;
+        }
         const data = { ...currentState };
         console.log("Plant data:", data)
     }
@@ -57,59 +79,121 @@ export default function AddPlant() {
     const changeHandler = (ref) => {
         const fieldName = ref.current.name;
         const fieldValue = ref.current.value;
-        const newState = { ...currentState, [fieldName]: fieldValue };
+        let validationMessage;
+
+        const integerFieldRefs = [plantHeightRef, plantSpreadRef, bloomTimeRef, temperatureRef, plantStockRef, plantCostRef]
+        if(integerFieldRefs.includes(ref)){
+            validationMessage = validateIntegerField(fieldValue);
+        }
+        if(ref === difficultyLevelRef){
+            validationMessage = validateDifficultyLevel(fieldValue);
+        }
+        if(ref === typeOfPlantRef){
+            validationMessage = validatePlantType(fieldValue);
+        }
+        const newValidations = {...currentState.validations, [fieldName]:validationMessage};
+        const newState = { ...currentState, [fieldName]: fieldValue, validations: newValidations };
         setNewState(newState);
+    }
+
+    const validateIntegerField = (field) =>{
+        if(field!="" && field<=0){
+            return validationMessage.lessThanZero
+        }
+        return undefined;
+    }
+
+    const validateDifficultyLevel=(difficultyLevel)=>{
+        const valid=["Easy","Medium","Hard",""];
+        if(valid.includes(difficultyLevel)){
+            return undefined;
+        }
+        return validationMessage.invalidValue;
+    }
+
+    const validatePlantType=(plantType)=>{
+        const valid=["Herb", "Shrub", "Ferns", "Fruit", "Climbers",""]
+        if(valid.includes(plantType)){
+            return undefined;
+        }
+        return validationMessage.invalidValue;
     }
 
     return (
         <div>
             <h3>Add Plant</h3>
-            <div>
+            <div className="mt-5">
                 <form onSubmit={submitHandler}>
                     <div className="form-group">
-                        <label>Enter plant height: </label>
+                        <label>Enter plant height in centimeter: </label>
                         <input 
                             type="number"
                             name="plantHeight"
                             ref={plantHeightRef} 
-                            onChange={() => changeHandler(plantHeightRef)} 
-                            className="form-control" />
+                            onChange={() => changeHandler(plantHeightRef)}
+                            required = "true" 
+                            className="form-control" 
+                        />
+                        {currentState.validations.plantHeight?(
+                            <div className={commonStyle.error}>
+                               {currentState.validations.plantHeight} 
+                            </div>
+                        ):''}
+
                     </div>
                     <div className="form-group">
-                        <label>Enter plant spread: </label>
+                        <label>Enter plant spread in centimeter: </label>
                         <input 
-                            type="text" 
+                            type="number" 
                             name="plantSpread"
                             ref={plantSpreadRef} 
                             onChange={() => changeHandler(plantSpreadRef)} 
-                            className="form-control" />
+                            required = "true" 
+                            className="form-control" 
+                        />
+                        {currentState.validations.plantSpread?(
+                            <div className={commonStyle.error}>
+                               {currentState.validations.plantSpread} 
+                            </div>
+                        ):''}
                     </div>
                     <div className="form-group">
-                        <label>Enter common name: </label>
+                        <label>Enter plant common name: </label>
                         <input 
                             type="text" 
                             name="commonName" 
                             ref={commonNameRef} 
                             onChange={() => changeHandler(commonNameRef)} 
-                            className="form-control" />
+                            required = "true" 
+                            className="form-control" 
+                        />
                     </div>
                     <div className="form-group">
-                        <label>Enter bloom time: </label>
+                        <label>Enter bloom time in weeks: </label>
                         <input 
-                            type="text" 
+                            type="number" 
                             name="bloomTime" 
                             ref={bloomTimeRef}
                             onChange={() => changeHandler(bloomTimeRef)} 
-                            className="form-control" />
+                            required = "true" 
+                            className="form-control" 
+                        />
+                        {currentState.validations.bloomTime?(
+                            <div className={commonStyle.error}>
+                               {currentState.validations.bloomTime} 
+                            </div>
+                        ):''}
                     </div>
                     <div className="form-group">
-                        <label>Enter medicinal or culinary use: </label>
+                        <label>Enter medicinal or culinary use if any: </label>
                         <input 
                             type="text" 
                             name="plantUse" 
                             ref={plantUseRef} 
                             onChange={() => changeHandler(plantUseRef)} 
-                            className="form-control" />
+                            required = "true" 
+                            className="form-control" 
+                        />
                     </div>
                     <div className="form-group">
                         <label>Enter difficulty level: </label>
@@ -118,16 +202,37 @@ export default function AddPlant() {
                             name="difficultyLevel" 
                             ref={difficultyLevelRef} 
                             onChange={() => changeHandler(difficultyLevelRef)} 
-                            className="form-control" />
+                            required = "true" 
+                            className="form-control" 
+                            list="difficultyList"
+                            autoComplete="off"
+                        />
+                        <datalist id="difficultyList">
+                            <option value="Easy" />
+                            <option value="Medium" />
+                            <option value="Hard" />
+                        </datalist>
+                        {currentState.validations.difficultyLevel?(
+                            <div className={commonStyle.error}>
+                               {currentState.validations.difficultyLevel} 
+                            </div>
+                        ):''}
                     </div>
                     <div className="form-group">
-                        <label>Enter temperature: </label>
+                        <label>Enter temperature in degrees: </label>
                         <input 
-                            type="text" 
+                            type="number" 
                             name="temperature" 
                             ref={temperatureRef} 
                             onChange={() => changeHandler(temperatureRef)} 
-                            className="form-control" />
+                            required = "true" 
+                            className="form-control" 
+                        />
+                        {currentState.validations.temperature?(
+                            <div className={commonStyle.error}>
+                               {currentState.validations.temperature} 
+                            </div>
+                        ):''}
                     </div>
                     <div className="form-group">
                         <label>Enter type of plant: </label>
@@ -136,16 +241,34 @@ export default function AddPlant() {
                             name="typeOfPlant" 
                             ref={typeOfPlantRef} 
                             onChange={() => changeHandler(typeOfPlantRef)} 
-                            className="form-control" />
+                            required = "true" 
+                            className="form-control" 
+                            list="plantTypeList"
+                            autoComplete="off"
+                        />
+                        <datalist id="plantTypeList">
+                            <option value="Herb" />
+                            <option value="Shrub" />
+                            <option value="Ferns" />
+                            <option value="Fruit" />
+                            <option value="Climbers" />
+                        </datalist>
+                        {currentState.validations.typeOfPlant?(
+                            <div className={commonStyle.error}>
+                               {currentState.validations.typeOfPlant} 
+                            </div>
+                        ):''}
                     </div>
                     <div className="form-group">
                         <label>Enter description: </label>
                         <input 
-                            type="textarea" 
+                            type="text" 
                             name="plantDescription" 
                             ref={plantDescriptionRef} 
                             onChange={() => changeHandler(plantDescriptionRef)} 
-                            className="form-control" />
+                            required = "true" 
+                            className="form-control" 
+                        />
                     </div>
                     <div className="form-group">
                         <label>Enter plant stock: </label>
@@ -154,7 +277,14 @@ export default function AddPlant() {
                             name="plantStock" 
                             ref={plantStockRef} 
                             onChange={() => changeHandler(plantStockRef)} 
-                            className="form-control" />
+                            required = "true" 
+                            className="form-control" 
+                        />
+                        {currentState.validations.plantStock?(
+                            <div className={commonStyle.error}>
+                               {currentState.validations.plantStock} 
+                            </div>
+                        ):''}
                     </div>
                     <div className="form-group">
                         <label>Enter plant cost: </label>
@@ -163,7 +293,14 @@ export default function AddPlant() {
                             name="plantCost" 
                             ref={plantCostRef} 
                             onChange={() => changeHandler(plantCostRef)} 
-                            className="form-control" />
+                            required = "true" 
+                            className="form-control" 
+                        />
+                        {currentState.validations.plantCost?(
+                            <div className={commonStyle.error}>
+                               {currentState.validations.plantCost} 
+                            </div>
+                        ):''}
                     </div>
                     <button className="btn btn-primary">Add Plant</button>
                 </form>

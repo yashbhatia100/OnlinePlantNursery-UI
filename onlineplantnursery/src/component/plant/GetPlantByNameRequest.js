@@ -43,8 +43,15 @@ export default function GetPlantByNameRequest() {
             <div>
                 <form onSubmit={submitHandler}>
                     <div className="form-group">
-                        <label>Enter Plant Name: </label>
-                        <input type="text" name="commonName" ref={nameRef} onChange={changeHandler} className="form-control" />
+                        <label>Enter plant name to view: </label>
+                        <input 
+                            type="text" 
+                            name="commonName" 
+                            ref={nameRef} 
+                            onChange={changeHandler} 
+                            required = "true"
+                            className="form-control" 
+                        />
                     </div>
                     <button className="btn btn-primary">Get Plant</button>
                 </form>
