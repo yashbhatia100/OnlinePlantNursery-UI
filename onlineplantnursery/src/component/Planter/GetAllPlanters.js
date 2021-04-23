@@ -21,7 +21,7 @@ export default function GetAllPlanters() {
     planterCapacity: 100,
     planterColor: 2,
     planterDrainageHoles: 1,
-    planterShape: "Square",
+    planterShape: "Rectangle",
     planterStock: 100,
     planterCost: 200,
     plantId: 3,

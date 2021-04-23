@@ -9,7 +9,8 @@ export default function DisplayPlanterList({ planters }) {
           <li key={planter.planterId}>
             <Link to={`/planterbyid/${planter.planterId}`}>
               <span>
-                {planter.planterShape}-{planter.planterCost}-
+
+               Planter Shape is  {planter.planterShape} Cost is Rs {planter.planterCost} Height is 
                 {planter.planterHeight}
               </span>
             </Link>
