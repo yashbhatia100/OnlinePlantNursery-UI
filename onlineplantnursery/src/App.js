@@ -20,9 +20,9 @@ function App() {
             <div className="col-md-9">
               <Switch>
                 <Route exact path ="/" component={Home} />
-                <Route exact path ="/all" components={GetAllPlanters}/>
+                <Route exact path ="/all" component={GetAllPlanters}/>
                 <Route exact path ="/addplanter" component={AddPlanter}/>
-                <Route exact path ="/planterbyid/:planterId" components={GetPlanterById}/>
+                <Route exact path ="/planterbyid/:planterId" component={GetPlanterById}/>
                 <Route exact path ="/planterbyidonrequest" component={GetPlanterByIdRequest}/>
                 <Route exact path="/planterbyshape" component={GetPlanterByShape}/>
               </Switch>
