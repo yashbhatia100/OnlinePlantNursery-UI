@@ -4,7 +4,7 @@ export default function DisplaySeedDetails({ seed }) {
       //  seedsStock, seedsCost, seedsPerPacket } = seed;
         
     return (
-        <span>
+        <div>
             seedId is {seed.seedId}
             <br />
             commonName is {seed.commonName}
@@ -27,7 +27,7 @@ export default function DisplaySeedDetails({ seed }) {
             <br />
             seedsPerPacket is {seed.seedsPerPacket}
 
-        </span>
+        </div>
     );
 
 
