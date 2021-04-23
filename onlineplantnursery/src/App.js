@@ -1,44 +1,20 @@
 
 import './App.css';
-import DisplayCustomer from './component/DisplayCustomer';
-import GetCustomer from './component/GetCustomer';
-import Addcustomer from './component/Addcustomer';
+import DisplayCustomer from './component/customer/DisplayCustomer';
+import GetCustomer from './component/customer/GetCustomer';
+import Addcustomer from './component/customer/Addcustomer';
+import GetCustomerDetailsOnRequest from './component/customer/GetCustomerDetailsOnRequest';
+import LoginForm from './component/customer/LoginForm';
 
 function App() {
-/*  let customer1={
-    id: 1,
-    customerName: "haha",
-    customerEmail: "haha@gmail.com",
-    username:"haha123",
-    addressId:234,
-    houseNo:"M56",
-    colony:"danger",
-    city:"Chennai",
-    state:"Tamil Nadu",
-    pincode:123456
-
-  }*/
-  const customer1 = {
-    customerId : 1,
-    customerName : "Saurabh",
-    customerEmail : "abc@gmail.com",
-    userName: "saurabh123",
-    password : "xyz421",
-    houseNo : 119,
-    colony : "ipsum",
-    city  : "chennai",
-    State: "TamilNadu",
-    pincode : 600001,
-  };
 
 
   return (
-    <div >
+    <div className="container mt-5">
      <h2>Welcome To Online Plant Nursery</h2> 
      
-     <GetCustomer/>
-     <br/>
-     <Addcustomer/>
+     <LoginForm/>
+     
      
      </div>
   );
