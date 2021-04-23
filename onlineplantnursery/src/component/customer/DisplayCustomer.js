@@ -1,7 +1,7 @@
 export default function DisplayCustomer({ customer }) {
   return (
     <div>
-        <table className="table table-striped">
+        <table className="table table-striped w-50">
             <tr>  
                 
                <th>Customer ID </th>
@@ -13,8 +13,7 @@ export default function DisplayCustomer({ customer }) {
                <th> City</th>
                <th>State</th>
                <th>Pincode</th>
-      
-      </tr>
+               </tr>
 
       <tr>
           <td>{customer.id}</td>

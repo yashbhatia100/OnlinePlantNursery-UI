@@ -9,13 +9,16 @@ import LoginForm from './component/customer/LoginForm';
 function App() {
 
 
+
+
   return (
     <div className="container mt-5">
      <h2>Welcome To Online Plant Nursery</h2> 
-     
-     <LoginForm/>
-     
-     
+
+    
+    
+     <br/>
+     {<Addcustomer/>} 
      </div>
   );
 }
