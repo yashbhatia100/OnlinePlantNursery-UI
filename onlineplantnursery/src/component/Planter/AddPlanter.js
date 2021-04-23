@@ -20,7 +20,8 @@ export default function AddPlanter() {
     { id: 2, name: "Carrot" },
   ];
 
-  const planter = {
+  const mockplanter = {
+    planterId:1,
     planterHeight: 10,
     planterCapacity: 100,
     planterColor: 2,
@@ -51,7 +52,6 @@ export default function AddPlanter() {
     planterShape: undefined,
     planterStock: undefined,
     planterCost: undefined,
-    plantId: undefined,
     seedId: undefined,
     product: undefined,
     errMsg: undefined,
@@ -65,8 +65,10 @@ export default function AddPlanter() {
       planterShape: undefined,
       planterStock: undefined,
       planterCost: undefined,
-    },
+    }
   };
+
+  const response = {planter:mockplanter,errMsg:undefined};
   const [state, setNewState] = useState(initialState);
 
   const submitHandler = (event) => {
@@ -102,54 +104,54 @@ export default function AddPlanter() {
     }
 
     const newValidations = { ...state.validations, [fieldName]: validationMsg };
-    let newState = {
+    const newState = {
       ...state,
       [fieldName]: fieldValue,
       planter: undefined,
       errMsg: undefined,
-      validation: newValidations,
+      validation: newValidations
     };
     setNewState(newState);
   };
 
   const validatePlanterHeight = (planterHeight) => {
-    console.log("inside validate Planter");
+    console.log("inside validate Planter Height");
     if (planterHeight < 0) {
-      return validationMessage.planterHeightSmallerThanZero;
+      return validationMessage.invalidPlanterHeight;
     }
     return undefined;
   };
 
   const validatePlanterCapacity = (planterCapacity) => {
     if (planterCapacity < 0) {
-      return validationMessage.planterCapacitySmallerThanZero;
+      return validationMessage.invalidPlanterCapacity;
     }
     return undefined;
   };
   const validatePlanterDraingeHoles = (planterDrainageHoles) => {
     if (planterDrainageHoles < 0) {
-      return validationMessage.platnterDrainaheHolesSmallerThanZero;
+      return validationMessage.invalidPlatnterDrainageHoles;
     }
     return undefined;
   };
 
   const validatePlanterShape = (planterShape) => {
     if (planterShape.length < 3) {
-      return validationMessage.planterShapelessThanthree;
+      return validationMessage.invalidPlanterShape;
     }
     return undefined;
   };
 
   const validatePlanterCost = (planterCost) => {
     if (planterCost < 0) {
-      return validationMessage.planterCostLessThanZero;
+      return validationMessage.invalidPlanterCost;
     }
     return undefined;
   };
 
   const validatePlanterStock = (planterStock) => {
     if (planterStock < 0) {
-      return validationMessage.PlanterStocklessthanZero;
+      return validationMessage.invalidPlanterStock;
     }
     return undefined;
   };
@@ -339,19 +341,19 @@ export default function AddPlanter() {
       </form>
       <h2>{state.formstatus}</h2>
 
-      {state.planter ? (
+      {response.planter ? (
         <div>
           <h3>Planter Added Successfully</h3>
-          <DisplayPlanter planter={state.planter} />
+          <DisplayPlanter planter={response.planter} />
         </div>
       ) : (
         ""
       )}
-      {state.errMsg ? (
+      {response.errMsg ? (
         <div>
           <h3> Planter was not Added Successfully</h3>
           <br />
-          {state.errMsg}
+          {response.errMsg}
         </div>
       ) : (
         ""
