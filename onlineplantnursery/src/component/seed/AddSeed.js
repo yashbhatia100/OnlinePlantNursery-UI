@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import DisplaySeedDetails from "./DisplaySeedDetails";
+import commonStyle from './commonStyle.module.css';
+import validateMessage from './validationMessage';
 
 export default function AddSeed() {
     let seed={
@@ -14,8 +16,7 @@ export default function AddSeed() {
         seedsStock:30, 
         seedsCost:100, 
         seedsPerPacket:20
-      };
-  let errorMsg = "Cannot add the Planter";
+      }
 
   const commonNameRef = React.createRef();
   const bloomTimeRef = React.createRef();
@@ -39,11 +40,12 @@ export default function AddSeed() {
     seedsStockRef: undefined,
     seedsCostRef: undefined,
     seedsPerPacketRef: undefined,
-    errMsg: undefined,
-    seed: undefined,
     formstatus: "",
+    validations:{commonName:undefined, seedsStock:undefined}
   };
   const [state, setNewState] = useState(initialState);
+
+  const response ={seed:seed,error:""};
 
   const submitHandler = (event) => {
     console.log("Inside submitHandler");
@@ -56,39 +58,73 @@ export default function AddSeed() {
     const field = ref.current;
     const fieldName = field.name;
     const fieldValue = field.value;
-    let newState = {
+    let validationMsg;
+    if(ref===commonNameRef){
+      validationMsg=validationCommonName(fieldValue);
+    }
+    if(ref===seedsStockRef){
+      validationMsg=validationSeedsStock(fieldValue);
+    }
+    const newValidations={...state.validations,[fieldName]:validationMsg};
+    const newState = {
       ...state,
       [fieldName]: fieldValue,
       seed: undefined,
       errMsg: undefined,
+      validations:newValidations
     };
     setNewState(newState);
+  };
+
+  const validationCommonName=(commonName)=>{
+    console.log("inside validate common name");
+    if(commonName.length<0){
+      return validateMessage.commonNameNotFound;
+
+    }
+    return undefined;
+  };
+
+  const validationSeedsStock=(seedsStock)=>{
+    console.log("inside validate seedsStock");
+    if(seedsStock<0){
+      return validateMessage.seedsStockLessThanZero;
+
+    }
+    return undefined;
   };
 
   return (
     <div>
       <form onSubmit={(event) => submitHandler(event)}>
-        <div>
-          <label>Enter the commonName</label>
-          <input
-            name="commonName"
+        <div className="form-group">
+          <label>Enter the commonName:  </label>
+          <input 
+            name="commonName" 
             type="text"
             ref={commonNameRef}
             onChange={() => changeHandler(commonNameRef)}
-          />
+            />
+          {state.validations.customerName ? (
+            <div className={commonStyle.error}>
+              {state.validations.customerName} 
+            </div>
+          ) : (
+            ""
+        )}
         </div>
 
-        <div>
-          <label>Enter the bloomTime</label>
+        <div className="form-group">
+          <label>Enter the bloomTime in days</label>
           <input
             name="bloomTime"
-            type="text"
+            type="number"
             ref={bloomTimeRef}
             onChange={() => changeHandler(bloomTimeRef)}
           />
         </div>
 
-        <div>
+        <div className="form-group">
           <label>Enter the watering</label>
           <input
             name="watering"
@@ -98,27 +134,31 @@ export default function AddSeed() {
           />
         </div>
 
-        <div>
+        <div className="form-group">
           <label>Enter the difficultyLevel</label>
-          <input
-            name="difficultyLevel"
-            type="text"
-            ref={difficultyLevelRef}
-            onChange={() => changeHandler(difficultyLevelRef)}
-          />
+          <select name="select" onChange={changeHandler}>
+            <option disable selected>
+              select
+            </option>
+            <option value="easy">Easy</option>
+            <option value="moderate">Moderate</option>
+            <option value="difficult">Difficult</option>
+
+          </select>
+          
         </div>
 
-        <div>
-          <label>Enter the temparature</label>
+        <div className="form-group">
+          <label>Enter the temparature in degree</label>
           <input
             name="temparature"
-            type="text"
+            type="number"
             ref={temparatureRef}
             onChange={() => changeHandler(temparatureRef)}
           />
         </div>
 
-        <div>
+        <div className="form-group">
           <label>Enter the typeOfSeeds</label>
           <input
             name="typeOfSeeds"
@@ -128,7 +168,7 @@ export default function AddSeed() {
           />
         </div>
 
-        <div>
+        <div className="form-group">
           <label>Enter the seedsDescription</label>
           <input
             name="seedsDescription"
@@ -138,7 +178,7 @@ export default function AddSeed() {
           />
         </div>
 
-        <div>
+        <div className="form-group">
           <label>Enter the seedsStock</label>
           <input
             name="seedsStock"
@@ -146,8 +186,15 @@ export default function AddSeed() {
             ref={seedsStockRef}
             onChange={() => changeHandler(seedsStockRef)}
           />
+          {state.validations.seedsStock ? (
+          <div className={commonStyle.error}>
+            {state.validations.seedsStock} 
+          </div>
+          ) : (
+            ""
+          )}
         </div>
-        <div>
+        <div className="form-group">
           <label>Enter the seedsCost</label>
           <input
             name="seedsCost"
@@ -156,7 +203,7 @@ export default function AddSeed() {
             onChange={() => changeHandler(seedsCostRef)}
           />
         </div>
-        <div>
+        <div className="form-group">
           <label>Enter the seedsPerPacket</label>
           <input
             name="seedsPerPacket"
@@ -166,45 +213,28 @@ export default function AddSeed() {
           />
         </div>      
         <br />
-        <button type="submit"> Add Seed</button>
+        <button className="btn btn-primary" type="submit"> Add Seed</button>
       </form>
-      <h2>{state.formstatus}</h2>
-      <h3>Details added are </h3>
-      commonName is :{state.commonName} <br />
-      bloomTime is :{state.bloomTime} <br />
-      watering is :{state.watering}
-      <br />
-      difficultyLevel is :{state.difficultyLevel}
-      <br />
-      temparature is :{state.temparature}
-      <br />
-      typeOfSeeds is :{state.typeOfSeeds}
-      <br />
-      seedsDescription is :{state.seedsDescription}
-      <br />
-      seedsStock is :{state.seedsStock}
-      <br />
-      seedsCost is :{state.seedsCost}
-      <br />
-      seedsPerPacket is :{state.seedsPerPacket}
-      <br />
-      {state.seed ? (
+      
+      <div className="mt-5">
+      {response.seed ? (
         <div>
           <h3>Seed Added Successfully</h3>
-          <DisplaySeedDetails seed={state.seed} />
+          <DisplaySeedDetails seed={response.seed} />
         </div>
       ) : (
         ""
       )}
-      {state.errMsg ? (
+      {response.errMsg ? (
         <div>
           <h3> Seed was not Added Successfully</h3>
           <br />
-          {state.errMsg}
+          {response.errMsg}
         </div>
       ) : (
         ""
       )}
+    </div>
     </div>
   );
 }

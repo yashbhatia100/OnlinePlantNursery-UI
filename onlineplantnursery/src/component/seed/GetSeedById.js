@@ -5,7 +5,7 @@ import  commonStyle from './commonStyle.module.css';
 
 export default function GetSeedById(){
    
-    let seed={
+    const seed={
         seedId:20,
         commonName:"Watermelon seed",
         bloomTime:"4 weeks", 
@@ -21,22 +21,22 @@ export default function GetSeedById(){
      
     const idRef=React.createRef();
 
-    let [state,setNewState]=useState({id:undefined, seed:seed, errMsg:undefined});
+    const response ={seed:seed,error:undefined};
+
+    const [state,setNewState]=useState({seedId:undefined});
 
     const setIdHandler=()=>{
         console.log("Inside setIdHandler");
          let field=idRef.current;
          let fieldValue=field.value;
-         let newState={...state,id:fieldValue, seed:undefined , errMsg:undefined};
+         let newState={...state,seedId:fieldValue};
          setNewState(newState);
     };
 
     const submitHandler=(event)=>{
        console.log("Inside submitHandler");
        event.preventDefault();
-       let newState={...state,seed:undefined,errMsg:"seed not found"};
-       setNewState(newState);
-       //console.log("current state",newState);
+       //console.log("current state",seedId);
            
     };
 
@@ -44,38 +44,39 @@ export default function GetSeedById(){
 
         <div>
             <h3>Get seed details</h3>
-
+            <div>
             <form onSubmit={(event) => submitHandler(event)}>
-                <div>
+                <div className='form-group'>
                     <label>Enter seed Id </label>
-                    <input name="seed Id" type="number" ref={idRef} onChange={() => setIdHandler()} />
+                    <input name="seed Id" type="number" ref={idRef} onChange={() => setIdHandler()} required="true" className='form-control' />
                 </div>
 
-                <button> Get Seed</button>
+                <button className="btn btn-primary"> Get Seed</button>
             </form>
-
-            {state.seed ? (
+        </div>
+        <div className="mt-5">
+        {response.seed ? (
 
                 <div>
                     <h3>Seed Details </h3>
-                    <DisplaySeedDetails seed={state.seed} />
+                    <DisplaySeedDetails seed={response.seed} />
                 </div>
 
             ) : ''}
 
 
-            {state.errMsg ? (
+            {response.error ? (
                 <div className={commonStyle.error}>
                 Request is not successful
                 <br/>
                 
-                 {state.errMsg}
+                 {response.error}
                 </div>
 
             ) : ''}
 
         </div>
+    </div>
 
     );
-
 }
