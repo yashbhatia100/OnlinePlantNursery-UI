@@ -3,7 +3,6 @@ import AddPlanter from "./component/planter/AddPlanter";
 import GetAllPlanters from "./component/planter/GetAllPlanters";
 import GetPlanterByShape from "./component/planter/GetPlanterByShape";
 import GetPlanterById from "./component/planter/GetPlanterById";
-import UpdatePlanterStock from "./component/planter/UpdatePlanterStock";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from "./component/planter/Home";
 import Navbar from "./component/planter/Navbar";
