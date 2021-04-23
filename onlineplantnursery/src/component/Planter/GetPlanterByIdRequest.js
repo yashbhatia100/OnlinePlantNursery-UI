@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import DisplayPlanter from "./DisplayPlanter";
-
-export default function GetPlanterDetails() {
-  const planter = {
-    id: 1,
+import React,{useState} from "react";
+import DisplayPlanter from"./DisplayPlanter";
+import commonStyle from "./commonStyle.module.css";
+export default function GetPlanterByIdRequest(){
+  const mockplanter = {
+    planterId: 1,
     planterHeight: 10,
     planterCapacity: 100,
     planterColor: 2,
@@ -14,68 +14,58 @@ export default function GetPlanterDetails() {
     plantId: 1,
     seedId: 1,
   };
-  let errorMsg = "Unable to fetch the planter";
-  const idRef = React.createRef();
-  let [state, setNewState] = useState({
-    id: undefined,
-    planter: undefined,
-    errMsg: undefined,
-  });
+
+  const planterIdRef = React.createRef();
+  const response={planter:mockplanter,errMsg:undefined};
+  const initialState={planterId:undefined}
+  const [currentState, setNewState] = useState(initialState);
 
   const setIdHandler = () => {
     console.log("Inside setId Handler");
-    let field = idRef.current;
-    let fieldValue = field.value;
-    let newState = {
-      ...state,
-      id: fieldValue,
-      planter: undefined,
-      errMsg: undefined,
+    const  fieldValue = planterIdRef.current.value;
+    const newState = {
+      ...currentState,
+      planterId: fieldValue,
     };
     setNewState(newState);
   };
   const submitHandler = (event) => {
     console.log("Inside Submit Handler");
     event.preventDefault();
-    let newState = {
-      ...state,
-      planter: undefined,
-      errMsg: errorMsg,
-    };
-    setNewState(newState);
   };
 
   return (
-    <div className="container">
+    <div>
       <h3>Get Planter Details</h3>
       <form onSubmit={(event) => submitHandler(event)}>
         <div className="form-group">
           <label>Enter the Planter ID</label>
           <input
-            name="id"
+            name="planterId"
             type="number"
             placeholder="Enter the Planter Id"
-            ref={idRef}
+            ref={planterIdRef}
             onChange={() => setIdHandler()}
             className="form-control"
+            required
           />
         </div>
         <button className="btn btn-primary">Get Planter</button>
       </form>
 
-      {state.planter ? (
+      {response.planter ? (
         <div>
           <h2>Planter Details</h2>
-          <DisplayPlanter planter={state.planter} />
+          <DisplayPlanter planter={response.planter} />
         </div>
       ) : (
         ""
       )}
-      {state.errMsg ? (
+      {response.errMsg ? (
         <div>
           Request was not successful
           <br />
-          {state.errMsg}
+          {response.errMsg}
         </div>
       ) : (
         ""

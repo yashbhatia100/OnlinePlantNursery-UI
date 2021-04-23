@@ -1,50 +1,35 @@
 import "./App.css";
-import AddPlanter from "./component/Planter/AddPlanter";
-import DisplayPlanter from "./component/Planter/DisplayPlanter";
-import DisplayPlanters from "./component/Planter/DisplayPlanters";
-import GetAllPlanters from "./component/Planter/GetAllPlanters";
-import GetPlanterDetails from "./component/Planter/GetPlanterDetails";
-import UpdatePlanterStock from "./component/Planter/UpdatePlanterStock";
+import AddPlanter from "./component/planter/AddPlanter";
+import GetAllPlanters from "./component/planter/GetAllPlanters";
+import GetPlanterByShape from "./component/planter/GetPlanterByShape";
+import GetPlanterById from "./component/planter/GetPlanterById";
+import UpdatePlanterStock from "./component/planter/UpdatePlanterStock";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Home from "./component/planter/Home";
+import Navbar from "./component/planter/Navbar";
+import GetPlanterByIdRequest from "./component/planter/GetPlanterByIdRequest";
 
 function App() {
-  const planter1 = {
-    id: 1,
-    planterHeight: 10,
-    planterCapacity: 100,
-    planterColor: 2,
-    planterDrainageHoles: 1,
-    planterShape: "Square",
-    planterStock: 100,
-    planterCost: 200,
-    plantId: 1,
-    seedId: 1,
-  };
-  const planter2 = {
-    id: 2,
-    planterHeight: 10,
-    planterCapacity: 100,
-    planterColor: 2,
-    planterDrainageHoles: 1,
-    planterShape: "Square",
-    planterStock: 100,
-    planterCost: 200,
-    plantId: 1,
-    seedId: 1,
-  };
-
-  const planters = [planter1, planter2];
-
+  
   return (
     <div>
-      <GetPlanterDetails />
-
-      <UpdatePlanterStock />
-      {/*  <DisplayPlanters planters={planters}/> */}
-
-      <AddPlanter />
-      <GetAllPlanters />
-
-      <DisplayPlanter planter={planter1} />
+      <Router>
+       <Navbar/>
+        <div className="container" style={{ marginTop: "50px" }}>
+          <div className="row">
+            <div className="col-md-9">
+              <Switch>
+                <Route exact path ="/" component={Home} />
+                <Route exact path ="/all" components={GetAllPlanters}/>
+                <Route exact path ="/addplanter" component={AddPlanter}/>
+                <Route exact path ="/planterbyid/:planterId" components={GetPlanterById}/>
+                <Route exact path ="/planterbyidonrequest" component={GetPlanterByIdRequest}/>
+                <Route exact path="/planterbyshape" component={GetPlanterByShape}/>
+              </Switch>
+            </div>
+          </div>
+        </div>
+      </Router>
     </div>
   );
 }
