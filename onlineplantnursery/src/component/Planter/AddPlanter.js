@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DisplayPlanter from "./DisplayPlanter";
-import validationMessage from "./validationMessage";
+import validationMessage from "./validationMessage"
 import commonStyle from "./commonStyle.module.css";
 
 export default function AddPlanter() {
@@ -115,9 +115,10 @@ export default function AddPlanter() {
   };
 
   const validatePlanterHeight = (planterHeight) => {
-    console.log("inside validate Planter Height");
+    
     if (planterHeight < 0) {
-      return validationMessage.invalidPlanterHeight;
+      console.log("inside validate Planter Height");
+     return validationMessage.invalidPlanterHeight;
     }
     return undefined;
   };
