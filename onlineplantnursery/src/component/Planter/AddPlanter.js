@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DisplayPlanter from "./DisplayPlanter";
-import validationMessage from "./validationMessage"
+import validationMessage from "./validationMessage";
 import commonStyle from "./commonStyle.module.css";
 
 export default function AddPlanter() {
@@ -21,7 +21,7 @@ export default function AddPlanter() {
   ];
 
   const mockplanter = {
-    planterId:1,
+    planterId: 1,
     planterHeight: 10,
     planterCapacity: 100,
     planterColor: 2,
@@ -65,10 +65,10 @@ export default function AddPlanter() {
       planterShape: undefined,
       planterStock: undefined,
       planterCost: undefined,
-    }
+    },
   };
 
-  const response = {planter:mockplanter,errMsg:undefined};
+  const response = { planter: mockplanter, errMsg: undefined };
   const [state, setNewState] = useState(initialState);
 
   const submitHandler = (event) => {
@@ -109,16 +109,15 @@ export default function AddPlanter() {
       [fieldName]: fieldValue,
       planter: undefined,
       errMsg: undefined,
-      validation: newValidations
+      validations: newValidations,
     };
     setNewState(newState);
   };
 
   const validatePlanterHeight = (planterHeight) => {
-    
     if (planterHeight < 0) {
       console.log("inside validate Planter Height");
-     return validationMessage.invalidPlanterHeight;
+      return validationMessage.invalidPlanterHeight;
     }
     return undefined;
   };
@@ -137,7 +136,7 @@ export default function AddPlanter() {
   };
 
   const validatePlanterShape = (planterShape) => {
-    if (planterShape.length < 3) {
+    if (planterShape.length < 5) {
       return validationMessage.invalidPlanterShape;
     }
     return undefined;
@@ -192,6 +191,13 @@ export default function AddPlanter() {
             className="form-control"
             required
           />
+          {state.validations.planterCapacity ? (
+            <div className={commonStyle.error}>
+              {state.validations.planterCapacity}
+            </div>
+          ) : (
+            ""
+          )}
         </div>
 
         <div className="form-group">
@@ -205,6 +211,13 @@ export default function AddPlanter() {
             className="form-control"
             required
           />
+          {state.validations.planterDrainageHoles ? (
+            <div className={commonStyle.error}>
+              {state.validations.planterDrainageHoles}
+            </div>
+          ) : (
+            ""
+          )}
         </div>
 
         <div>
@@ -236,6 +249,13 @@ export default function AddPlanter() {
             className="form-control"
             required
           />
+          {state.validations.planterShape ? (
+            <div className={commonStyle.error}>
+              {state.validations.planterShape}
+            </div>
+          ) : (
+            ""
+          )}
         </div>
 
         <div className="form-group">
@@ -249,6 +269,13 @@ export default function AddPlanter() {
             className="form-control"
             required
           />
+          {state.validations.planterStock ? (
+            <div className={commonStyle.error}>
+              {state.validations.planterStock}
+            </div>
+          ) : (
+            ""
+          )}
         </div>
 
         <div className="form-group">
@@ -262,6 +289,13 @@ export default function AddPlanter() {
             className="form-control"
             required
           />
+          {state.validations.planterCost ? (
+            <div className={commonStyle.error}>
+              {state.validations.planterCost}
+            </div>
+          ) : (
+            ""
+          )}
         </div>
 
         <div>
