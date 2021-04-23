@@ -47,11 +47,9 @@ export default function AddPlant() {
                       plantSpread: undefined,
                       commonName: undefined,
                       bloomTime: undefined,
-                      plantUse: undefined,
                       difficultyLevel: undefined,
                       temperature: undefined,
                       typeOfPlant: undefined,
-                      plantDescription: undefined,
                       plantStock: undefined,
                       plantCost: undefined,}
     };
@@ -64,7 +62,8 @@ export default function AddPlant() {
         event.preventDefault();
         if(currentState.validations.plantHeight 
         || currentState.validations.plantSpread 
-        ||currentState.validations.bloomTime 
+        || currentState.validations.commonName
+        || currentState.validations.bloomTime 
         || currentState.validations.difficultyLevel
         || currentState.validations.temperature 
         || currentState.validations.typeOfPlant
@@ -90,6 +89,9 @@ export default function AddPlant() {
         }
         if(ref === typeOfPlantRef){
             validationMessage = validatePlantType(fieldValue);
+        }
+        if(ref === commonNameRef){
+            validationMessage = validateName(fieldValue);
         }
         const newValidations = {...currentState.validations, [fieldName]:validationMessage};
         const newState = { ...currentState, [fieldName]: fieldValue, validations: newValidations };
@@ -117,6 +119,13 @@ export default function AddPlant() {
             return undefined;
         }
         return validationMessage.invalidValue;
+    }
+
+    const validateName=(name)=>{
+        if(name!="" & name.length<3){
+            return validationMessage.invalidNameLength;
+        }
+        return undefined;
     }
 
     return (
@@ -167,6 +176,11 @@ export default function AddPlant() {
                             required = "true" 
                             className="form-control" 
                         />
+                        {currentState.validations.commonName?(
+                            <div className={commonStyle.error}>
+                                {currentState.validations.commonName}
+                            </div>
+                        ):''}
                     </div>
                     <div className="form-group">
                         <label>Enter bloom time in weeks: </label>

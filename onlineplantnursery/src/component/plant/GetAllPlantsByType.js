@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import commonStyle from './commonStyle.module.css';
 import DisplayPlantList from "./DisplayPlantList";
+import validationMessage from './validationMessage';
 
 export default function GetAllPlantsByType() {
 
@@ -47,19 +48,34 @@ export default function GetAllPlantsByType() {
 
     const response = { plants: plantList, errMsg: undefined };
 
-    const [currentState, setNewState] = useState({ typeOfPlant: undefined })
+    const initialState = { typeOfPlant: undefined, validations:{typeOfPlant:undefined} };
+
+    const [currentState, setNewState] = useState(initialState);
 
     const typeRef = React.createRef();
 
     const submitHandler = (event) => {
         event.preventDefault();
+        if(currentState.validations.typeOfPlant){
+            return;
+        }
         console.log(currentState.typeOfPlant)
     }
 
     const changeHandler = () => {
-        const fieldVal = typeRef.current.value;
-        const newState = { typeOfPlant: fieldVal };
+        const fieldValue = typeRef.current.value;
+        let validationMessage = validatePlantType(fieldValue);
+        const newValidations = {typeOfPlant:validationMessage}
+        const newState = {typeOfPlant: fieldValue, validations:newValidations};
         setNewState(newState);
+    }
+
+    const validatePlantType=(plantType)=>{
+        const valid=["Herb", "Shrub", "Ferns", "Fruit", "Climbers",""]
+        if(valid.includes(plantType)){
+            return undefined;
+        }
+        return validationMessage.invalidValue;
     }
 
     return (
@@ -86,6 +102,11 @@ export default function GetAllPlantsByType() {
                             <option value="Fruit" />
                             <option value="Climbers" />
                         </datalist>
+                        {currentState.validations.typeOfPlant?(
+                            <div className={commonStyle.error}>
+                               {currentState.validations.typeOfPlant} 
+                            </div>
+                        ):''}
                     </div>
                     <button className="btn btn-primary">Get Plants</button>
                 </form>

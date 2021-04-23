@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import DisplayPlant from "./DisplayPlant";
 import commonStyle from './commonStyle.module.css';
+import validationMessage from "./validationMessage";
 
 export default function GetPlantByNameRequest() {
 
@@ -22,21 +23,34 @@ export default function GetPlantByNameRequest() {
 
     const response = {plant: mockPlant, errMsg: undefined};
 
-    const initialState = { name: undefined };
+    const initialState = { name: undefined, validations:{name:undefined} };
 
     const [currentState, setNewState] = useState(initialState);
 
     const submitHandler = (event) => {
         event.preventDefault();
+        if(currentState.validations.name){
+            return;
+        }
         console.log(currentState.name);
+        
     }
 
     const changeHandler = () => {
         const fieldValue = nameRef.current.value;
-        const newState = { ...currentState, name: fieldValue };
+        let validationMessage = validateName(fieldValue);
+        
+        const newValidations = {name:validationMessage};
+        const newState = {name: fieldValue, validations: newValidations};
         setNewState(newState);
     }
 
+    const validateName=(name)=>{
+        if(name!="" & name.length<3){
+            return validationMessage.invalidNameLength;
+        }
+        return undefined;
+    }
     return (
         <div>
             <h3>Get Plant By Name On Request</h3>
@@ -52,6 +66,11 @@ export default function GetPlantByNameRequest() {
                             required = "true"
                             className="form-control" 
                         />
+                        {currentState.validations.name?(
+                            <div className={commonStyle.error}>
+                                {currentState.validations.name}
+                            </div>
+                        ):''}
                     </div>
                     <button className="btn btn-primary">Get Plant</button>
                 </form>
