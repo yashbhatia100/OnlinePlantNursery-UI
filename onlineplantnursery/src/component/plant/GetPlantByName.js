@@ -24,7 +24,7 @@ export default function GetPlantByName(props){
 
     return(
         <div>
-            <h3>Get Plant By Name</h3>
+            <h3>Plant Details</h3>
             <div className="mt-5">
             {response.plant?(
                 <div>

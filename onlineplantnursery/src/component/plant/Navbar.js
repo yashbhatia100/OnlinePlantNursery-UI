@@ -26,7 +26,7 @@ export default function Navbar() {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/plantbyname/:id" className="nav-link">
+                            <Link to="/plantbyname/:name" className="nav-link">
                                 Get Plant By Name
                             </Link>
                         </li>
