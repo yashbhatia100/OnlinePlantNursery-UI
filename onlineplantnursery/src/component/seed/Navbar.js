@@ -5,6 +5,10 @@ export default function Navbar() {
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <Link to="/" className="navbar-brand" >
+                    Seed Module
+                </Link>
+
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
                     <span className="navbar-toggler-icon"></span>
                 </button>
