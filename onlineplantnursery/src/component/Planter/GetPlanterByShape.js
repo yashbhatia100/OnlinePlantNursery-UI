@@ -47,7 +47,7 @@ export default function GetPlanterByShape() {
 
   const planterShapeRef = React.createRef();
 
-  const changeHandler = () => {
+  const changeHandler = (ref) => {
       console.log("Inside Change Handler")
     const fieldVal = planterShapeRef.current.value;
     const newState = { planterShape: undefined };

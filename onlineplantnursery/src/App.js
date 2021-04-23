@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from "./component/planter/Home";
 import Navbar from "./component/planter/Navbar";
 import GetPlanterByIdRequest from "./component/planter/GetPlanterByIdRequest";
+import GetPlanterByCost from "./component/planter/GetPlanterByCost";
 
 function App() {
   
@@ -24,6 +25,7 @@ function App() {
                 <Route exact path ="/planterbyid/:planterId" component={GetPlanterById}/>
                 <Route exact path ="/planterbyidonrequest" component={GetPlanterByIdRequest}/>
                 <Route exact path="/planterbyshape" component={GetPlanterByShape}/>
+                <Route exact path="/planterbycost" component={GetPlanterByCost}/>
               </Switch>
             </div>
           </div>

@@ -3,6 +3,7 @@ export default function DisplayPlanter({ planter }) {
     
       <div>
         <table className="table table-striped w-40">
+          <tbody>
           <tr>
             <th>Planter Id</th>
               <td>{planter.planterId}</td>
@@ -42,6 +43,7 @@ export default function DisplayPlanter({ planter }) {
               <td>{planter.planterCost}</td>
             
           </tr>
+          </tbody>
         </table>
       </div>
   );

@@ -39,6 +39,11 @@ export default function Navbar() {
                 <span>Get planter by Shape on Request</span>
               </Link>
             </li>
+            <li className="nav-item">
+              <Link to="/planterbycost" className="nav-link">
+                <span>Get planter by Cost </span>
+              </Link>
+            </li>
           </ul>
         </div>
       </nav>

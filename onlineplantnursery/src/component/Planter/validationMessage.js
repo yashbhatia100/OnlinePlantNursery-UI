@@ -5,6 +5,8 @@ const validationMessage = {
     "Planter Drainage Holes can't be less than zero or negative.",
   invalidPlanterStock: "Planter Stock can't be less than zero or negative.",
   invalidPlanterCost: "Planter Cost can't be less than zero or negative.",
+  invalidMinCost: "Planter Cost can't be less than zero or negative.",
+  invalidMaxCost: "Planter Cost can't be less than zero or negative.",
   invalidPlanterShape: "Planter Shape should be of length more than three",
 }
 

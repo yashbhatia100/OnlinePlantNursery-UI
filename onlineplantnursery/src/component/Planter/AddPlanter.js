@@ -52,7 +52,6 @@ export default function AddPlanter() {
     planterShape: undefined,
     planterStock: undefined,
     planterCost: undefined,
-    seedId: undefined,
     product: undefined,
     errMsg: undefined,
     planter: undefined,
@@ -227,7 +226,7 @@ export default function AddPlanter() {
             ref={planterColorRef}
             onChange={() => changeHandler(planterColorRef)}
           >
-            <option disabled selected>
+            <option>
               select color
             </option>
             {colors.map((colors) => (
@@ -327,7 +326,7 @@ export default function AddPlanter() {
             />
           </div>
 
-          {state.product == "plant" ? (
+          {state.product === "plant" ? (
             <select
               name="plant"
               ref={plantIdRef}
@@ -346,7 +345,7 @@ export default function AddPlanter() {
             ""
           )}
 
-          {state.product == "seed" ? (
+          {state.product === "seed" ? (
             <div>
               <select
                 name="seed"
