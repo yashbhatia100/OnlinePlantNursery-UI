@@ -1,7 +1,10 @@
-import React,{useState} from "react";
-import DisplayPlanter from"./DisplayPlanter";
+import React, { useState } from "react";
+import DisplayPlanter from "./DisplayPlanter";
 import commonStyle from "./commonStyle.module.css";
-export default function GetPlanterByIdRequest(){
+import validationMessage from "./validationMessage";
+
+
+export default function GetPlanterByIdRequest() {
   const mockplanter = {
     planterId: 1,
     planterHeight: 10,
@@ -16,22 +19,45 @@ export default function GetPlanterByIdRequest(){
   };
 
   const planterIdRef = React.createRef();
-  const response={planter:mockplanter,errMsg:undefined};
-  const initialState={planterId:undefined}
-  const [currentState, setNewState] = useState(initialState);
+  const response = { planter:undefined, errMsg: undefined };
+  const initialState = {
+    planterId: undefined,
+    validations: { planterId: undefined },
+  };
+  const [state, setNewState] = useState(initialState);
 
   const setIdHandler = () => {
     console.log("Inside setId Handler");
-    const  fieldValue = planterIdRef.current.value;
+    const fieldValue = planterIdRef.current.value;
+    const validationMsg = validatePlanterId(fieldValue);
+    const newValidations = {
+      ...state.validations,
+      planterId: validationMsg,
+    };
     const newState = {
-      ...currentState,
+      ...state,
       planterId: fieldValue,
+      errMsg: undefined,
+      validations: newValidations,
     };
     setNewState(newState);
   };
   const submitHandler = (event) => {
-    console.log("Inside Submit Handler");
     event.preventDefault();
+    console.log("Inside Submit Handler");
+    if (state.validations.planterId) {
+      return;
+    }
+    let data = { ...state };
+  
+  };
+
+  const validatePlanterId = (planterId) => {
+    if (planterId < 0) {
+      console.log("inside validate planterId");
+      return validationMessage.invalidPlanterId;
+    }
+    return undefined;
   };
 
   return (
@@ -49,6 +75,13 @@ export default function GetPlanterByIdRequest(){
             className="form-control"
             required
           />
+          {state.validations.planterId ? (
+            <div className={commonStyle.error}>
+              {state.validations.planterId}
+            </div>
+          ) : (
+            ""
+          )}
         </div>
         <button className="btn btn-primary">Get Planter</button>
       </form>
@@ -62,7 +95,7 @@ export default function GetPlanterByIdRequest(){
         ""
       )}
       {response.errMsg ? (
-        <div>
+        <div className={commonStyle.error}>
           Request was not successful
           <br />
           {response.errMsg}

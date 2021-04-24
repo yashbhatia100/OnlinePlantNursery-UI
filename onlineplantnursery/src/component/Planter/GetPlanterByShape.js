@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import DisplayPlanterList from "./DisplayPlanterList";
 import commonStyle from "./commonStyle.module.css";
+
+
 export default function GetPlanterByShape() {
   const planter1 = {
     planterId: 1,
@@ -43,7 +45,7 @@ export default function GetPlanterByShape() {
   let planterList = [planter1, planter2, planter3];
 
   const response = { planters: planterList, errMsg: undefined };
-  const [currentState, setNewState] = useState({ planterShape: undefined });
+  const [state, setNewState] = useState({ planterShape: undefined });
 
   const planterShapeRef = React.createRef();
 
@@ -57,6 +59,12 @@ export default function GetPlanterByShape() {
   const submitHandler = (event) => {
     event.preventDefault();
     console.log("Inside Submit Handler")
+    if (state.validations.planterShape) {
+      return;
+    }
+    let data = { ...state };
+
+
   };
   return (
     <div>
@@ -74,7 +82,7 @@ export default function GetPlanterByShape() {
             autocomplete="off"
           />
           <datalist id="planterShapeList">
-            <option value="Cylindrical" />
+            <option value="Cylinderical" />
             <option value="Square" />
             <option value="Recatngualr" />
           </datalist>

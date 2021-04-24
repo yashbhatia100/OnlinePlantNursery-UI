@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import validationMessage from "./validationMessage";
 import commonStyle from "./commonStyle.module.css";
 import DisplayPlanterList from "./DisplayPlanterList";
-export default function GetPlanterByCost(props) {
+
+export default function GetPlanterByCost() {
   const planter1 = {
     planterId: 1,
     planterHeight: 10,
@@ -11,7 +12,7 @@ export default function GetPlanterByCost(props) {
     planterDrainageHoles: 1,
     planterShape: "Square",
     planterStock: 100,
-    planterCost: 200,
+    planterCost: 300,
     plantId: 1,
     seedId: 2,
   };
@@ -29,17 +30,23 @@ export default function GetPlanterByCost(props) {
     seedId: 4,
   };
   let planterList = [planter1, planter2];
+  
  
-  const initialState={minCost:undefined, maxCost:undefined};
+  const initialState={minCost:undefined, maxCost:undefined,validations:{
+    minCost:undefined,
+    maxCost:undefined,
+  }};
   const response = { planters: planterList, errMsg: undefined };
-  const [state, setNewState] = useState({ initialState});
+  const [state, setNewState] = useState(initialState);
   const minCostRef = React.createRef();
   const maxCostRef = React.createRef();
 
   const changeHandler = (ref) => {
+    console.log("In change Handler")
     const field = ref.current;
     const fieldName = field.name;
     const fieldValue = field.value;
+
 
     let validationMsg;
     if (ref === minCostRef) {
@@ -62,6 +69,12 @@ export default function GetPlanterByCost(props) {
   const submitHandler = (event) => {
     event.preventDefault();
     console.log("Inside Submit Handler");
+
+    if (state.validations.maxCost && state.validations.minCost) {
+      return;
+
+
+    }
   };
 
   const validateMinCost = (minCost) => {
@@ -80,10 +93,10 @@ export default function GetPlanterByCost(props) {
     return undefined;
   };
 
-  return (
+  return(
     <div>
       <h3>Get Planters By Cost Range</h3>
-      <form onSubmit  onSubmit={(event) => submitHandler(event)}>
+      <form onSubmit={(event) => submitHandler(event)}>
         <div className="form-group">
           <label>Planter Minimium Cost</label>
           <input
@@ -129,7 +142,7 @@ export default function GetPlanterByCost(props) {
           Get Planters
         </button>
       </form>
-      <div>
+      <div className="mt-5">
         <ol>
           {response.planters ? (
             <DisplayPlanterList planters={response.planters} />

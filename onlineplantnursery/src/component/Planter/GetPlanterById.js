@@ -1,5 +1,7 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import DisplayPlanter from "./DisplayPlanter";
+
 
 export default function GetPlanterById(props) {
   const mockplanter = {
@@ -14,7 +16,24 @@ export default function GetPlanterById(props) {
     plantId: 1,
     seedId: 1,
   };
-  const response={planter:mockplanter,errMsg:undefined}
+  const response={planter:undefined,errMsg:undefined}
+
+  const planterIdRef=React.createRef();
+  const intitalState = { planter:undefined, errMsg: undefined };
+
+    const [currentState, setNewState] = useState(intitalState);
+
+
+
+  const setFieldState = () => {
+      const planterIdValue = planterIdRef.current.value;
+      const newState = { ...currentState, planterId: planterIdValue, planter: undefined, errMsg:undefined };
+      setNewState(newState);
+  }
+
+
+
+
   return (
     <div>
       <h3>Get Planter By Id </h3>

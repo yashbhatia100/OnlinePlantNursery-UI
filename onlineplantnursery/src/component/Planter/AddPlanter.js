@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import DisplayPlanter from "./DisplayPlanter";
 import validationMessage from "./validationMessage";
 import commonStyle from "./commonStyle.module.css";
-
 export default function AddPlanter() {
   const plants = [
     { id: 1, name: "Mango" },
@@ -73,7 +72,6 @@ export default function AddPlanter() {
   const submitHandler = (event) => {
     console.log("Inside submit Handler");
     event.preventDefault();
-    setNewState({ ...state, formstatus: "Form is submitted Successfully" });
   };
 
   const changeHandler = (ref) => {
@@ -226,9 +224,7 @@ export default function AddPlanter() {
             ref={planterColorRef}
             onChange={() => changeHandler(planterColorRef)}
           >
-            <option>
-              select color
-            </option>
+            <option>select color</option>
             {colors.map((colors) => (
               <option key={colors.id} value={colors.id}>
                 {colors.name}

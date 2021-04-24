@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DisplayPlanterList from "./DisplayPlanterList";
 import commonStyle from "./commonStyle.module.css"
+
 export default function GetAllPlanters() {
   const planter1 = {
     planterId: 1,
@@ -29,7 +30,12 @@ export default function GetAllPlanters() {
   }
   let planterList = [planter1, planter2];
 
-  const response = { planters: planterList, errMsg: undefined };
+  const response = { planters: undefined, errMsg: undefined };
+
+  const [currentState, setNewState] = useState({ planters: undefined, errMsg: undefined });
+console.log("inside get all planters",currentState.planters);
+
+
   return(
     <div>
       <h3>Get All Planters</h3>
