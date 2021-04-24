@@ -92,7 +92,7 @@ export default function GetPlantToUpdate() {
                         </table>
                         <div>
                             <Link to={`/updatestock/${response.plant.plantId}`}>
-                                <button class="btn btn-primary">Update Stock</button>
+                                <button className="btn btn-primary">Update Stock</button>
                             </Link>
 
                         </div>

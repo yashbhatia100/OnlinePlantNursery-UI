@@ -140,7 +140,7 @@ export default function AddPlant() {
                             name="plantHeight"
                             ref={plantHeightRef} 
                             onChange={() => changeHandler(plantHeightRef)}
-                            required = "true" 
+                            required = {true} 
                             className="form-control" 
                         />
                         {currentState.validations.plantHeight?(
@@ -157,7 +157,7 @@ export default function AddPlant() {
                             name="plantSpread"
                             ref={plantSpreadRef} 
                             onChange={() => changeHandler(plantSpreadRef)} 
-                            required = "true" 
+                            required = {true} 
                             className="form-control" 
                         />
                         {currentState.validations.plantSpread?(
@@ -173,7 +173,7 @@ export default function AddPlant() {
                             name="commonName" 
                             ref={commonNameRef} 
                             onChange={() => changeHandler(commonNameRef)} 
-                            required = "true" 
+                            required = {true} 
                             className="form-control" 
                         />
                         {currentState.validations.commonName?(
@@ -189,7 +189,7 @@ export default function AddPlant() {
                             name="bloomTime" 
                             ref={bloomTimeRef}
                             onChange={() => changeHandler(bloomTimeRef)} 
-                            required = "true" 
+                            required = {true} 
                             className="form-control" 
                         />
                         {currentState.validations.bloomTime?(
@@ -205,7 +205,7 @@ export default function AddPlant() {
                             name="plantUse" 
                             ref={plantUseRef} 
                             onChange={() => changeHandler(plantUseRef)} 
-                            required = "true" 
+                            required = {true} 
                             className="form-control" 
                         />
                     </div>
@@ -216,7 +216,7 @@ export default function AddPlant() {
                             name="difficultyLevel" 
                             ref={difficultyLevelRef} 
                             onChange={() => changeHandler(difficultyLevelRef)} 
-                            required = "true" 
+                            required = {true} 
                             className="form-control" 
                             list="difficultyList"
                             autoComplete="off"
@@ -239,7 +239,7 @@ export default function AddPlant() {
                             name="temperature" 
                             ref={temperatureRef} 
                             onChange={() => changeHandler(temperatureRef)} 
-                            required = "true" 
+                            required = {true} 
                             className="form-control" 
                         />
                         {currentState.validations.temperature?(
@@ -255,7 +255,7 @@ export default function AddPlant() {
                             name="typeOfPlant" 
                             ref={typeOfPlantRef} 
                             onChange={() => changeHandler(typeOfPlantRef)} 
-                            required = "true" 
+                            required = {true} 
                             className="form-control" 
                             list="plantTypeList"
                             autoComplete="off"
@@ -280,7 +280,7 @@ export default function AddPlant() {
                             name="plantDescription" 
                             ref={plantDescriptionRef} 
                             onChange={() => changeHandler(plantDescriptionRef)} 
-                            required = "true" 
+                            required = {true} 
                             className="form-control" 
                         />
                     </div>
@@ -291,7 +291,7 @@ export default function AddPlant() {
                             name="plantStock" 
                             ref={plantStockRef} 
                             onChange={() => changeHandler(plantStockRef)} 
-                            required = "true" 
+                            required = {true} 
                             className="form-control" 
                         />
                         {currentState.validations.plantStock?(
@@ -307,7 +307,7 @@ export default function AddPlant() {
                             name="plantCost" 
                             ref={plantCostRef} 
                             onChange={() => changeHandler(plantCostRef)} 
-                            required = "true" 
+                            required = {true} 
                             className="form-control" 
                         />
                         {currentState.validations.plantCost?(
