@@ -3,7 +3,7 @@ import DisplaySeedDetails from './DisplaySeedDetails';
 import  commonStyle from './commonStyle.module.css';
 
 
-export default function GetSeedById(){
+export default function GetSeedByIdRequest(){
    
     const seed={
         seedId:20,

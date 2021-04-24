@@ -1,7 +1,7 @@
 import DisplaySeedList from "./DisplaySeedList";
 import  commonStyle from './commonStyle.module.css';
 
-export default function GetAllPlants(){
+export default function GetAllSeeds(){
 
     let seed1={
         seedId:14,

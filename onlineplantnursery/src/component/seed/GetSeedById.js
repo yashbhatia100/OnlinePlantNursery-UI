@@ -2,7 +2,7 @@ import React , {useState} from 'react';
 import DisplaySeedDetails from './DisplaySeedDetails';
 import  commonStyle from './commonStyle.module.css';
 
-export default function GetSeed(props){
+export default function GetSeedById(props){
     let seed={
         seedId:13,
         commonName:"Rose seed",

@@ -1,8 +1,6 @@
 
 export default function DisplaySeedDetails({ seed }) {
-    //let { seedId, commonName, bloomTime, watering, difficultyLevel, temparature, typeOfSeeds, seedsDescription, 
-      //  seedsStock, seedsCost, seedsPerPacket } = seed;
-        
+    
     return (
         <div>
             seedId is {seed.seedId}
