@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 export default function Navbar() {
 
@@ -38,6 +38,11 @@ export default function Navbar() {
                         <li className="nav-item">
                             <Link to="/plantsbytype" className="nav-link">
                                 Get Plants By Type
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/planttoupdate" className="nav-link">
+                                Get Plant To Update
                             </Link>
                         </li>
                     </ul>

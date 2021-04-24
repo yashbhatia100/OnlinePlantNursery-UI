@@ -5,6 +5,7 @@ import commonStyle from './commonStyle.module.css';
 export default function GetPlantByName(props){
 
     let mockPlant={
+        plantId:1,
         plantHeight:100, 
         plantSpread:"2m", 
         commonName:"Rose",  
@@ -28,7 +29,9 @@ export default function GetPlantByName(props){
             <div className="mt-5">
             {response.plant?(
                 <div>
-                    <DisplayPlant plant={response.plant}/>
+                    <div>
+                        <DisplayPlant plant={response.plant}/>
+                    </div>
                 </div>
             ):''}
 

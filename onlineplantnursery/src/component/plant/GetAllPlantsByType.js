@@ -50,6 +50,8 @@ export default function GetAllPlantsByType() {
 
     const initialState = { typeOfPlant: undefined, validations:{typeOfPlant:undefined} };
 
+ const object = {minCost:undefined, maxCost:undefined};
+
     const [currentState, setNewState] = useState(initialState);
 
     const typeRef = React.createRef();
