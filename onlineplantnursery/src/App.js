@@ -11,9 +11,11 @@ import Home from './component/customer/Home';
 import ChangeCustomerName from './component/customer/ChangeCustomerName';
 import GetCustomerById from './component/customer/GetCustomerById';
 import {addCustomer} from './service/customerService';
+import {addCustomer,getCustomer} from './service/CustomerService'
 function App() {
+  /*const customer = {
 
-  let mockCustomer={
+
     customerName : "Saurabh",
     customerEmail : "abc@gmail.com",
     username: "abckg",
@@ -21,14 +23,21 @@ function App() {
     houseNo : 119,
     colony : "ipsum",
     city  : "chennai",
-    State: "TamilNadu",
-    pincode : 600001
-};
+    state: "TamilNadu",
+    pincode : 600001,
 
-const promise=addCustomer(mockCustomer);
-promise.then(response=>console.log("success:", response.data))
-.catch(error=>console.log("failure:", error.message));
+};*/
 
+
+ // const promise = addCustomer(customer);
+ // promise.then(response=>console.log("Success",response.data))
+ //.catch(error=>console.log("error in  add Customer  component ",error.message));
+
+   const promise= getCustomer();
+   promise.then(response=>console.log("Success ",response.data))
+   .catch(error=>console.log("error in getCustomer",error.message));
+
+ 
   return(
     <div >
    <Router>
@@ -40,7 +49,10 @@ promise.then(response=>console.log("success:", response.data))
     <Route exact path="/login" component = {LoginForm} />
     <Route exact path="/getcustomerbyid" component = {GetCustomerById} />
     <Route exact path="/getcustomerdetailsonrequest" component = {GetCustomerDetailsOnRequest} />
+    <Route exact path="/getcustomer" component = {GetCustomer} />
     <Route exact path="/changecustomername" component = {ChangeCustomerName} />
+    <Route exact path="/getcustomerdetailsonrequest" component = {GetCustomerDetailsOnRequest} />
+    
     </Switch>
     </div>
     </Router>

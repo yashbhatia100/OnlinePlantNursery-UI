@@ -7,16 +7,15 @@ import {addCustomer} from '../../service/customerService';
 export default function  AddCustomer(){
 const customer = {
 
-    id : 2,
+
     customerName : "Saurabh",
     customerEmail : "abc@gmail.com",
     username: "abckg",
     password : "xyz421",
     houseNo : 119,
-    addressId : 123,
     colony : "ipsum",
     city  : "chennai",
-    State: "TamilNadu",
+    state: "TamilNadu",
     pincode : 600001,
 
 };

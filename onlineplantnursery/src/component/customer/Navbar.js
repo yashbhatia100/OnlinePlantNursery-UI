@@ -36,7 +36,7 @@ export default function Navbar(){
        </Link>
        <li className="nav-item">
        <Link to="/changecustomername" className="nav-link">
-           Change Customer Name
+        Change Customer Name
        </Link>
        </li>
    </li>
