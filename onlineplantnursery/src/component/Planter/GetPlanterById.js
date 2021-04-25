@@ -1,35 +1,39 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPlanterById } from "../../redux/fetchplanterbyid/fetchPlanterByIdAction";
 import DisplayPlanter from "./DisplayPlanter";
 
 
 export default function GetPlanterById(props) {
-  const mockplanter = {
-    planterId: 1,
-    planterHeight: 10,
-    planterCapacity: 100,
-    planterColor: 2,
-    planterDrainageHoles: 1,
-    planterShape: "Square",
-    planterStock: 100,
-    planterCost: 200,
-    plantId: 1,
-    seedId: 1,
-  };
-  const response={planter:undefined,errMsg:undefined}
+  // const mockplanter = {
+  //   planterId: 1,
+  //   planterHeight: 10,
+  //   planterCapacity: 100,
+  //   planterColor: 2,
+  //   planterDrainageHoles: 1,
+  //   planterShape: "Square",
+  //   planterStock: 100,
+  //   planterCost: 200,
+  //   plantId: 1,
+  //   seedId: 1,
+  // };
 
-  const planterIdRef=React.createRef();
-  const intitalState = { planter:undefined, errMsg: undefined };
+  const currentState = useSelector( state=>{
+    return{
+      planter: state.fetchPlanterById.planter,
+      error:state.fetchPlanterById.error
+    };
+})
 
-    const [currentState, setNewState] = useState(intitalState);
+ const dispatch=useDispatch();
 
-
-
-  const setFieldState = () => {
-      const planterIdValue = planterIdRef.current.value;
-      const newState = { ...currentState, planterId: planterIdValue, planter: undefined, errMsg:undefined };
-      setNewState(newState);
-  }
+ const fetchPlanterOnRender=()=>{
+   const id=props.match.params.id;
+   dispatch(fetchPlanterById(id));
+   
+ }
+ useEffect(fetchPlanterOnRender,[]);
 
 
 
@@ -39,19 +43,19 @@ export default function GetPlanterById(props) {
       <h3>Get Planter By Id </h3>
      
 
-      {response.planter ? (
+      {currentState.planter ? (
         <div>
           <h2>Planter Details</h2>
-          <DisplayPlanter planter={response.planter} />
+          <DisplayPlanter planter={currentState.planter} />
         </div>
       ) : (
         ""
       )}
-      {response.errMsg ? (
+      {currentState.errMsg ? (
         <div className="commonStyle.error">
           Request was not successful
           <br />
-          {response.errMsg}
+          {currentState.errMsg}
         </div>
       ) : (
         ""

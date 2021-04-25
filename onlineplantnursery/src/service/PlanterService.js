@@ -1,6 +1,7 @@
 import axios from "axios";
 const baseUrl = "http://localhost:8585";
-function fetchPlanterById(id) {
+
+  function fetchPlanter(id) {
   const url = baseUrl + "/planter/fetch/byid/" + id;
   console.log("Inside fetch by planter Service with Id", +id);
   const promise = axios.get(url);
@@ -21,6 +22,7 @@ function addPlanter(data) {
     seedId: data.seedId,
   };
   console.log("Inside add planter service");
+  console.log(data);
   const promise = axios.post(url, requestData);
   return promise;
 }
@@ -45,7 +47,7 @@ function fetchAll() {
 }
 
 export {
-  fetchPlanterById,
+  fetchPlanter,
   addPlanter,
   fetchPlanterByShape,
   fetchPlanterByCost,

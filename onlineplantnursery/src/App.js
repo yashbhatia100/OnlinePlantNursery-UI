@@ -8,14 +8,24 @@ import Home from "./component/planter/Home";
 import Navbar from "./component/planter/Navbar";
 import GetPlanterByIdRequest from "./component/planter/GetPlanterByIdRequest";
 import GetPlanterByCost from "./component/planter/GetPlanterByCost";
-//import { fetchPlanterByCost } from "./service/PlanterService";
-import {addPlanter,fetchPlanterById,fetchPlanterByShape,fetchPlanterByCost,fetchAll} from "./service/PlanterService";
+import {addPlanter,fetchPlanter,fetchPlanterByShape,fetchPlanterByCost,fetchAll} from "./service/PlanterService";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 function App() {
 
+  //   const mockplanter = {
+  //           planterHeight: 10,planterCapacity: 100,
+  //           planterColor: 2,planterDrainageHoles: 1,
+  //           planterShape: "Square",
+  //           planterStock: 100,
+  //           planterCost: 200,
+  //           plantId: 1,
+  //           seedId: 11,
+  //         };
   
 
-  // const promise=PlanterService.addPlanter(mockplanter);
+  // const promise=addPlanter(mockplanter);
   // promise.then(response=>console.log("inside addPlanter",response.data))
   // .catch(error=>console.log("error in planter add component ",error.message));
         
@@ -32,15 +42,16 @@ function App() {
   // promise.then(response=>console.log("inside fetch All ",response.data))
   // .catch(error=>console.log("error in planter fetching All ",error.message));
 
-  const promise=fetchPlanterByCost(200,400);
-  promise.then(response=>console.log("inside fetch planter by Cost ",response.data))
-  .catch(error=>console.log("error in planter by Cost ",error.message));
+  // const promise=fetchPlanterByCost(200,400);
+  // promise.then(response=>console.log("inside fetch planter by Cost ",response.data))
+  // .catch(error=>console.log("error in planter by Cost ",error.message));
 
 
 
   return (
     <div>
-      {/*    {
+        {
+          <Provider store={store}>
     <Router>
        <Navbar/>
         <div className="container" style={{ marginTop: "50px" }}>
@@ -59,9 +70,9 @@ function App() {
           </div>
         </div>
       </Router>
+      </Provider>
   }
-      */}
-    
+      
     </div>
   );
 }

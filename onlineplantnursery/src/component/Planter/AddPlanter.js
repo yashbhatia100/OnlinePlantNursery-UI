@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import DisplayPlanter from "./DisplayPlanter";
 import validationMessage from "./validationMessage";
 import commonStyle from "./commonStyle.module.css";
+import { addPlanterAction } from "../../redux/addplanter/addPlanterActions";
+import { useDispatch, useSelector } from "react-redux";
 export default function AddPlanter() {
   const plants = [
     { id: 1, name: "Mango" },
@@ -24,7 +26,7 @@ export default function AddPlanter() {
     planterHeight: 10,
     planterCapacity: 100,
     planterColor: 2,
-    planterDrainageHoles: 1,
+    drainageHoles: 1,
     planterShape: "Square",
     planterStock: 100,
     planterCost: 200,
@@ -35,7 +37,7 @@ export default function AddPlanter() {
 
   const planterHeightRef = React.createRef();
   const planterCapacityRef = React.createRef();
-  const planterDrainageHolesRef = React.createRef();
+  const drainageHolesRef = React.createRef();
   const planterColorRef = React.createRef();
   const planterShapeRef = React.createRef();
   const planterStockRef = React.createRef();
@@ -46,7 +48,7 @@ export default function AddPlanter() {
   const initialState = {
     planterHeight: undefined,
     planterCapacity: undefined,
-    planterDrainageHoles: undefined,
+    drainageHoles: undefined,
     planterColor: undefined,
     planterShape: undefined,
     planterStock: undefined,
@@ -54,31 +56,54 @@ export default function AddPlanter() {
     product: undefined,
     errMsg: undefined,
     planter: undefined,
-    plantId: undefined,
-    seedId: undefined,
+    plantId:0,
+    seedId: 0,
     validations: {
       planterHeight: undefined,
       planterCapacity: undefined,
-      planterDrainageHoles: undefined,
+      drainageHoles: undefined,
       planterShape: undefined,
       planterStock: undefined,
       planterCost: undefined,
+      plantId: undefined,
+      seedId: undefined,
+      planterColor: undefined,
     },
   };
 
-  const response = { planter: mockplanter, errMsg: undefined };
   const [state, setNewState] = useState(initialState);
+  const response = useSelector((state) => {
+    return {
+      planter: state.addPlanter.planter,
+      error: state.addPlanter.error,
+    };
+  });
+
+  const dispatch = useDispatch();
 
   const submitHandler = (event) => {
     console.log("Inside submit Handler");
     event.preventDefault();
+    if (
+      state.validations.planterHeight ||
+      state.validations.planterCapacity ||
+      state.validations.drainageHoles ||
+      state.validations.planterShape ||
+      state.validations.planterCost ||
+      state.validations.planterStock
+    ) {
+      return;
+    }
+    let data = { ...state };
+    dispatch(addPlanterAction(data));
   };
 
   const changeHandler = (ref) => {
-    console.log("Inside changeHandler");
     const field = ref.current;
     const fieldName = field.name;
+
     const fieldValue = field.value;
+
     let validationMsg;
     if (ref === planterHeightRef) {
       validationMsg = validatePlanterHeight(fieldValue);
@@ -86,8 +111,8 @@ export default function AddPlanter() {
     if (ref === planterCapacityRef) {
       validationMsg = validatePlanterCapacity(fieldValue);
     }
-    if (ref === planterDrainageHolesRef) {
-      validationMsg = validatePlanterDraingeHoles(fieldValue);
+    if (ref === drainageHolesRef) {
+      validationMsg = validateDraingeHoles(fieldValue);
     }
 
     if (ref === planterShapeRef) {
@@ -125,8 +150,8 @@ export default function AddPlanter() {
     }
     return undefined;
   };
-  const validatePlanterDraingeHoles = (planterDrainageHoles) => {
-    if (planterDrainageHoles < 0) {
+  const validateDraingeHoles = (drainageHoles) => {
+    if (drainageHoles < 0) {
       return validationMessage.invalidPlatnterDrainageHoles;
     }
     return undefined;
@@ -200,17 +225,17 @@ export default function AddPlanter() {
         <div className="form-group">
           <label>Planter Drainage Holes </label>
           <input
-            name="planterDrainageHoles"
+            name="drainageHoles"
             type="number"
             placeholder="Enter the Planter Drainage Holes"
-            ref={planterDrainageHolesRef}
-            onChange={() => changeHandler(planterDrainageHolesRef)}
+            ref={drainageHolesRef}
+            onChange={() => changeHandler(drainageHolesRef)}
             className="form-control"
             required
           />
-          {state.validations.planterDrainageHoles ? (
+          {state.validations.drainageHoles ? (
             <div className={commonStyle.error}>
-              {state.validations.planterDrainageHoles}
+              {state.validations.drainageHoles}
             </div>
           ) : (
             ""
@@ -220,14 +245,14 @@ export default function AddPlanter() {
         <div>
           <label>Planter Color &nbsp;</label>
           <select
-            name="color"
+            name="planterColor"
             ref={planterColorRef}
             onChange={() => changeHandler(planterColorRef)}
           >
             <option>select color</option>
-            {colors.map((colors) => (
-              <option key={colors.id} value={colors.id}>
-                {colors.name}
+            {colors.map((color) => (
+              <option key={color.id} value={color.id}>
+                {color.name}
               </option>
             ))}
           </select>
@@ -303,7 +328,11 @@ export default function AddPlanter() {
               type="radio"
               value="plant"
               onChange={() => {
-                let newState = { ...state, product: "plant" };
+                let newState = {
+                  ...state,
+                  product: "plant",
+                  seedId: 0,
+                };
                 setNewState(newState);
               }}
             />
@@ -316,7 +345,11 @@ export default function AddPlanter() {
               type="radio"
               value="seed"
               onChange={() => {
-                let newState = { ...state, product: "seed" };
+                let newState = {
+                  ...state,
+                  product: "seed",
+                  plantId:0,
+                };
                 setNewState(newState);
               }}
             />
@@ -324,16 +357,16 @@ export default function AddPlanter() {
 
           {state.product === "plant" ? (
             <select
-              name="plant"
+              name="plantId"
               ref={plantIdRef}
               onChange={() => changeHandler(plantIdRef)}
             >
               <option disabled selected>
                 select plant
               </option>
-              {plants.map((plants) => (
-                <option key={plants.id} value={plants.id}>
-                  {plants.name}
+              {plants.map((plant) => (
+                <option key={plant.id} value={plant.id}>
+                  {plant.name}
                 </option>
               ))}
             </select>
@@ -344,16 +377,16 @@ export default function AddPlanter() {
           {state.product === "seed" ? (
             <div>
               <select
-                name="seed"
+                name="seedId"
                 ref={seedIdRef}
                 onChange={() => changeHandler(seedIdRef)}
               >
                 <option disabled selected>
                   select seed
                 </option>
-                {seeds.map((seeds) => (
-                  <option key={seeds.id} value={seeds.id}>
-                    {seeds.name}
+                {seeds.map((seed) => (
+                  <option key={seed.id} value={seed.id}>
+                    {seed.name}
                   </option>
                 ))}
               </select>
@@ -379,11 +412,11 @@ export default function AddPlanter() {
       ) : (
         ""
       )}
-      {response.errMsg ? (
+      {response.error ? (
         <div>
           <h3> Planter was not Added Successfully</h3>
           <br />
-          {response.errMsg}
+          {response.error}
         </div>
       ) : (
         ""

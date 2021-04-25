@@ -21,7 +21,7 @@ export default function DisplayPlanter({ planter }) {
           </tr>
           <tr>
             <th >Planter Draianage Holes  </th>
-              <td>{planter.planterDrainageHoles}</td>
+              <td>{planter.drainageHoles}</td>
            
           </tr>
           <tr>
