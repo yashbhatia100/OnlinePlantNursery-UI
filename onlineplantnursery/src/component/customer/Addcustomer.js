@@ -2,6 +2,7 @@ import  React,{ useState } from "react";
 import DisplayCustomer from "./DisplayCustomer";
 import validationMessage from '../../validationMessage';
 import commonStyle from "./commonStyle.module.css";
+import {addCustomer} from '../../service/customerService';
 
 export default function  AddCustomer(){
 const customer = {

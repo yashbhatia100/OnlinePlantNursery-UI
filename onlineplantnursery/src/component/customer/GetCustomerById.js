@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import commonStyle from "./commonStyle.module.css";
 import DisplayCustomer from "./DisplayCustomer";
+import  {fetchCustomerDetails} from '../../service/customerService';
 
-export default function GetCustomer(props) {
+export default function GetCustomerById(props) {
   let customer1 = {
     id: 1,
     customerName: "haha",

@@ -26,8 +26,8 @@ export default function Navbar(){
            </Link>
        </li>
        <li className="nav-item">
-       <Link to="/getcustomer" className="nav-link">
-           Get Customer
+       <Link to="/getcustomerbyid" className="nav-link">
+           Get Customer By ID
        </Link>
        </li>
        <li className="nav-item">
