@@ -1,5 +1,5 @@
-import { useState } from "react";
-import DisplayOrder from "./DisplayOrder";
+import commonStyle from './commonStyle.module.css';
+import DisplayOrderList from "./DisplayOrderList";
 
 export default function GetAllOrder(){
 
@@ -8,48 +8,38 @@ export default function GetAllOrder(){
     transactionMode: "online",
     quantity: 10,
     totalCost: 207,
-    planterId: 1,
+    planterId: 1
     }
     let order2={
         bookingOrderId: 2,
     transactionMode: "cash",
     quantity: 101,
     totalCost: 2017,
-    planterId: 2,
+    planterId: 2
     }
     let orderList=[order1,order2]
 
-    const initialState = {orders:orderList, errMsg:undefined};
-    const [currentState, setNewState] = useState(initialState)
-    return(
-        <div>
-            <h3>Get All Orders</h3><br/>
-            {currentState.orders?(
-                <table className="table table-striped">
-                    <tr>
-                        <th>bookingOrderId</th>
-                        <th>transactionMode</th>
-                        <th>quantity</th>
-                        <th>totalCost</th>
-                        <th>planterId</th>
-                    </tr>
-                    {currentState.orders.map(order=>
-                    <tr>
-                        <td>{order.bookingOrderId}</td>
-                        <td>{order.transactionMode}</td>
-                        <td>{order.quantity}</td>
-                        <td>{order.totalCost}</td>
-                        <td>{order.planterId}</td>
-                    </tr>)}
-                </table>
-                    ):''}
+    const response = {orders: orderList, errMsg: undefined }
 
-            
-            {currentState.errMsg?(
+    return (
+        <div>
+            <h3>Get All Order</h3>
+            <div className="mt-5">
                 <div>
-                    {currentState.errMsg}
+                    <ul>
+                        {response.orders ? (
+                            <DisplayOrderList orders={response.orders} />
+                        ) : ''}
+                    </ul>
                 </div>
-            ):''}
+                {response.errMsg ? (
+                    <div className={commonStyle.error}>
+                        Request cannot be successfull
+                        <br />
+                        {response.errMsg}
+                    </div>
+                ) : ''}
+            </div>
         </div>
     );
 }

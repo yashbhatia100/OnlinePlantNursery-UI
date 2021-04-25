@@ -1,33 +1,33 @@
 import './App.css';
 import AddOrder from './component/Order/AddOrder';
 import GetAllOrder from './component/Order/GetAllOrder';
-import GetOrderById from './component/Order/GetOrderById';
+import GetOrderByIdRequest from './component/Order/GetOrderByIdRequest';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Navbar from './component/Order/Navbar';
+import home from './component/Order/home';
+
+import { GetOrderById} from './service/OrderService';
+
 
 function App() {
-/*
-  let mockPlant={
-    plantHeight:100, 
-    plantSpread:"2m", 
-    commonName:"Rose", 
-    bloomTime:"2 months",
-    plantUse:"decoration",
-    difficultyLevel:"easy",
-    temperature:"25 deg",
-    typeOfPlant:"herb",
-    plantDescription:"red flowers",
-    plantStock:10,
-    plantCost:50
-  }
-*/
+
+
   return (
-    <div class="container">
-      <h1>Order Module Module</h1>
-      <AddOrder />
-      <br/><hr/><br/>
-      <GetOrderById />
-      <br/><hr/><br/>
-      <GetAllOrder />
-      </div>
+    <div>
+      <Router>
+        <Navbar />
+        <div className="container mt-5">
+        <Switch>
+          <Route exact path="/" component={home} />
+          <Route exact path="/all" component={GetAllOrder} />
+          <Route exact path="/addorder" component={AddOrder} />
+          <Route exact path="/orderbyid/:bookingOrderId" component={GetOrderById} />
+          <Route exact path="/orderbyidonrequest" component={GetOrderByIdRequest} />
+        </Switch>
+        </div>
+      </Router>
+     
+    </div>
   );
 }
 

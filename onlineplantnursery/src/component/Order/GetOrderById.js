@@ -1,75 +1,42 @@
-import React , {useState} from 'react';
-import DisplayOrder from './DisplayOrder';
+import React, { useState } from "react";
+import DisplayOrder from "./DisplayOrder";
+import commonStyle from './commonStyle.module.css';
+import DisplayOrder from "./DisplayOrder";
 
+export default function GetOrderById(props){
 
-
-export default function GetOrderById(){
-   
-    let order={
+    let mockOrder={
         bookingOrderId: 1,
-        transactionMode: "Square",
+        transactionMode: "online",
         quantity: 10,
         totalCost: 207,
         planterId: 1,
-      };
-     
-    const idRef=React.createRef();
+    }
+    
+    const response = {order:mockOrder, errMsg:undefined};
 
-    let [state,setNewState]=useState({id:undefined, order:order, errMsg:undefined});
+    //const [currentState, setNewState]=useState({name:undefined});
 
-    const setIdHandler=()=>{
-        console.log("Inside setIdHandler");
-         let field=idRef.current;
-         let fieldValue=field.value;
-         let newState={...state,id:fieldValue, seed:undefined , errMsg:undefined};
-         setNewState(newState);
-    };
-
-    const submitHandler=(event)=>{
-       console.log("Inside submitHandler");
-       event.preventDefault();
-       let newState={...state,seed:undefined,errMsg:"order not found"};
-       setNewState(newState);
-       //console.log("current state",newState);
-           
-    };
-
-    return (
-
+    return(
         <div>
-            <h3>Get order details</h3>
-
-            <form onSubmit={(event) => submitHandler(event)}>
+            <h3>Order Details</h3>
+            <div className="mt-5">
+            {response.order?(
                 <div>
-                    <label>Enter Order booking Id </label>
-                    <input name="Order Booking Id" type="number" ref={idRef} onChange={() => setIdHandler()} />
+                    <div>
+                        <DisplayOrder order={response.order}/>
+                    </div>
                 </div>
+            ):''}
 
-                <button> Get Order</button>
-            </form>
-
-            {state.order ? (
-
-                <div>
-                    <h3>order Details </h3>
-                    <DisplayOrder order={state.order} />
+            {response.errMsg?(
+                <div className={commonStyle.error}>
+                    Request cannot be processed
+                    <br/>
+                    {response.errMsg}
                 </div>
-
-            ) : ''}
-
-
-            {state.errMsg ? (
-                <div >
-                Request is not successful
-                <br/>
-                
-                 {state.errMsg}
-                </div>
-
-            ) : ''}
-
+            ):''}
+            </div>
         </div>
-
     );
-
 }

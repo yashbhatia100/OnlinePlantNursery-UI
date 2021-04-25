@@ -1,10 +1,31 @@
   
 export default function DisplayOrder({ order }) {
-    return (
-      <span>
-        id is {order.bookingOrderId} transactionMode is {order.transactionMode} quantity is{" "}
-        {order.quantity} totalCost is {order.totalCost} planterId is{" "}
-        {order.planterId} 
-      </span>
-    );
-  }
+
+  return (
+      <div>
+          <table className="table table-striped w-50">
+              <tr>
+                  <th>bookingOrderId</th>
+                  <td>{order.bookingOrderId}</td>
+              </tr>
+              <tr>
+                  <th>transactionMode</th>
+                  <td>{order.transactionMode}</td>
+              </tr>
+              <tr>
+                  <th>quantity</th>
+                  <td>{order.quantity}</td>
+              </tr>
+              <tr>
+                  <th>totalCost</th>
+                  <td>{order.totalCost}</td>
+              </tr>
+              <tr>
+                  <th>planterId</th>
+                  <td>{order.planterId}</td>
+              </tr>
+              
+          </table>
+      </div>
+  );
+}
