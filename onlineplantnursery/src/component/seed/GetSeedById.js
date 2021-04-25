@@ -1,9 +1,10 @@
 import React , {useState} from 'react';
 import DisplaySeedDetails from './DisplaySeedDetails';
 import  commonStyle from './commonStyle.module.css';
+import {fetchSeedById}  from '../../service/SeedService';
 
 export default function GetSeedById(props){
-    let seed={
+   let seed={
         seedId:13,
         commonName:"Rose seed",
 		bloomTime:"3days",
@@ -17,9 +18,10 @@ export default function GetSeedById(props){
 		seedsPerPacket:20
     }
 
-    const response={seed:seed,errMsg:""};
+    const response = {seed:seed, errMsg:undefined};
 
-    return (
+
+     return (
         <div>
             <h3> Get seed details</h3>
             <div className ='mt-5'> 
@@ -41,7 +43,7 @@ export default function GetSeedById(props){
                 ""
 
             )}
-            )
+            
             </div>
         </div>
     );

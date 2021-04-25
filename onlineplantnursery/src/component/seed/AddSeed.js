@@ -1,22 +1,23 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import DisplaySeedDetails from "./DisplaySeedDetails";
 import commonStyle from './commonStyle.module.css';
 import validateMessage from './validationMessage';
 
 export default function AddSeed() {
-    let seed={
-        seedId:20,
-        commonName:"Watermelon seed",
-        bloomTime:"4 weeks", 
-        watering:"Sprinkle",
-        difficultyLevel:"easy", 
-        temparature:"25 deg", 
-        typeOfSeeds:"Round", 
-        seedsDescription:"Black colored seeds", 
-        seedsStock:30, 
-        seedsCost:100, 
-        seedsPerPacket:20
-      }
+   
+  let seed={
+    seedId:30,
+    commonName:"abcd seed",
+    bloomTime:30, 
+    watering:"Sprinkle",
+    difficultyLevel:"easy", 
+    temparature:25, 
+    typeOfSeeds:"Round", 
+    seedsDescription:"Black colored seeds", 
+    seedsStock:30, 
+    seedsCost:100, 
+    seedsPerPacket:20
+  }
 
   const commonNameRef = React.createRef();
   const bloomTimeRef = React.createRef();
@@ -48,14 +49,14 @@ export default function AddSeed() {
     }
   };
 
-  const response ={seed:seed,error:undefined};
+  const response ={seed:undefined,error:undefined};
 
   const [state, setNewState] = useState(initialState);
 
   const submitHandler = (event) => {
     console.log("Inside submitHandler");
     event.preventDefault();
-    setNewState({ ...state, formstatus: "Form is successfully submitted" });
+    
   };
 
   const changeHandler = (ref) => {
@@ -149,6 +150,7 @@ export default function AddSeed() {
             type="text"
             ref={commonNameRef}
             onChange={() => changeHandler(commonNameRef)}
+            className="form-control"
             required = "true" 
             />
           {state.validations.commonName ? (
@@ -167,6 +169,7 @@ export default function AddSeed() {
             type="number"
             ref={bloomTimeRef}
             onChange={() => changeHandler(bloomTimeRef)}
+            className="form-control"
             required = "true" 
           />
           {state.validations.bloomTime ? (
@@ -185,6 +188,7 @@ export default function AddSeed() {
             type="text"
             ref={wateringRef}
             onChange={() => changeHandler(wateringRef)}
+            className="form-control"
             required = "true" 
           />
           
@@ -197,6 +201,7 @@ export default function AddSeed() {
             name="difficultyLevel" 
             ref={difficultyLevelRef} 
             onChange={() => changeHandler(difficultyLevelRef)} 
+            className="form-control"
             required = "true" 
             list="difficultyList"
             autoComplete="off"
@@ -216,6 +221,7 @@ export default function AddSeed() {
             type="number"
             ref={temparatureRef}
             onChange={() => changeHandler(temparatureRef)}
+            className="form-control"
             required = "true" 
           />
           
@@ -228,6 +234,7 @@ export default function AddSeed() {
             type="text"
             ref={typeOfSeedsRef}
             onChange={() => changeHandler(typeOfSeedsRef)}
+            className="form-control"
             required = "true" 
           />
           {state.validations.typeOfSeeds ? (
@@ -246,6 +253,7 @@ export default function AddSeed() {
             type="text"
             ref={seedsDescriptionRef}
             onChange={() => changeHandler(seedsDescriptionRef)}
+            className="form-control"
             required = "true" 
           />
         </div>
@@ -257,6 +265,7 @@ export default function AddSeed() {
             type="number"
             ref={seedsStockRef}
             onChange={() => changeHandler(seedsStockRef)}
+            className="form-control"
             required = "true" 
           />
           {state.validations.seedsStock ? (
@@ -274,6 +283,7 @@ export default function AddSeed() {
             type="number"
             ref={seedsCostRef}
             onChange={() => changeHandler(seedsCostRef)}
+            className="form-control"
             required = "true" 
           />
           {state.validations.seedsCost ? (
@@ -291,6 +301,7 @@ export default function AddSeed() {
             type="number"
             ref={seedsPerPacketRef}
             onChange={() => changeHandler(seedsPerPacketRef)}
+            className="form-control"
             required = "true" 
           />
         </div>      
@@ -302,7 +313,7 @@ export default function AddSeed() {
       {response.seed ? (
         <div>
           <h3>Seed Added Successfully</h3>
-          <DisplaySeedDetails seed={seed} />
+          <DisplaySeedDetails seed={response.seed} />
         </div>
       ) : (
         ""
@@ -311,7 +322,7 @@ export default function AddSeed() {
         <div >
           <h3> Seed was not Added Successfully</h3>
           <br />
-          {state.errMsg}
+          {response.errMsg}
         </div>
       ) : (
         ""

@@ -7,12 +7,47 @@ import GetAllSeedsByType from './component/seed/GetAllSeedsByType';
 import GetSeedById from './component/seed/GetSeedById';
 import Navbar from './component/seed/Navbar';
 import home from './component/seed/Home';
+import {addSeed, fetchAllSeeds, fetchSeedById, fetchSeedsByType} from './service/SeedService';
 
 function App() {
- // let str=tempurature+"";
+ /*
+ let seed={
+  seedId:300,
+  commonName:"xyz seed",
+  bloomTime:30, 
+  watering:"Sprinkle",
+  difficultyLevel:"easy", 
+  temparature:25, 
+  typeOfSeeds:"Round", 
+  seedsDescription:"Black colored seeds", 
+  seedsStock:30, 
+  seedsCost:100, 
+  seedsPerPacket:20
+}
+
+const promise = addSeed(seed);
+promise.then(response=>console.log("Inside response", response.data))
+.catch(error=>console.log("Inside error", error.message));
+*/
+
+const promise = fetchSeedById(3);
+promise.then(response=>console.log("Inside response",response.data))
+.catch(error=>console.log("Inside error ", error.message));
+/*
+const promise=fetchAllSeeds();
+promise.then(response=>console.log("inside fetch All ",response.data))
+.catch(error=>console.log("Inside error ",error.message));
+
+const promise=fetchSeedsByType("Round");
+promise.then(response=>console.log("inside fetch All ",response.data))
+.catch(error=>console.log("Inside error ",error.message));
  
+*/
+
  return (
     <div >
+      
+      
       <Router>
         <Navbar />
         <div className="container mt-5" style={{ marginTop: '50px' }}>
@@ -20,22 +55,21 @@ function App() {
 
             <div className="col-md-9">
         <Switch>
-          <Route exact path="/addseed" component={AddSeed} />
-          <Route exact path="/seedbyid/:seedId" component={GetSeedById} />
-          <Route exact path="/seedbyidonrequest" component={GetSeedByIdRequest} />
+          {/*<Route exact path="/addseed" component={AddSeed} />
+          
+          <Route exact path="/seedbyidonrequest" component={GetSeedByIdRequest} /> 
           <Route exact path="/allseeds" component={GetAllSeeds} />
-          <Route exact path="/seedsbytype" component={GetAllSeedsByType} />
+           <Route exact path="/seedsbytype" component={GetAllSeedsByType} />
+            */}
+          <Route exact path="/seedbyid/:seedId" component={GetSeedById} />
+         
         </Switch>
         </div>
         </div>
         </div>
-      </Router>
-      {/*<DisplaySeedDetails seed={seed}/>*/}
-      {/*<GetSeedById />*/}
-      {/*<AddSeed />*/}
-      {/*<DisplaySeedList seeds={seeds} />*/}
-      {/*<GetAllSeeds />*/}
-      
+      </Router> 
+       
+     
     </div>
   );
 }

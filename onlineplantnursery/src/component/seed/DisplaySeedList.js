@@ -1,5 +1,6 @@
 import DisplaySeedDetails from "./DisplaySeedDetails";
 import {Link} from 'react-router-dom';
+
 export default function DisplaySeedList({ seeds }) {
   return (
     <div>

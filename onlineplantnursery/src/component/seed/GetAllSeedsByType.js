@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import DisplaySeedList from "./DisplaySeedList";
 import  commonStyle from './commonStyle.module.css';
-import validateMessage from './validationMessage';
 
 export default function GetAllSeedsByType(){
     let seed1={
