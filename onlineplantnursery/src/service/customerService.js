@@ -16,15 +16,28 @@ function addCustomer(data){
         pincode : data.pincode,
 
     };
+
+
     console.log("Inside add Customer service");
     const promise = axios.post(url, requestData);
     return promise;
 
     
 }
- function getCustomer(){
-    const url = baseUrl + "/customer/get";
+ function getCustomer(id){
+    const url = baseUrl + "/customer/fetch/byid/" + id  ;
     const promise = axios.get(url);
     return promise;
 }
-export {addCustomer,getCustomer};
+
+function updateCustomerName(data){
+    const url= baseUrl + "/customer/changename" ;
+    let requestData={
+        id: data.customerId,
+        customerName: data.customerName
+    };
+    const promise = axios.put(url, requestData);
+    return promise;
+
+}
+export {addCustomer,getCustomer, updateCustomerName};

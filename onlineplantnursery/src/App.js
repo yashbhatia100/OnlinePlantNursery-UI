@@ -10,8 +10,7 @@ import Navbar from './component/customer/Navbar';
 import Home from './component/customer/Home';
 import ChangeCustomerName from './component/customer/ChangeCustomerName';
 import GetCustomerById from './component/customer/GetCustomerById';
-import {addCustomer} from './service/customerService';
-import {addCustomer,getCustomer} from './service/CustomerService'
+import {addCustomer,getCustomer,updateCustomerName} from './service/CustomerService';
 function App() {
   /*const customer = {
 
@@ -26,17 +25,26 @@ function App() {
     state: "TamilNadu",
     pincode : 600001,
 
-};*/
+}; */
+
+let mockUpdate={
+  customerId:19,
+  customerName: "abeer"
+}
 
 
- // const promise = addCustomer(customer);
- // promise.then(response=>console.log("Success",response.data))
+  //const promise = addCustomer(customer);
+  //promise.then(response=>console.log("Success",response.data))
  //.catch(error=>console.log("error in  add Customer  component ",error.message));
 
-   const promise= getCustomer();
-   promise.then(response=>console.log("Success ",response.data))
-   .catch(error=>console.log("error in getCustomer",error.message));
+  // const promise= getCustomer(19);
+   //promise.then(response=>console.log("Success ",response.data))
+   //.catch(error=>console.log("error in getCustomer",error.message));
 
+   const promise = updateCustomerName(mockUpdate);
+   promise.then(response=>console.log("success:", response.data))
+   .catch(error=>console.log("error in update Customer",error.message));
+   
  
   return(
     <div >
@@ -47,11 +55,9 @@ function App() {
     <Route exact path="/" component = {Home} />
     <Route exact path="/addcustomer" component = {Addcustomer} />
     <Route exact path="/login" component = {LoginForm} />
-    <Route exact path="/getcustomerbyid" component = {GetCustomerById} />
+    <Route exact path="/getcustomerbyid/:id" component = {GetCustomerById} />
     <Route exact path="/getcustomerdetailsonrequest" component = {GetCustomerDetailsOnRequest} />
-    <Route exact path="/getcustomer" component = {GetCustomer} />
-    <Route exact path="/changecustomername" component = {ChangeCustomerName} />
-    <Route exact path="/getcustomerdetailsonrequest" component = {GetCustomerDetailsOnRequest} />
+    <Route exact path="/changecustomername/:id" component = {ChangeCustomerName} />
     
     </Switch>
     </div>
