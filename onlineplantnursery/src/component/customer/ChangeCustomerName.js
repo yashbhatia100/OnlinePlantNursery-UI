@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import DisplayCustomer from "./DisplayCustomer";
 import validationMessage from '../../validationMessage';
 import commonStyle from "./commonStyle.module.css";
-import {updateCustomerNameAction} from "../../redux/updateCustomer/updateCustomerNameActions";
 import { useDispatch,useSelector } from "react-redux";
+import { updateCustomerNameAction } from "../../redux/getCustomerByIdRequest/getCustomerByIdRequestActions";
 
 export default function ChangeCustomerName() {
 
@@ -33,8 +33,8 @@ export default function ChangeCustomerName() {
     const response = useSelector(state => {
         return (
             {
-                customer: state.fetchByIdRequest.customer,
-                errMsg: state.fetchByIdRequest.error
+                customer: state.getCustomerByIdRequest.customer,
+                errMsg: state.getCustomerByIdRequest.error
             }
         );
     })
@@ -48,7 +48,7 @@ export default function ChangeCustomerName() {
         if(state.validations.customerName){
             return;
         }
-        let data = {id:response.customer.id,customerName:state.customerName}
+        let data = {id:response.customer.customerId,customerName:state.customerName}
         dispatch(updateCustomerNameAction(data))
         setNewState({...state})
         customerNameref.current.value="";

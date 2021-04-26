@@ -1,41 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import commonStyle from "./commonStyle.module.css";
 import DisplayCustomer from "./DisplayCustomer";
 import validationMessage from '../../validationMessage';
-
+import { useDispatch, useSelector } from "react-redux";
+import {getCustomerByIdRequestActions} from '../../redux/getCustomerByIdRequest/getCustomerByIdRequestActions';
 export default function GetCustomerDetailsOnRequest() {
- let customer1 = {
-    id: 1,
-    customerName: "haha",
-    customerEmail: "haha@gmail.com",
-    username: "haha123",
-    addressId: 234,
-    houseNo: "M56",
-    colony: "danger",
-    city: "Chennai",
-    state: "Tamil Nadu",
-    pincode: 123456,
-  }
 
   const idRef = React.createRef();
 
-  const response = { customer:customer1 , errMsg: undefined };
+  const response = useSelector(state=>{
+    return(
+      {
+        customer:state.getCustomerByIdRequest.customer,
+        error:state.getCustomerByIdRequest.error
+      }
+    );
+  })
+
+  const dispatch = useDispatch();
 
   const initialState = {
     id: undefined,
-    errMsg:undefined,
-    customer: undefined,
     validations: {id:undefined },
   };
 
   const [currentState, setNewState] = useState(initialState);
+  
+
+  
 
   const submitHandler = (event) => {
     event.preventDefault();
     if (currentState.validations.id){
       return;
     }
-  };
+    dispatch (getCustomerByIdRequestActions(currentState.id));
+  }
 
   const setFieldState = (ref) => {
     const idValue = idRef.current.value;
@@ -45,12 +45,9 @@ export default function GetCustomerDetailsOnRequest() {
       validationMsg = validateId(idValue);
     }
     
-    const newValidations = {...currentState.validations, id: validationMsg};
+    const newValidations = { id: validationMsg};
     const newState = {
-      ...currentState,
-      id: idValue,
-      errMsg:undefined,
-      customer: undefined,
+     id: idValue,
       validations: newValidations
     };
     setNewState(newState);
@@ -96,14 +93,18 @@ export default function GetCustomerDetailsOnRequest() {
 
       <div className="mt-5">
         {response.customer ? (
+           <div>
+           <div className="alert alert-success">
+               Customer details fetched successfully!
+           </div>
           <div>
-            <h3>Details</h3>
             <DisplayCustomer customer={response.customer} />
+          </div>
           </div>
         ) : (
           " "
         )}
-        {response.errMsg ? (
+        {response.error ? (
           <div className={commonStyle.error}>
             Request unsuccessful
             <br />

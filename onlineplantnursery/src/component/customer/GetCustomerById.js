@@ -1,47 +1,54 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import commonStyle from "./commonStyle.module.css";
 import DisplayCustomer from "./DisplayCustomer";
-
+import { getCustomerByIdActions } from "../../redux/getCustomerById/getCustomerByIdActions";
 
 export default function GetCustomerById(props) {
-  let customer1 = {
-    id: 1,
-    customerName: "haha",
-    customerEmail: "haha@gmail.com",
-    username: "haha123",
-    addressId: 234,
-    houseNo: "M56",
-    colony: "danger",
-    city: "Chennai",
-    state: "Tamil Nadu",
-    pincode: 123456,
-  };
-  
+  const response = useSelector((state) => {
+    return {
+      customer: state.getCustomerById.customer,
+      error: state.getCustomerById.error,
+    };
+  });
 
-  const response = {customer: customer1, errMsg: undefined};
-  
-  
+  const dispatch = useDispatch();
+
+  const getCustomerById = () => {
+    let id = props.match.params.id;
+    dispatch(getCustomerByIdActions(id));
+  }
+
+  useEffect(getCustomerById, []);
+
   return (
     <div>
       <h3> Get Customer details</h3>
-<div className='mt-5'> 
-      {response.customer ? (
-        <div>
-          <DisplayCustomer customer={response.customer} />
-        </div>
-      ) : (
-        ""
-      )}
-      {response.errMsg ? (
-        <div className={commonStyle.error}>
-          Request unsuccessful
-          <br />
-          {response.errMsg}
-        </div>
-      ) : (
-        ""
-      )}
-    </div>
+      <div className="mt-5">
+        {response.customer ? (
+          <div>
+            <div>
+              <div className="alert alert-success">
+                Customer details fetched successfully!
+              </div>
+              <div>
+                <DisplayCustomer customer={response.customer} />
+              </div>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
+        {response.error ? (
+          <div className={commonStyle.error}>
+            Request unsuccessful
+            <br />
+            {response.error}
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
     </div>
   );
 }

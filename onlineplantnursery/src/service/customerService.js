@@ -33,7 +33,7 @@ function addCustomer(data){
 function updateCustomerName(data){
     const url= baseUrl + "/customer/changename" ;
     let requestData={
-        id: data.customerId,
+        id: data.id,
         customerName: data.customerName
     };
     const promise = axios.put(url, requestData);

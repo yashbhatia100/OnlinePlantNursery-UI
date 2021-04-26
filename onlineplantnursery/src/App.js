@@ -13,6 +13,7 @@ import GetCustomerById from './component/customer/GetCustomerById';
 import {addCustomer,getCustomer,updateCustomerName} from './service/customerService';
 import { Provider } from "react-redux";
 import store from "./redux/store";
+
 function App() {
   /*const customer = {
 
@@ -59,9 +60,10 @@ let mockUpdate={
     <Route exact path="/" component = {Home} />
     <Route exact path="/addcustomer" component = {Addcustomer} />
     <Route exact path="/login" component = {LoginForm} />
-    <Route exact path="/getcustomerbyid/:id" component = {GetCustomerById} />
     <Route exact path="/getcustomerdetailsonrequest" component = {GetCustomerDetailsOnRequest} />
     <Route exact path="/changecustomername" component = {ChangeCustomerName} />
+    <Route exact path="/getcustomerbyid/:id" component = {GetCustomerById} />
+    <Route exact path="/changecustomername/:id" component = {ChangeCustomerName} />
     
     </Switch>
     </div>
