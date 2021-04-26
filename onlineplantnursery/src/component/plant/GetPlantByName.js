@@ -5,21 +5,6 @@ import { getPlantByNameAction } from "../../redux/getPlantByName/getPlantByNameA
 
 export default function GetPlantByName(props){
 
-    let mockPlant={
-        plantId:1,
-        plantHeight:100, 
-        plantSpread:"2m", 
-        commonName:"Rose",  
-        bloomTime:"2 months",
-        plantUse:"decoration",
-        difficultyLevel:"easy",
-        temperature:"25 deg",
-        typeOfPlant:"herb",
-        plantDescription:"red flowers",
-        plantStock:10,
-        plantCost:50
-    }
-    
     const response = useSelector(state=>{
         return(
             {

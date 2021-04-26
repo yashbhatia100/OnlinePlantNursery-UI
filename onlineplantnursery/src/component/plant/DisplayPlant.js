@@ -10,7 +10,7 @@ export default function DisplayPlant({ plant }) {
                     </tr>
                     <tr>
                         <th>Plant Height</th>
-                        <td>{plant.plantHeight}</td>
+                        <td>{plant.plantHeight} cm</td>
                     </tr>
                     <tr>
                         <th>Plant Spread</th>
@@ -22,7 +22,7 @@ export default function DisplayPlant({ plant }) {
                     </tr>
                     <tr>
                         <th>Medicinal or Culinary Use</th>
-                        <td>{plant.plantUse}</td>
+                        <td>{plant.medicinalOrCulinaryUse}</td>
                     </tr>
                     <tr>
                         <th>Difficulty Level</th>
@@ -42,7 +42,7 @@ export default function DisplayPlant({ plant }) {
                     </tr>
                     <tr>
                         <th>Plant Stock</th>
-                        <td>{plant.plantStock}</td>
+                        <td>{plant.plantsStock}</td>
                     </tr>
                     <tr>
                         <th>Plant Cost</th>

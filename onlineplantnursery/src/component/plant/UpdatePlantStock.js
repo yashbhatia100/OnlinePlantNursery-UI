@@ -1,27 +1,21 @@
 import React, { useState } from "react"
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updatePlantStockAction } from "../../redux/getPlantToUpdate/updatePlantStockActions";
 import commonStyle from './commonStyle.module.css';
 import validationMessage from "./validationMessage";
 
-export default function UpdatePlantStock(props){
-
-    let mockPlant={
-        plantId:1,
-        plantHeight:100, 
-        plantSpread:"2m", 
-        commonName:"Rose",  
-        bloomTime:"2 months",
-        plantUse:"decoration",
-        difficultyLevel:"easy",
-        temperature:"25 deg",
-        typeOfPlant:"herb",
-        plantDescription:"red flowers",
-        plantStock:10,
-        plantCost:50
-    }
+export default function UpdatePlantStock(){
 
     const stockRef = React.createRef();
+
+    const response = useSelector(state => {
+        return (
+            {
+                plant: state.updatePlantStock.plant,
+                errMsg: state.updatePlantStock.error
+            }
+        );
+    })
 
     const initialState={plantStock:undefined, updated:undefined, validations:{plantStock:undefined}};
 
@@ -34,7 +28,8 @@ export default function UpdatePlantStock(props){
         if(currentState.validations.plantStock){
             return;
         }
-        let data={plantId:props.id, plantStock:currentState.plantStock}
+        let data={plantId:response.plant.plantId, plantStock:currentState.plantStock}
+        
         dispatch(updatePlantStockAction(data))
         setNewState({...currentState, updated:true})
         stockRef.current.value="";

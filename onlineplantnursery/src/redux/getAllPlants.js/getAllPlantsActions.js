@@ -1,3 +1,4 @@
+import { getAllPlants } from "../../service/PlantService";
 import store from "../store";
 import getAllPlantsConstants from "./getAllPlantsConstants";
 
@@ -22,35 +23,9 @@ function getAllPlantsFail(error){
 function getAllPlantsAction(){
 
     return()=>{
-        let plant1 = {
-            plantHeight: 100,
-            plantSpread: "2m",
-            commonName: "Rose",
-            bloomTime: "2 months",
-            plantUse: "decoration",
-            difficultyLevel: "easy",
-            temperature: "25 deg",
-            typeOfPlant: "herb",
-            plantDescription: "red flowers",
-            plantStock: 10,
-            plantCost: 50
-        }
-        let plant2 = {
-            plantHeight: 50,
-            plantSpread: "1m",
-            commonName: "Lily",
-            bloomTime: "4 months",
-            plantUse: "NA",
-            difficultyLevel: "difficult",
-            temperature: "30 deg",
-            typeOfPlant: "herb",
-            plantDescription: "fragrant flowers",
-            plantStock: 30,
-            plantCost: 70
-        }
-        let plantList = [plant1, plant2]
-
-        store.dispatch(getAllPlantsSuccess(plantList));
+        const promise = getAllPlants();
+        promise.then(response=>store.dispatch(getAllPlantsSuccess(response.data)))
+        .catch(error=>store.dispatch(getAllPlantsFail(error.response.data)));
     }
 }
 export {getAllPlantsSuccess, getAllPlantsFail, getAllPlantsAction};

@@ -7,20 +7,6 @@ import { addPlantAction } from '../../redux/addPlant/addPlantActions';
 
 export default function AddPlant() {
 
-    let mockPlant = {
-        plantHeight: 100,
-        plantSpread: "2m",
-        commonName: "Rose",
-        bloomTime: "2 months",
-        plantUse: "decoration",
-        difficultyLevel: "easy",
-        temperature: "25 deg",
-        typeOfPlant: "herb",
-        plantDescription: "red flowers",
-        plantStock: 10,
-        plantCost: 50
-    }
-
     const plantHeightRef = React.createRef();
     const plantSpreadRef = React.createRef();
     const commonNameRef = React.createRef();
@@ -337,7 +323,7 @@ export default function AddPlant() {
                         Plant added successfully!
                     </div>
                     <div>
-                        <DisplayPlant plant={mockPlant} />
+                        <DisplayPlant plant={response.plant} />
                     </div>
                 </div>
             ) : ''}

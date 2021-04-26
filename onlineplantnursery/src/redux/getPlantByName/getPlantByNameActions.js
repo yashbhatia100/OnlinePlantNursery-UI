@@ -1,3 +1,4 @@
+import { getPlantByName } from "../../service/PlantService";
 import store from "../store";
 import getPlantByNameConstants from "./getPlantByNameConstants";
 
@@ -20,21 +21,9 @@ function getPlantByNameFail(error){
 function getPlantByNameAction(data){
 
     return()=>{
-    let mockPlant={
-        plantId:1,
-        plantHeight:100, 
-        plantSpread:"2m", 
-        commonName:"Lily",  
-        bloomTime:"2 months",
-        plantUse:"decoration",
-        difficultyLevel:"easy",
-        temperature:"25 deg",
-        typeOfPlant:"herb",
-        plantDescription:"red flowers",
-        plantStock:10,
-        plantCost:50
-    }
-    store.dispatch(getPlantByNameSuccess(mockPlant));
+    const promise = getPlantByName(data);
+    promise.then(response=>store.dispatch(getPlantByNameSuccess(response.data)))
+    .catch(error=>store.dispatch(getPlantByNameFail(error.response.data)));
     }
 }
 

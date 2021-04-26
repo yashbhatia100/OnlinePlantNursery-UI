@@ -8,7 +8,7 @@ function addPlant(data){
         plantHeight: data.plantHeight,
         plantSpread: data.plantSpread.toString()+" cm",
         commonName: data.commonName,
-        bloomTime: data.bloomTime.toString+" weeks",
+        bloomTime: data.bloomTime.toString()+" weeks",
         medicinalOrCulinaryUse: data.plantUse,
         difficultyLevel: data.difficultyLevel,
         temperature: data.temperature.toString()+" deg",
@@ -17,7 +17,6 @@ function addPlant(data){
         plantsStock: data.plantStock,
         plantCost: data.plantCost
     };
-    console.log(typeof requestData.plantSpread)
     const promise = axios.post(url, requestData);
     return promise;
 }

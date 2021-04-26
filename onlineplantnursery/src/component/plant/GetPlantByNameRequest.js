@@ -7,20 +7,6 @@ import { getPlantByNameRequestAction } from "../../redux/getPlantByNameRequest/g
 
 export default function GetPlantByNameRequest() {
 
-    let mockPlant = {
-        plantHeight: 100,
-        plantSpread: "2m",
-        commonName: "Rose",
-        bloomTime: "2 months",
-        plantUse: "decoration",
-        difficultyLevel: "easy",
-        temperature: "25 deg",
-        typeOfPlant: "herb",
-        plantDescription: "red flowers",
-        plantStock: 10,
-        plantCost: 50
-    }
-
     const nameRef = React.createRef();
 
     const response = useSelector(state=>{

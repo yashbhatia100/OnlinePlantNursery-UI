@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPlantStockAction } from "../../redux/getPlantToUpdate/updatePlantStockActions";
 import commonStyle from './commonStyle.module.css';
@@ -6,21 +6,6 @@ import validationMessage from "./validationMessage";
 import UpdatePlantStock from './UpdatePlantStock';
 
 export default function GetPlantToUpdate() {
-
-    let mockPlant = {
-        plantId: 1,
-        plantHeight: 100,
-        plantSpread: "2m",
-        commonName: "Rose",
-        bloomTime: "2 months",
-        plantUse: "decoration",
-        difficultyLevel: "easy",
-        temperature: "25 deg",
-        typeOfPlant: "herb",
-        plantDescription: "red flowers",
-        plantStock: 10,
-        plantCost: 50
-    }
 
     const nameRef = React.createRef();
 
@@ -45,7 +30,6 @@ export default function GetPlantToUpdate() {
             return;
         }
         dispatch(getPlantStockAction(currentState.name));
-
     }
 
     const changeHandler = () => {
@@ -103,21 +87,21 @@ export default function GetPlantToUpdate() {
                                     </tr>
                                     <tr>
                                         <th>Plant Stock</th>
-                                        <td>{response.plant.plantStock}</td>
+                                        <td>{response.plant.plantsStock}</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         <div>
-                            <UpdatePlantStock props={response.plant.id} />
+                            <UpdatePlantStock />
                         </div>
                     </div>
                 ) : ''}
                 {response.errMsg ? (
                     <div className="alert alert-danger">
-                        Request cannot be processed
+                        Request cannot be processed!
                         <br />
-                        Error: {response.errMsg}
+                        ERROR: {response.errMsg}
                     </div>
                 ) : ''}
             </div>
