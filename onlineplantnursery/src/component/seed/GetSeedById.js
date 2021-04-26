@@ -1,7 +1,8 @@
-import React , {useState} from 'react';
+import React , {useEffect} from 'react';
 import DisplaySeedDetails from './DisplaySeedDetails';
+import { useDispatch, useSelector } from "react-redux";
 import  commonStyle from './commonStyle.module.css';
-import {fetchSeedById}  from '../../service/SeedService';
+import { fetchSeed } from "../../redux/fetchseedbyid/fetchSeedByIdAction";
 
 export default function GetSeedById(props){
    let seed={
@@ -17,27 +18,42 @@ export default function GetSeedById(props){
 		seedsCost: 100.0,
 		seedsPerPacket:20
     }
+    
 
-    const response = {seed:seed, errMsg:undefined};
-
+    const currentState = useSelector( state=>{
+        return{
+          seed: state.fetchSeed.seed,
+          error:state.fetchSeed.error
+        };
+    })
+    
+     const dispatch=useDispatch();
+    
+     const fetchSeedOnRender=()=>{
+       const id=props.match.params.seedId;
+       console.log("inside fetch seed by id",id);
+       dispatch(fetchSeed(id));
+       
+     }
+     useEffect(fetchSeedOnRender,[]);
 
      return (
         <div>
             <h3> Get seed details</h3>
             <div className ='mt-5'> 
-            {response.seed ? (
+            {currentState.seed ? (
                 <div>
-                <DisplaySeedDetails seed={response.seed} />
+                <DisplaySeedDetails seed={currentState.seed} />
                 </div>
             ) : (
                 ""
                 )
             }
-            {response.errMsg ? (
+            {currentState.error ? (
                 <div className = {commonStyle.error}>
                 Request is not processing
                 <br />
-                {response.errMsg}
+                {currentState.error}
                 </div>
             ) : (
                 ""

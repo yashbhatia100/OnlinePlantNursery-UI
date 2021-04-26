@@ -1,5 +1,8 @@
 import DisplaySeedList from "./DisplaySeedList";
 import  commonStyle from './commonStyle.module.css';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {fetchAllSeeds} from "../../redux/fetchallseeds/fetchAllSeedsAction";
 
 export default function GetAllSeeds(){
 
@@ -29,9 +32,27 @@ export default function GetAllSeeds(){
 		seedsCost: 50.0,
 		seedsPerPacket:10
     }
-    let seedList=[seed1,seed2]
 
-    const response = {seeds: seedList, errMsg: undefined }
+    const currentState=useSelector(state=>{
+        return{
+          seeds:state.fetchAllSeeds.seeds,
+          error:state.fetchAllSeeds.error
+        };
+    
+      })
+    
+      const dispatch = useDispatch();
+      const fetchAll = () =>{
+        console.log("inside use state function");
+        dispatch(fetchAllSeeds());
+      };
+    
+    useEffect(fetchAll,[]);
+    
+      
+    console.log("inside get all seeds");
+    
+    
 
     return(
         <div>
@@ -39,16 +60,16 @@ export default function GetAllSeeds(){
            <div className="mt-5">
                 <div>
                     <ul>
-                        {response.seeds ? (
-                            <DisplaySeedList seeds={response.seeds} />
+                        {currentState.seeds ? (
+                            <DisplaySeedList seeds={currentState.seeds} />
                         ) : ''}
                     </ul>
                 </div>
-                {response.errMsg ? (
+                {currentState.error ? (
                     <div className={commonStyle.error}>
                         Request cannot be successfull
                         <br />
-                        {response.errMsg}
+                        {currentState.error}
                     </div>
                 ) : ''}
             </div>

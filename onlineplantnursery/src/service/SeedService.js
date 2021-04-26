@@ -16,7 +16,7 @@ export function addSeed(data){
         seedsCost: data.seedsCost,
         seedsPerPacket: data.seedsPerPacket
     };
-    console.log("inside addseed service, request data ",requestData);
+    console.log("inside addseed service, request data ");
     const promise = axios.post(url, requestData);
     return promise;
 }
@@ -26,7 +26,7 @@ export function fetchSeedById(seedId) {
     const promise = axios.get(url);
     return promise;
 }
-export function fetchAllSeeds(){
+export function fetchAll(){
     const url = baseUrl + "/fetch";
     const promise = axios.get(url);
     return promise;

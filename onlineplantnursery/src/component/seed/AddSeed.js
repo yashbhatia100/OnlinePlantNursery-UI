@@ -2,6 +2,9 @@ import React, { useState,useEffect } from "react";
 import DisplaySeedDetails from "./DisplaySeedDetails";
 import commonStyle from './commonStyle.module.css';
 import validateMessage from './validationMessage';
+import { useDispatch, useSelector } from "react-redux";
+import { addSeedAction } from "../../redux/addseed/addSeedAction";
+
 
 export default function AddSeed() {
    
@@ -49,17 +52,34 @@ export default function AddSeed() {
     }
   };
 
-  const response ={seed:undefined,error:undefined};
+  const response = useSelector(state=>{
+    return {
+      seed:state.addSeed.seed, 
+      errMsg:state.addSeed.error
+    };
+  });
 
   const [state, setNewState] = useState(initialState);
+
+  const dispatch=useDispatch();
 
   const submitHandler = (event) => {
     console.log("Inside submitHandler");
     event.preventDefault();
-    
+    if (
+      state.validations.commonName ||
+      state.validations.bloomTime ||
+      state.validations.typeOfSeeds ||
+      state.validations.seedsStock ||
+      state.validations.seedsCost
+    ) {
+      return;
+    }
+    let data = { ...state };
+    dispatch(addSeedAction(data));
   };
-
-  const changeHandler = (ref) => {
+    
+    const changeHandler = (ref) => {
     console.log("Inside changeHandler");
     const field = ref.current;
     const fieldName = field.name;
@@ -310,6 +330,7 @@ export default function AddSeed() {
       </form>
       
       <div className="mt-5">
+
       {response.seed ? (
         <div>
           <h3>Seed Added Successfully</h3>
