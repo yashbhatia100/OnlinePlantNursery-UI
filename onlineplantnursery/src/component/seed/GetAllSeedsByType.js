@@ -5,34 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllSeedsByType } from "../../redux/fetchallseedsbytype/fetchAllSeedsByTypeAction";
 
 export default function GetAllSeedsByType() {
-  let seed1 = {
-    seedId: 14,
-    commonName: "Rose seed",
-    bloomTime: "3days",
-    watering: "Sprinkle",
-    difficultyLevel: "Easy",
-    temparature: "25deg",
-    typeOfSeeds: "Round",
-    seedsDescription: "Red rose seeds",
-    seedsStock: 20,
-    seedsCost: 100.0,
-    seedsPerPacket: 20,
-  };
-  let seed2 = {
-    seedId: 15,
-    commonName: "Potato",
-    bloomTime: "4days",
-    watering: "Sprinkle",
-    difficultyLevel: "Easy",
-    temparature: "25deg",
-    typeOfSeeds: "Round",
-    seedsDescription: "Potato seeds",
-    seedsStock: 30,
-    seedsCost: 50.0,
-    seedsPerPacket: 10,
-  };
-  let seedList = [seed1, seed2];
-
+ 
   const typeOfSeedsRef = React.createRef();
 
   const [state, setNewState] = useState({ typeOfSeeds: undefined });

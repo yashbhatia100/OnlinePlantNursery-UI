@@ -6,12 +6,15 @@ import fetchAllSeedsReducer from "./fetchallseeds/fetchAllSeedsReducer";
 import fetchAllSeedsByTypeReducer from "./fetchallseedsbytype/fetchAllSeedsByTypeReducer";
 import fetchSeedByIdReducer from "./fetchseedbyid/fetchSeedByIdReducer";
 
+import fetchSeedByNameReducer from "./fetchseedbyname/fetchSeedByNameReducer";
+
 const store = createStore(
   combineReducers({
     addSeed: addSeedReducer,
     fetchAllSeeds: fetchAllSeedsReducer,
     fetchAllSeedsByType: fetchAllSeedsByTypeReducer,
-    fetchSeed:fetchSeedByIdReducer
+    fetchSeed: fetchSeedByIdReducer,
+    fetchSeedByCommonName: fetchSeedByNameReducer,
   }),
   composeWithDevTools(applyMiddleware(thunk))
 );

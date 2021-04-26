@@ -2,26 +2,26 @@ import React , {useEffect} from 'react';
 import DisplaySeedDetails from './DisplaySeedDetails';
 import { useDispatch, useSelector } from "react-redux";
 import  commonStyle from './commonStyle.module.css';
-import { fetchSeed } from "../../redux/fetchseedbyid/fetchSeedByIdAction";
+import { fetchSeedByCommonName } from "../../redux/fetchseedbyname/fetchSeedByNameAction";
 
-export default function GetSeedById(props){
-   
-    const currentState = useSelector( state=>{
+export default function GetSeedByName(props){
+  
+    const currentState = useSelector( (state)=>{
         return{
-          seed: state.fetchSeed.seed,
-          error:state.fetchSeed.error
+          seed: state.fetchSeedByCommonName.seed,
+          error:state.fetchSeedByCommonName.error
         };
     })
     
      const dispatch=useDispatch();
     
-     const fetchSeedOnRender=()=>{
-       const id=props.match.params.seedId;
-       console.log("inside fetch seed by id",id);
-       dispatch(fetchSeed(id));
+     const fetchSeedByNameOnRender=()=>{
+       const name=props.match.params.commonName;
+       console.log("inside fetch seed by name",name);
+       dispatch(fetchSeedByCommonName(name));
        
      }
-     useEffect(fetchSeedOnRender,[]);
+     useEffect(fetchSeedByNameOnRender,[]);
 
      return (
         <div>

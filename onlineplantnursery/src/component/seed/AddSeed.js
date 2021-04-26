@@ -171,7 +171,7 @@ export default function AddSeed() {
             ref={commonNameRef}
             onChange={() => changeHandler(commonNameRef)}
             className="form-control"
-            required = "true" 
+            required = {true} 
             />
           {state.validations.commonName ? (
             <div className={commonStyle.error}>
@@ -190,7 +190,7 @@ export default function AddSeed() {
             ref={bloomTimeRef}
             onChange={() => changeHandler(bloomTimeRef)}
             className="form-control"
-            required = "true" 
+            required =  {true} 
           />
           {state.validations.bloomTime ? (
             <div className={commonStyle.error}>
@@ -209,7 +209,7 @@ export default function AddSeed() {
             ref={wateringRef}
             onChange={() => changeHandler(wateringRef)}
             className="form-control"
-            required = "true" 
+            required =  {true} 
           />
           
         </div>
@@ -222,7 +222,7 @@ export default function AddSeed() {
             ref={difficultyLevelRef} 
             onChange={() => changeHandler(difficultyLevelRef)} 
             className="form-control"
-            required = "true" 
+            required =  {true} 
             list="difficultyList"
             autoComplete="off"
             />
@@ -242,7 +242,7 @@ export default function AddSeed() {
             ref={temparatureRef}
             onChange={() => changeHandler(temparatureRef)}
             className="form-control"
-            required = "true" 
+            required =  {true} 
           />
           
         </div>
@@ -255,7 +255,7 @@ export default function AddSeed() {
             ref={typeOfSeedsRef}
             onChange={() => changeHandler(typeOfSeedsRef)}
             className="form-control"
-            required = "true" 
+            required =  {true} 
           />
           {state.validations.typeOfSeeds ? (
             <div className={commonStyle.error}>
@@ -274,7 +274,7 @@ export default function AddSeed() {
             ref={seedsDescriptionRef}
             onChange={() => changeHandler(seedsDescriptionRef)}
             className="form-control"
-            required = "true" 
+            required =  {true} 
           />
         </div>
 
@@ -286,7 +286,7 @@ export default function AddSeed() {
             ref={seedsStockRef}
             onChange={() => changeHandler(seedsStockRef)}
             className="form-control"
-            required = "true" 
+            required =  {true} 
           />
           {state.validations.seedsStock ? (
           <div className={commonStyle.error}>
@@ -304,7 +304,7 @@ export default function AddSeed() {
             ref={seedsCostRef}
             onChange={() => changeHandler(seedsCostRef)}
             className="form-control"
-            required = "true" 
+            required =  {true} 
           />
           {state.validations.seedsCost ? (
           <div className={commonStyle.error}>
@@ -322,7 +322,7 @@ export default function AddSeed() {
             ref={seedsPerPacketRef}
             onChange={() => changeHandler(seedsPerPacketRef)}
             className="form-control"
-            required = "true" 
+            required =  {true} 
           />
         </div>      
         <br />
