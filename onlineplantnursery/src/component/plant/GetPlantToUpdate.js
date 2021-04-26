@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getPlantStockAction } from "../../redux/getPlantToUpdate/updatePlantStockActions";
 import commonStyle from './commonStyle.module.css';
 import validationMessage from "./validationMessage";
+import UpdatePlantStock from './UpdatePlantStock';
 
 export default function GetPlantToUpdate() {
 
     let mockPlant = {
-        plantId:1,
+        plantId: 1,
         plantHeight: 100,
         plantSpread: "2m",
         commonName: "Rose",
@@ -22,7 +24,16 @@ export default function GetPlantToUpdate() {
 
     const nameRef = React.createRef();
 
-    const response = { plant: mockPlant, errMsg: undefined };
+    const response = useSelector(state => {
+        return (
+            {
+                plant: state.updatePlantStock.plant,
+                errMsg: state.updatePlantStock.error
+            }
+        );
+    })
+
+    const dispatch = useDispatch();
 
     const initialState = { name: undefined, validations: { name: undefined } };
 
@@ -33,7 +44,7 @@ export default function GetPlantToUpdate() {
         if (currentState.validations.name) {
             return;
         }
-        console.log(currentState.name);
+        dispatch(getPlantStockAction(currentState.name));
 
     }
 
@@ -54,7 +65,7 @@ export default function GetPlantToUpdate() {
     }
     return (
         <div>
-            <h3>Get Plant To Update</h3>
+            <h3>Update Plant Stock</h3>
             <div>
                 <form onSubmit={submitHandler}>
                     <div className="form-group">
@@ -80,32 +91,36 @@ export default function GetPlantToUpdate() {
             <div className="mt-5">
                 {response.plant ? (
                     <div>
-                        <table className="table table-striped w-50">
-                            <tr>
-                                <th>Common Name</th>
-                                <td>{response.plant.commonName}</td>
-                            </tr>
-                            <tr>
-                                <th>Plant Stock</th>
-                                <td>{response.plant.plantStock}</td>
-                            </tr>
-                        </table>
+                        <div className="alert alert-success">
+                            Plant to update fetched successfully!
+                        </div>
                         <div>
-                            <Link to={`/updatestock/${response.plant.plantId}`}>
-                                <button className="btn btn-primary">Update Stock</button>
-                            </Link>
-
+                            <table className="table table-striped w-50">
+                                <tbody>
+                                    <tr>
+                                        <th>Common Name</th>
+                                        <td>{response.plant.commonName}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Plant Stock</th>
+                                        <td>{response.plant.plantStock}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <UpdatePlantStock props={response.plant.id} />
                         </div>
                     </div>
                 ) : ''}
-                        {response.errMsg ? (
-                            <div className={commonStyle.error}>
-                                Request cannot be processed
-                                <br />
-                                {response.errMsg}
-                            </div>
-                        ) : ''}
+                {response.errMsg ? (
+                    <div className="alert alert-danger">
+                        Request cannot be processed
+                        <br />
+                        Error: {response.errMsg}
                     </div>
+                ) : ''}
+            </div>
         </div >
     );
 }

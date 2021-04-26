@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import DisplayPlant from './DisplayPlant';
 import commonStyle from './commonStyle.module.css';
 import validationMessage from './validationMessage';
+import { useDispatch, useSelector } from 'react-redux';
+import { addPlantAction } from '../../redux/addPlant/addPlantActions';
 
 export default function AddPlant() {
 
@@ -54,9 +56,18 @@ export default function AddPlant() {
                       plantCost: undefined,}
     };
 
-    const response = { plant: mockPlant, errMsg: undefined };
+    const response = useSelector(state=>{ 
+        return (
+            {
+                plant: state.addPlant.plant,
+                errMsg: state.addPlant.error
+            }
+        );
+    });
 
     const [currentState, setNewState] = useState(initialState);
+
+    const dispatch = useDispatch();
 
     const submitHandler = (event) => {
         event.preventDefault();
@@ -71,8 +82,8 @@ export default function AddPlant() {
         || currentState.validations.plantCost){
             return;
         }
-        const data = { ...currentState };
-        console.log("Plant data:", data)
+        let data = { ...currentState };
+        dispatch(addPlantAction(data));
     }
 
     const changeHandler = (ref) => {
@@ -319,18 +330,23 @@ export default function AddPlant() {
                     <button className="btn btn-primary">Add Plant</button>
                 </form>
             </div>
-            <div className="mt-5">
+            <div className="mt-5 mb-5">
             {response.plant ? (
                 <div>
-                    <DisplayPlant plant={mockPlant} />
+                    <div className="alert alert-success">
+                        Plant added successfully!
+                    </div>
+                    <div>
+                        <DisplayPlant plant={mockPlant} />
+                    </div>
                 </div>
             ) : ''}
 
             {response.errMsg ? (
-                <div className={commonStyle.error}>
-                    Request cannot be processed
-                    <br />
-                    {currentState.errMsg}
+                <div className="alert alert-danger">
+                    Request cannot be processed! 
+                    <br/>
+                    Error: {response.errMsg}
                 </div>
             ) : ''}
             </div>

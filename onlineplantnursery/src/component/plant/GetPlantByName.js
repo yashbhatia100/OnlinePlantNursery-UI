@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import DisplayPlant from "./DisplayPlant";
-import commonStyle from './commonStyle.module.css';
+import { useDispatch, useSelector } from "react-redux";
+import { getPlantByNameAction } from "../../redux/getPlantByName/getPlantByNameActions";
 
 export default function GetPlantByName(props){
 
@@ -19,9 +20,23 @@ export default function GetPlantByName(props){
         plantCost:50
     }
     
-    const response = {plant:mockPlant, errMsg:undefined};
+    const response = useSelector(state=>{
+        return(
+            {
+                plant: state.getPlantByName.plant, 
+                errMsg: state.getPlantByName.error
+            }
+        );
+    })
 
-    //const [currentState, setNewState]=useState({name:undefined});
+    const dispatch = useDispatch();
+
+    const getPlantByName=()=>{
+        let name=props.match.params.name;
+        dispatch(getPlantByNameAction(name));
+    }
+
+    useEffect(getPlantByName, []);
 
     return(
         <div>
@@ -30,16 +45,22 @@ export default function GetPlantByName(props){
             {response.plant?(
                 <div>
                     <div>
-                        <DisplayPlant plant={response.plant}/>
+                        <div className="alert alert-success">
+                            Plant details fetched successfully!
+                        </div>
+                        <div>
+                            <DisplayPlant plant={response.plant}/>
+                        </div>
+                       
                     </div>
                 </div>
             ):''}
 
             {response.errMsg?(
-                <div className={commonStyle.error}>
+                <div className="alert alert-danger">
                     Request cannot be processed
                     <br/>
-                    {response.errMsg}
+                    Error: {response.errMsg}
                 </div>
             ):''}
             </div>

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getPlantsByTypeAction } from "../../redux/getPlantsByType/getPlantsByTypeActions";
 import commonStyle from './commonStyle.module.css';
 import DisplayPlantList from "./DisplayPlantList";
 import validationMessage from './validationMessage';
@@ -46,11 +48,18 @@ export default function GetAllPlantsByType() {
     }
     let plantList = [plant1, plant2, plant3]
 
-    const response = { plants: plantList, errMsg: undefined };
+    const response = useSelector(state=>{
+        return(
+            {
+                plants: state.getPlantsByType.plants, 
+                errMsg: state.getPlantsByType.error
+            }
+        );
+    })
+
+    const dispatch = useDispatch();
 
     const initialState = { typeOfPlant: undefined, validations:{typeOfPlant:undefined} };
-
- const object = {minCost:undefined, maxCost:undefined};
 
     const [currentState, setNewState] = useState(initialState);
 
@@ -61,7 +70,7 @@ export default function GetAllPlantsByType() {
         if(currentState.validations.typeOfPlant){
             return;
         }
-        console.log(currentState.typeOfPlant)
+        dispatch(getPlantsByTypeAction(currentState.typeOfPlant));
     }
 
     const changeHandler = () => {
@@ -117,15 +126,23 @@ export default function GetAllPlantsByType() {
                 <div>
                     <ul>
                         {response.plants ? (
-                            <DisplayPlantList plants={response.plants} />
+                            <div>
+                            <div className="alert alert-success">
+                                Plants of entered type fetched successfully!
+                            </div>
+                            <div>
+                                <DisplayPlantList plants={response.plants} />
+                            </div>
+                            
+                            </div>
                         ) : ''}
                     </ul>
                 </div>
                 {response.errMsg ? (
-                    <div className={commonStyle.error}>
-                        Request cannot be successfull
+                    <div className="alert alert-danger">
+                        Request cannot be successfull!
                         <br />
-                        {response.errMsg}
+                        Error: {response.errMsg}
                     </div>
                 ) : ''}
             </div>

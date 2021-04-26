@@ -1,4 +1,6 @@
-import commonStyle from './commonStyle.module.css';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllPlantsAction } from '../../redux/getAllPlants.js/getAllPlantsActions';
 import DisplayPlantList from "./DisplayPlantList";
 
 export default function GetAllPlants() {
@@ -31,7 +33,22 @@ export default function GetAllPlants() {
     }
     let plantList = [plant1, plant2]
 
-    const response = {plants: plantList, errMsg: undefined }
+    const response = useSelector(state=>{
+        return(
+            {
+                plants: state.getAllPlants.plants, 
+                errMsg: state.getAllPlants.error
+            }
+        );
+    })
+
+    const dispatch = useDispatch();
+
+    const getAllPlants =()=>{
+        dispatch(getAllPlantsAction());
+    };
+
+    useEffect(getAllPlants, []);
 
     return (
         <div>
@@ -40,15 +57,23 @@ export default function GetAllPlants() {
                 <div>
                     <ul>
                         {response.plants ? (
-                            <DisplayPlantList plants={response.plants} />
+                            <div>
+                                <div className="alert alert-success">
+                                    All Plants fetched successfully!
+                                </div>
+                                <div>
+                                    <DisplayPlantList plants={response.plants} />
+                                </div>
+                            
+                            </div>
                         ) : ''}
                     </ul>
                 </div>
                 {response.errMsg ? (
-                    <div className={commonStyle.error}>
-                        Request cannot be successfull
+                    <div className="alert alert-danger">
+                        Request cannot be successfull!
                         <br />
-                        {response.errMsg}
+                        Error: {response.errMsg}
                     </div>
                 ) : ''}
             </div>

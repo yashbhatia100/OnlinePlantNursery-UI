@@ -10,13 +10,15 @@ import home from './component/plant/home';
 import GetAllPlantsByType from './component/plant/GetAllPlantsByType';
 import UpdatePlantStock from './component/plant/UpdatePlantStock';
 import {addPlant, getPlantByName, getPlantsByType, getAllPlants, updateStock} from './service/PlantService';
+import store from './redux/store';
+import { Provider } from 'react-redux';
 
 function App() {
 /*
 let mockPlant={
   plantHeight: 100,
   plantSpread: "2m",
-  commonName: "Rose",
+  commonName: "Lotus",
   bloomTime: "2 months",
   plantUse: "decoration",
   difficultyLevel: "easy",
@@ -33,8 +35,8 @@ let mockUpdate = {
 }
 
 const promise = addPlant(mockPlant);
-promise.then(response=>console.log("Inside response body", response.data))
-.catch(error=>console.log("Inside error", error.message));
+promise.then(response=>console.log("Success: ", response.data))
+.catch(error=>console.log("Faliure: ", error.message));
 
 
 const promise = getPlantByName("Sunflower")
@@ -59,6 +61,7 @@ promise.then(response=>console.log("Success: ",response.data))
 
   return (
     <div>
+      <Provider store={store}>
       <Router>
         <Navbar />
         <div className="container mt-5">
@@ -70,11 +73,10 @@ promise.then(response=>console.log("Success: ",response.data))
           <Route exact path="/plantbynameonrequest" component={GetPlantByNameRequest} />
           <Route exact path="/plantsbytype" component={GetAllPlantsByType} />
           <Route exact path="/planttoupdate" component={GetPlantToUpdate} />
-          <Route exact path="/updatestock/:id" component={UpdatePlantStock} />
         </Switch>
         </div>
       </Router>
-     
+      </Provider>
     </div>
   );
 }

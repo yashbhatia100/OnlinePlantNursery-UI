@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import DisplayPlant from "./DisplayPlant";
 import commonStyle from './commonStyle.module.css';
 import validationMessage from "./validationMessage";
+import { useDispatch, useSelector } from "react-redux";
+import { getPlantByNameRequestAction } from "../../redux/getPlantByNameRequest/getPlantByNameRequestActions";
 
 export default function GetPlantByNameRequest() {
 
@@ -21,7 +23,16 @@ export default function GetPlantByNameRequest() {
 
     const nameRef = React.createRef();
 
-    const response = {plant: mockPlant, errMsg: undefined};
+    const response = useSelector(state=>{
+        return(
+            {
+                plant: state.getPlantByNameRequest.plant, 
+                errMsg: state.getPlantByNameRequest.error
+            }
+        );
+    })
+
+    const dispatch = useDispatch();
 
     const initialState = { name: undefined, validations:{name:undefined} };
 
@@ -32,7 +43,7 @@ export default function GetPlantByNameRequest() {
         if(currentState.validations.name){
             return;
         }
-        console.log(currentState.name);
+        dispatch(getPlantByNameRequestAction(currentState.name));
         
     }
 
@@ -79,14 +90,20 @@ export default function GetPlantByNameRequest() {
             <div className="mt-5">
                 {response.plant ? (
                     <div>
-                        <DisplayPlant plant={response.plant} />
+                        <div className="alert alert-success">
+                            Plant details fetched successfully!
+                        </div>
+                        <div>
+                            <DisplayPlant plant={response.plant} />
+                        </div>
+                        
                     </div>
                 ) : ''}
                 {response.errMsg ? (
-                    <div className={commonStyle.error}>
+                    <div className="alert alert-danger">
                         Request cannot be processed
                         <br />
-                        {response.errMsg}
+                        Error: {response.errMsg}
                     </div>
                 ) : ''}
             </div>

@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import DisplayPlant from './DisplayPlant';
 
 export default function DisplayPlantList({plants}) {
     

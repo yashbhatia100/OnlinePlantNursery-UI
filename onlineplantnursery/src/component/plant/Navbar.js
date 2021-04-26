@@ -42,7 +42,7 @@ export default function Navbar() {
                         </li>
                         <li className="nav-item">
                             <Link to="/planttoupdate" className="nav-link">
-                                Get Plant To Update
+                                Update Plant Stock
                             </Link>
                         </li>
                     </ul>

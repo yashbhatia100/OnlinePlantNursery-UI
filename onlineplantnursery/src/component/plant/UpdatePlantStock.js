@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react"
-import {Redirect} from "react-router-dom";
+import React, { useState } from "react"
+import { useDispatch } from "react-redux";
+import { updatePlantStockAction } from "../../redux/getPlantToUpdate/updatePlantStockActions";
 import commonStyle from './commonStyle.module.css';
 import validationMessage from "./validationMessage";
 
@@ -20,18 +21,23 @@ export default function UpdatePlantStock(props){
         plantCost:50
     }
 
-    const initialState={plantStock:undefined, validations:{plantStock:undefined}};
+    const stockRef = React.createRef();
 
-    const response = {plant:undefined, errMsg:undefined};
+    const initialState={plantStock:undefined, updated:undefined, validations:{plantStock:undefined}};
 
     const [currentState, setNewState] = useState(initialState);
+
+    const dispatch=useDispatch();
 
     const submitHandler = (event)=>{
         event.preventDefault();
         if(currentState.validations.plantStock){
             return;
         }
-        
+        let data={plantId:props.id, plantStock:currentState.plantStock}
+        dispatch(updatePlantStockAction(data))
+        setNewState({...currentState, updated:true})
+        stockRef.current.value="";
     }
 
 
@@ -43,8 +49,6 @@ export default function UpdatePlantStock(props){
         setNewState(newState);
     }
 
-    const stockRef = React.createRef();
-
     const validateStock=(plantStock)=>{
         if(plantStock!=="" && plantStock<=0){
             return validationMessage.lessThanZero;
@@ -54,8 +58,7 @@ export default function UpdatePlantStock(props){
 
     return(
         <div>
-            <h3>Update Plant Stock</h3>
-            <div>
+            <div className="mt-5 mb-5">
                 <form onSubmit={submitHandler}>
                     <div className="form-group">
                     <label>Enter updated stock :</label>
@@ -73,21 +76,13 @@ export default function UpdatePlantStock(props){
                         </div>
                     ):''}
                     </div>
-                        <button className="btn btn-primary">Save Change</button>  
-                </form>
-            </div>
-            <div className="mt-5">
-            {response.plant?(
-                <Redirect to={`/plantbyname/${response.plant.commonName}`}/>                          
-            ):''}  
-            
-            {response.errMsg?(
-                <div className={commonStyle.error}>
-                    Stock cannot be updated
-                    <br/>
-                    {response.errMsg}
-                </div>                    
-            ):''}   
+                        <button className="btn btn-primary">Save Changes</button>  
+                </form>    
+                {currentState.updated?(
+                    <div className="alert alert-success mt-3">
+                        Plant stock updated successfully!
+                    </div>
+                ):''}             
             </div>                    
         </div>
     );

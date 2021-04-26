@@ -6,17 +6,18 @@ function addPlant(data){
     const url = baseUrl+"/add";
     let requestData = {
         plantHeight: data.plantHeight,
-        plantSpread: data.plantSpread,
+        plantSpread: data.plantSpread.toString()+" cm",
         commonName: data.commonName,
-        bloomTime: data.bloomTime,
+        bloomTime: data.bloomTime.toString+" weeks",
         medicinalOrCulinaryUse: data.plantUse,
         difficultyLevel: data.difficultyLevel,
-        temperature: data.temperature,
+        temperature: data.temperature.toString()+" deg",
         typeOfPlant: data.typeOfPlant,
         plantDescription: data.plantDescription,
         plantsStock: data.plantStock,
         plantCost: data.plantCost
     };
+    console.log(typeof requestData.plantSpread)
     const promise = axios.post(url, requestData);
     return promise;
 }
