@@ -2,52 +2,63 @@ import React, { useState } from "react";
 import DisplayPlanterList from "./DisplayPlanterList";
 import commonStyle from "./commonStyle.module.css";
 
+import {fetchAllPlantersByShape} from "../../redux/fetchplanterbyshape/fetchPlanterByShapeAction";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function GetPlanterByShape() {
-  const planter1 = {
-    planterId: 1,
-    planterHeight: 10,
-    planterCapacity: 100,
-    planterColor: 2,
-    planterDrainageHoles: 1,
-    planterShape: "Square",
-    planterStock: 100,
-    planterCost: 200,
-    plantId: 1,
-    seedId: 1,
-  };
+  // const planter1 = {
+  //   planterId: 1,
+  //   planterHeight: 10,
+  //   planterCapacity: 100,
+  //   planterColor: 2,
+  //   planterDrainageHoles: 1,
+  //   planterShape: "Square",
+  //   planterStock: 100,
+  //   planterCost: 200,
+  //   plantId: 1,
+  //   seedId: 1,
+  // };
 
-  const planter2 = {
-    planterId: 2,
-    planterHeight: 10,
-    planterCapacity: 100,
-    planterColor: 2,
-    planterDrainageHoles: 1,
-    planterShape: "Square",
-    planterStock: 100,
-    planterCost: 200,
-    plantId: 1,
-    seedId: 1,
-  };
+  // const planter2 = {
+  //   planterId: 2,
+  //   planterHeight: 10,
+  //   planterCapacity: 100,
+  //   planterColor: 2,
+  //   planterDrainageHoles: 1,
+  //   planterShape: "Square",
+  //   planterStock: 100,
+  //   planterCost: 200,
+  //   plantId: 1,
+  //   seedId: 1,
+  // };
 
-  const planter3 = {
-    planterId: 3,
-    planterHeight: 10,
-    planterCapacity: 100,
-    planterColor: 2,
-    planterDrainageHoles: 1,
-    planterShape: "Rectangular",
-    planterStock: 100,
-    planterCost: 200,
-    plantId: 1,
-    seedId: 1,
-  };
-  let planterList = [planter1, planter2, planter3];
+  // const planter3 = {
+  //   planterId: 3,
+  //   planterHeight: 10,
+  //   planterCapacity: 100,
+  //   planterColor: 2,
+  //   planterDrainageHoles: 1,
+  //   planterShape: "Rectangular",
+  //   planterStock: 100,
+  //   planterCost: 200,
+  //   plantId: 1,
+  //   seedId: 1,
+  // };
+  // let planterList = [planter1, planter2, planter3];
+  const planterShapeRef = React.createRef();
 
-  const response = { planters: planterList, errMsg: undefined };
   const [state, setNewState] = useState({ planterShape: undefined });
 
-  const planterShapeRef = React.createRef();
+  const response = useSelector(state=>{
+    return{
+      planters:state.fetchAllPlantersByShape.planters,
+      error:state.fetchAllPlantersByShape.error
+    }
+  })
+  const dispatch=useDispatch();
+
+
+  
 
   const changeHandler = (ref) => {
       console.log("Inside Change Handler")
@@ -59,12 +70,12 @@ export default function GetPlanterByShape() {
   const submitHandler = (event) => {
     event.preventDefault();
     console.log("Inside Submit Handler")
-    if (state.validations.planterShape) {
-      return;
-    }
-    let data = { ...state };
-
-
+    const planterShape=planterShapeRef.current.value;
+    // if (state.validations.planterShape) {
+    //   return;
+    // }
+    
+    dispatch(fetchAllPlantersByShape(planterShape));
   };
   return (
     <div>
@@ -100,10 +111,10 @@ export default function GetPlanterByShape() {
         </ol>
       </div>
 
-      {response.errMsg ? (
+      {response.error ? (
         <div className={commonStyle.error}>
           Request was unsuccessfull
-          {response.errMsg}
+          {response.error}
         </div>
       ) : (
         ""

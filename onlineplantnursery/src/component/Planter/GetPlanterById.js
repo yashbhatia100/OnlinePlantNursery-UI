@@ -29,7 +29,8 @@ export default function GetPlanterById(props) {
  const dispatch=useDispatch();
 
  const fetchPlanterOnRender=()=>{
-   const id=props.match.params.id;
+   const id=props.match.params.planterId;
+   console.log("inside fetch planter in getbplanterby id",id);
    dispatch(fetchPlanterById(id));
    
  }
@@ -51,11 +52,11 @@ export default function GetPlanterById(props) {
       ) : (
         ""
       )}
-      {currentState.errMsg ? (
+      {currentState.error ? (
         <div className="commonStyle.error">
           Request was not successful
           <br />
-          {currentState.errMsg}
+          {currentState.error}
         </div>
       ) : (
         ""

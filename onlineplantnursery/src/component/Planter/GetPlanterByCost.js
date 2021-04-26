@@ -2,44 +2,68 @@ import React, { useState } from "react";
 import validationMessage from "./validationMessage";
 import commonStyle from "./commonStyle.module.css";
 import DisplayPlanterList from "./DisplayPlanterList";
+import { useDispatch, useSelector } from "react-redux";
+import {fetchAllPlantersByCost} from "../../redux/fetchplanterbycost/fetchPlanterByCostAction";
 
 export default function GetPlanterByCost() {
-  const planter1 = {
-    planterId: 1,
-    planterHeight: 10,
-    planterCapacity: 100,
-    planterColor: 2,
-    planterDrainageHoles: 1,
-    planterShape: "Square",
-    planterStock: 100,
-    planterCost: 300,
-    plantId: 1,
-    seedId: 2,
-  };
+  // const planter1 = {
+  //   planterId: 1,
+  //   planterHeight: 10,
+  //   planterCapacity: 100,
+  //   planterColor: 2,
+  //   planterDrainageHoles: 1,
+  //   planterShape: "Square",
+  //   planterStock: 100,
+  //   planterCost: 300,
+  //   plantId: 1,
+  //   seedId: 2,
+  // };
 
-  const planter2 = {
-    planterId: 2,
-    planterHeight: 10,
-    planterCapacity: 100,
-    planterColor: 2,
-    planterDrainageHoles: 1,
-    planterShape: "Rectangle",
-    planterStock: 100,
-    planterCost: 200,
-    plantId: 3,
-    seedId: 4,
-  };
-  let planterList = [planter1, planter2];
+  // const planter2 = {
+  //   planterId: 2,
+  //   planterHeight: 10,
+  //   planterCapacity: 100,
+  //   planterColor: 2,
+  //   planterDrainageHoles: 1,
+  //   planterShape: "Rectangle",
+  //   planterStock: 100,
+  //   planterCost: 200,
+  //   plantId: 3,
+  //   seedId: 4,
+  // };
+  // let planterList = [planter1, planter2];
   
  
   const initialState={minCost:undefined, maxCost:undefined,validations:{
     minCost:undefined,
     maxCost:undefined,
   }};
-  const response = { planters: planterList, errMsg: undefined };
+  
   const [state, setNewState] = useState(initialState);
   const minCostRef = React.createRef();
   const maxCostRef = React.createRef();
+
+  const response = useSelector(state=>{
+    return({
+      planters:state.fetchAllPlantersByCost.planters,
+      error:state.fetchAllPlantersByCost.error
+    });
+  })
+  const dispatch=useDispatch();
+
+  
+  const submitHandler = (event) => {
+    event.preventDefault();
+    console.log("Inside Submit Handler");
+
+    if(state.validations.maxCost && state.validations.minCost) {
+      return;
+    }
+    const minCost=minCostRef.current.value;
+    const maxCost=maxCostRef.current.value;
+    dispatch(fetchAllPlantersByCost(minCost,maxCost));
+    
+  }
 
   const changeHandler = (ref) => {
     console.log("In change Handler")
@@ -59,23 +83,13 @@ export default function GetPlanterByCost() {
     const newState = {
       ...state,
       [fieldName]: fieldValue,
-      planterList: undefined,
+      planters: undefined,
       errMsg: undefined,
       validations: newValidations,
     };
     setNewState(newState);
   };
 
-  const submitHandler = (event) => {
-    event.preventDefault();
-    console.log("Inside Submit Handler");
-
-    if (state.validations.maxCost && state.validations.minCost) {
-      return;
-
-
-    }
-  };
 
   const validateMinCost = (minCost) => {
     if (minCost < 0) {
@@ -151,11 +165,10 @@ export default function GetPlanterByCost() {
           )}
         </ol>
       </div>
-
-      {response.errMsg ? (
+      {response.error ? (
         <div className={commonStyle.error}>
           Request was unsuccessfull
-          {response.errMsg}
+          {response.error}
         </div>
       ) : (
         ""
