@@ -35,7 +35,7 @@ export default function Navbar(){
            Get Customer Details On Request
        </Link>
        <li className="nav-item">
-       <Link to="/changecustomername/:id" className="nav-link">
+       <Link to="/changecustomername" className="nav-link">
         Change Customer Name
        </Link>
        </li>

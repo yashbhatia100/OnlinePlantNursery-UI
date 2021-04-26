@@ -2,6 +2,8 @@ import  React,{ useState } from "react";
 import DisplayCustomer from "./DisplayCustomer";
 import validationMessage from '../../validationMessage';
 import commonStyle from "./commonStyle.module.css";
+import {addCustomerAction} from "../../redux/addCustomer/addCustomerAction";
+import {useDispatch,useSelector} from "react-redux";
 
 
 export default function  AddCustomer(){
@@ -45,13 +47,29 @@ const initialState = {
     
 };
 
-const response = {customer: customer, errMsg: undefined};
+const response = useSelector(state=>{ 
+  return (
+      {
+          customer: state.addCustomer.customer,
+          errMsg: state.addCustomer.error
+      }
+  );
+});
 
 const [state, setNewState] = useState(initialState);
 
+const dispatch = useDispatch();
+
 const submitHandler = (event) => {
   event.preventDefault();
-  setNewState({ ...state, formstatus: "Form is submitted Successfully" });
+  if(
+    state.validations.customerName ||
+    state.validations.pincode
+  ) {
+    return;
+  }
+  let data = {...state};
+  dispatch(addCustomerAction(data));
 };
 
 const changeHandler = (ref) => {
@@ -117,8 +135,8 @@ const changeHandler = (ref) => {
     </div>
 
     <div className="form-group">
-    <label>UserName</label>
-    <input name="userName" type = "text" ref={userNameref} onChange={()=> changeHandler(userNameref) }className="form-control" />
+    <label>Username</label>
+    <input name="username" type = "text" ref={userNameref} onChange={()=> changeHandler(userNameref) }className="form-control" />
     </div>
 
     <div className="form-group">
@@ -143,7 +161,7 @@ const changeHandler = (ref) => {
 
     <div className="form-group">
     <label>State</label>
-    <input name="State" type = "text" ref={stateref} onChange={()=> changeHandler(stateref) }className="form-control" /><br/>
+    <input name="state" type = "text" ref={stateref} onChange={()=> changeHandler(stateref) }className="form-control" /><br/>
     </div>
 
     <div className="form-group">

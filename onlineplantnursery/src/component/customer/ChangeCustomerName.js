@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import DisplayCustomer from "./DisplayCustomer";
 import validationMessage from '../../validationMessage';
 import commonStyle from "./commonStyle.module.css";
+import {updateCustomerNameAction} from "../../redux/updateCustomer/updateCustomerNameActions";
+import { useDispatch,useSelector } from "react-redux";
 
-export default function ChangeCustomerName(props) {
+export default function ChangeCustomerName() {
 
     const customer = {
 
@@ -28,17 +30,29 @@ export default function ChangeCustomerName(props) {
         formstatus: "",
         validations: { customerName: undefined }
     };
-
-    const response = { customer: customer, errMsg: undefined };
+    const response = useSelector(state => {
+        return (
+            {
+                customer: state.fetchByIdRequest.customer,
+                errMsg: state.fetchByIdRequest.error
+            }
+        );
+    })
+    
     const [state, setNewState] = useState(initialState);
+
+    const dispatch = useDispatch();
 
     const submitHandler = (event) => {
         event.preventDefault();
         if(state.validations.customerName){
             return;
         }
-        setNewState({ ...state, formstatus: "Form is submitted Successfully" });
-    };
+        let data = {id:response.customer.id,customerName:state.customerName}
+        dispatch(updateCustomerNameAction(data))
+        setNewState({...state})
+        customerNameref.current.value="";
+    }
 
     const changeHandler = () => {
         const fieldValue = customerNameref.current.value;
