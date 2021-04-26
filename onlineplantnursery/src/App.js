@@ -11,6 +11,9 @@ import Home from './component/customer/Home';
 import ChangeCustomerName from './component/customer/ChangeCustomerName';
 import GetCustomerById from './component/customer/GetCustomerById';
 import {addCustomer,getCustomer,updateCustomerName} from './service/CustomerService';
+import { Provider } from 'react-redux';
+import store from './redux/store';
+
 function App() {
   /*const customer = {
 
@@ -48,6 +51,8 @@ let mockUpdate={
  
   return(
     <div >
+      <Provider store={store}>
+      
    <Router>
     <Navbar/>
     <div className=" container mt-5">
@@ -55,13 +60,14 @@ let mockUpdate={
     <Route exact path="/" component = {Home} />
     <Route exact path="/addcustomer" component = {Addcustomer} />
     <Route exact path="/login" component = {LoginForm} />
-    <Route exact path="/getcustomerbyid/:id" component = {GetCustomerById} />
     <Route exact path="/getcustomerdetailsonrequest" component = {GetCustomerDetailsOnRequest} />
+    <Route exact path="/getcustomerbyid/:id" component = {GetCustomerById} />
     <Route exact path="/changecustomername/:id" component = {ChangeCustomerName} />
     
     </Switch>
     </div>
     </Router>
+    </Provider>
     
     
     </div>

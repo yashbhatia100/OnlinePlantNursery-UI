@@ -164,7 +164,6 @@ const changeHandler = (ref) => {
     <button className= "btn btn-primary" >AddCustomers</button>
  </form>
  <h2>{state.formstatus}</h2><br/>
- <h3>Details: <br/></h3>
  
 
  <br />
@@ -172,6 +171,7 @@ const changeHandler = (ref) => {
    <div>
      <h3>Customer Added Successfully</h3>
      <br/>
+     <h3>Details: <br/></h3>
      <DisplayCustomer customer={ response.customer} />
    </div>
  ) : (
