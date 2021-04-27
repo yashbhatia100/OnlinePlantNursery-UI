@@ -7,6 +7,12 @@ import fetchPlanterByCostReducer from "./fetchplanterbycost/fetchPlanterByCostRe
 import fetchPlanterByIdReducer from "./fetchplanterbyid/fetchPlanterByIdReducer";
 import fetchPlanterByShapeReducer from "./fetchplanterbyshape/fetchPlanterByShapeReducer";
 import getPlanterOnRequestReducer from "./getPlanterOnRequest/getPlanterOnRequestReducer";
+import addPlantReducer from "./addPlant/addPlantReducer";
+import getAllPlantsReducer from "./getAllPlants.js/getAllPlantsReducer";
+import getPlantByNameReducer from "./getPlantByName/getPlantByNameReducer";
+import getPlantByNameRequestReducer from "./getPlantByNameRequest/getPlantByNameRequestReducer";
+import getPlantsByTypeReducer from "./getPlantsByType/getPlantsByTypeReducer";
+import updatePlantStockReducer from "./getPlantToUpdate/updatePlantStockReducer";
 
 const store = createStore(
   combineReducers({
@@ -16,7 +22,14 @@ const store = createStore(
     fetchAllPlantersByShape: fetchPlanterByShapeReducer,
     fetchAllPlantersByCost: fetchPlanterByCostReducer,
     fetchPlanterById: fetchPlanterByIdReducer,
+    addPlant: addPlantReducer,
+    getAllPlants: getAllPlantsReducer,
+    getPlantByName: getPlantByNameReducer,
+    getPlantByNameRequest: getPlantByNameRequestReducer,
+    getPlantsByType: getPlantsByTypeReducer,
+    updatePlantStock: updatePlantStockReducer,
   }),
   composeWithDevTools(applyMiddleware(thunk))
 );
+
 export default store;

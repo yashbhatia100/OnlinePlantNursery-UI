@@ -14,7 +14,7 @@ export default function PlanterHome() {
           </li>
 
           <li className="list-group-item bg-light mb-4 border-0">
-            <Link to="/all" className="nav-link">
+            <Link to="/allplanters" className="nav-link">
               <span>Get All Planters</span>
             </Link>
           </li>
