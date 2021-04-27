@@ -1,5 +1,12 @@
 import './App.css';
 
+import Addcustomer from './component/customer/Addcustomer';
+import GetCustomerDetailsOnRequest from './component/customer/GetCustomerDetailsOnRequest';
+import LoginForm from './component/customer/LoginForm';
+import customerHome from './component/customer/customerHome';
+import ChangeCustomerName from './component/customer/ChangeCustomerName';
+import GetCustomerById from './component/customer/GetCustomerById';
+
 import AddPlant from './component/plant/AddPlant';
 import GetAllPlants from './component/plant/GetAllPlants';
 import GetPlantByName from './component/plant/GetPlantByName';
@@ -29,6 +36,7 @@ import { Provider } from 'react-redux';
 import Navbar from './component/Navbar';
 
 function App() {
+
   return (
     <div>
       <Provider store={store}>
@@ -58,6 +66,14 @@ function App() {
               <Route exact path="/seedbyname/:commonName" component={GetSeedByName} />
               <Route exact path="/allseeds" component={GetAllSeeds} />
               <Route exact path="/seedsbytype" component={GetAllSeedsByType} />
+
+              <Route exact path="/customerhome" component = {customerHome} />
+              <Route exact path="/addcustomer" component = {Addcustomer} />
+              <Route exact path="/login" component = {LoginForm} />
+              <Route exact path="/getcustomerdetailsonrequest" component = {GetCustomerDetailsOnRequest} />
+              <Route exact path="/changecustomername" component = {ChangeCustomerName} />
+              <Route exact path="/getcustomerbyid/:id" component = {GetCustomerById} />
+              <Route exact path="/changecustomername/:id" component = {ChangeCustomerName} />
             </Switch>
           </div>
         </Router>
@@ -65,5 +81,10 @@ function App() {
     </div >
   );
 }
+export default App; 
 
-export default App;
+
+ 
+     
+
+

@@ -29,6 +29,12 @@ export default function Navbar() {
                 <span>Seed Module</span>
               </Link>
             </li>
+
+            <li className="nav-item">
+              <Link to="/customerhome" className="nav-link">
+                <span>Customer Module</span>
+              </Link>
+            </li>
           </ul>
         </div>
       </nav>
