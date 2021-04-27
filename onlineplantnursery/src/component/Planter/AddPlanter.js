@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DisplayPlanter from "./DisplayPlanter";
 import validationMessage from "./validationMessage";
 import commonStyle from "./commonStyle.module.css";
 import { addPlanterAction } from "../../redux/addplanter/addPlanterActions";
 import { useDispatch, useSelector } from "react-redux";
+import { getAllPlantsAction } from "../../redux/getAllPlants.js/getAllPlantsActions";
 export default function AddPlanter() {
   const plants = [
     { id: 1, name: "Mango" },
@@ -66,7 +67,22 @@ export default function AddPlanter() {
     };
   });
 
+  const plantList = useSelector((state)=>{
+    return(
+      {
+        plants: state.getAllPlants.plants,
+        error: state.getAllPlants.error
+      }
+    );
+  })
+
   const dispatch = useDispatch();
+
+  const getPlantList=()=>{
+    dispatch(getAllPlantsAction());
+  }
+
+  useEffect(getPlantList,[]);
 
   const submitHandler = (event) => {
     console.log("Inside submit Handler");
@@ -351,9 +367,9 @@ export default function AddPlanter() {
               <option disabled selected>
                 select plant
               </option>
-              {plants.map((plant) => (
-                <option key={plant.id} value={plant.id}>
-                  {plant.name}
+              {plantList.plants.map((plant) => (
+                <option key={plant.plantId} value={plant.plantId}>
+                  {plant.commonName}
                 </option>
               ))}
             </select>
