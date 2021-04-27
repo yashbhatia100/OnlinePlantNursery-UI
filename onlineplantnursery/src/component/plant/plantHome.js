@@ -7,7 +7,7 @@ export default function plantHome(){
             <h3>Plant Module</h3>
             <ul className="list-group mt-5">
                     <li className="list-group-item bg-light mb-4 border-0">
-                        <Link to="/all" >
+                        <Link to="/allplants" >
                             Get All Plants
                         </Link>
                     </li>

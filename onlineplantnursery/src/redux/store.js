@@ -1,3 +1,4 @@
+
 import {applyMiddleware, combineReducers, createStore} from 'redux';
 import thunk from 'redux-thunk';
 import addPlantReducer from './addPlant/addPlantReducer';
@@ -7,15 +8,30 @@ import getPlantByNameRequestReducer from './getPlantByNameRequest/getPlantByName
 import getPlantsByTypeReducer from './getPlantsByType/getPlantsByTypeReducer';
 import updatePlantStockReducer from './getPlantToUpdate/updatePlantStockReducer';
 
+import addPlanterReducer from "./addplanter/addPlanterReducer";
+import fetchAllPlantersReducer from "./fetchallplanters/fetchAllPlantersReducer";
+import fetchPlanterByCostReducer from "./fetchplanterbycost/fetchPlanterByCostReducer";
+import fetchPlanterByIdReducer from "./fetchplanterbyid/fetchPlanterByIdReducer";
+import fetchPlanterByShapeReducer from "./fetchplanterbyshape/fetchPlanterByShapeReducer";
+import getPlanterOnRequestReducer from "./getPlanterOnRequest/getPlanterOnRequestReducer";
+
+import { composeWithDevTools } from "redux-devtools-extension";
+
 const store = createStore(
     combineReducers({
-        addPlant:addPlantReducer,
-        getAllPlants:getAllPlantsReducer,
-        getPlantByName:getPlantByNameReducer,
-        getPlantByNameRequest:getPlantByNameRequestReducer,
-        getPlantsByType:getPlantsByTypeReducer,
-        updatePlantStock:updatePlantStockReducer
+      addPlant:addPlantReducer,
+      getAllPlants:getAllPlantsReducer,
+      getPlantByName:getPlantByNameReducer,
+      getPlantByNameRequest:getPlantByNameRequestReducer,
+      getPlantsByType:getPlantsByTypeReducer,
+      updatePlantStock:updatePlantStockReducer,
+      addPlanter: addPlanterReducer,
+      fetchAllPlanters: fetchAllPlantersReducer,
+      getPlanterOnRequest: getPlanterOnRequestReducer,
+      fetchAllPlantersByShape: fetchPlanterByShapeReducer,
+      fetchAllPlantersByCost: fetchPlanterByCostReducer,
+      fetchPlanterById: fetchPlanterByIdReducer
     }),
-    applyMiddleware(thunk));
-
+    composeWithDevTools(applyMiddleware(thunk))
+)
 export default store;
