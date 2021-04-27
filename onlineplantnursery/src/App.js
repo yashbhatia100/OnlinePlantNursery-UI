@@ -1,5 +1,5 @@
-
 import './App.css';
+
 import AddPlant from './component/plant/AddPlant';
 import GetAllPlants from './component/plant/GetAllPlants';
 import GetPlantByName from './component/plant/GetPlantByName';
@@ -16,40 +16,53 @@ import PlanterHome from "./component/Planter/PlanterHome";
 import GetPlanterByIdRequest from "./component/Planter/GetPlanterByIdRequest";
 import GetPlanterByCost from "./component/Planter/GetPlanterByCost";
 
+import SeedHome from "./component/seed/SeedHome";
+import AddSeed from "./component/seed/AddSeed";
+import GetAllSeeds from "./component/seed/GetAllSeeds";
+import GetAllSeedsByType from "./component/seed/GetAllSeedsByType";
+import GetSeedById from "./component/seed/GetSeedById";
+import GetSeedByName from "./component/seed/GetSeedByName";
+
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import store from './redux/store';
 import { Provider } from 'react-redux';
 import Navbar from './component/Navbar';
 
 function App() {
-
   return (
     <div>
       <Provider store={store}>
-      <Router>
-        <Navbar />
-        <div className="container mt-5">
-        <Switch>
-          <Route exact path="/planthome" component={plantHome} />
-          <Route exact path="/allplants" component={GetAllPlants} />
-          <Route exact path="/addplant" component={AddPlant} />
-          <Route exact path="/plantbyname/:name" component={GetPlantByName} />
-          <Route exact path="/plantbynameonrequest" component={GetPlantByNameRequest} />
-          <Route exact path="/plantsbytype" component={GetAllPlantsByType} />
-          <Route exact path="/planttoupdate" component={GetPlantToUpdate} />
-          <Route exact path ="/planterhome" component={PlanterHome} />
-          <Route exact path ="/allplanters" component={GetAllPlanters}/>
-          <Route exact path ="/addplanter" component={AddPlanter}/>
-          <Route exact path ="/planterbyid/:planterId" component={GetPlanterById}/>
-          <Route exact path ="/planterbyidonrequest" component={GetPlanterByIdRequest}/>
-          <Route exact path="/planterbyshape" component={GetPlanterByShape}/>
-          <Route exact path="/planterbycost" component={GetPlanterByCost}/>
-        </Switch>
-        </div>
-      </Router>
+        <Router>
+          <Navbar />
+          <div className="container mt-5">
+            <Switch>
+              <Route exact path="/planthome" component={plantHome} />
+              <Route exact path="/allplants" component={GetAllPlants} />
+              <Route exact path="/addplant" component={AddPlant} />
+              <Route exact path="/plantbyname/:name" component={GetPlantByName} />
+              <Route exact path="/plantbynameonrequest" component={GetPlantByNameRequest} />
+              <Route exact path="/plantsbytype" component={GetAllPlantsByType} />
+              <Route exact path="/planttoupdate" component={GetPlantToUpdate} />
+
+              <Route exact path="/planterhome" component={PlanterHome} />
+              <Route exact path="/allplanters" component={GetAllPlanters} />
+              <Route exact path="/addplanter" component={AddPlanter} />
+              <Route exact path="/planterbyid/:planterId" component={GetPlanterById} />
+              <Route exact path="/planterbyidonrequest" component={GetPlanterByIdRequest} />
+              <Route exact path="/planterbyshape" component={GetPlanterByShape} />
+              <Route exact path="/planterbycost" component={GetPlanterByCost} />
+              
+              <Route exact path="/seedHome" component={SeedHome} />
+              <Route exact path="/addseed" component={AddSeed} />
+              <Route exact path="/seedbyid/:seedId" component={GetSeedById} />
+              <Route exact path="/seedbyname/:commonName" component={GetSeedByName} />
+              <Route exact path="/allseeds" component={GetAllSeeds} />
+              <Route exact path="/seedsbytype" component={GetAllSeedsByType} />
+            </Switch>
+          </div>
+        </Router>
       </Provider>
-      
-    </div>
+    </div >
   );
 }
 

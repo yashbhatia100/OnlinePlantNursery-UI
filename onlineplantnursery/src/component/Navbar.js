@@ -3,9 +3,11 @@ export default function Navbar() {
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+
         <Link to="/"className="navbar-brand">
           Online Plant Nursery 
         </Link>
+        
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
@@ -17,11 +19,16 @@ export default function Navbar() {
             </li>
 
             <li className="nav-item">
-              <Link to="/planthome" className="nav-link">
+              <Link to="/plantHome" className="nav-link">
                 <span>Plant Module</span>
               </Link>
             </li>
 
+            <li className="nav-item">
+              <Link to="/seedHome" className="nav-link">
+                <span>Seed Module</span>
+              </Link>
+            </li>
           </ul>
         </div>
       </nav>

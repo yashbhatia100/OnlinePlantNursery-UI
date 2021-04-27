@@ -1,4 +1,3 @@
-
 import {applyMiddleware, combineReducers, createStore} from 'redux';
 import thunk from 'redux-thunk';
 import addPlantReducer from './addPlant/addPlantReducer';
@@ -15,6 +14,12 @@ import fetchPlanterByIdReducer from "./fetchplanterbyid/fetchPlanterByIdReducer"
 import fetchPlanterByShapeReducer from "./fetchplanterbyshape/fetchPlanterByShapeReducer";
 import getPlanterOnRequestReducer from "./getPlanterOnRequest/getPlanterOnRequestReducer";
 
+import addSeedReducer from "./addseed/addSeedReducer";
+import fetchAllSeedsReducer from "./fetchallseeds/fetchAllSeedsReducer";
+import fetchAllSeedsByTypeReducer from "./fetchallseedsbytype/fetchAllSeedsByTypeReducer";
+import fetchSeedByIdReducer from "./fetchseedbyid/fetchSeedByIdReducer";
+import fetchSeedByNameReducer from "./fetchseedbyname/fetchSeedByNameReducer";
+
 import { composeWithDevTools } from "redux-devtools-extension";
 
 const store = createStore(
@@ -25,13 +30,21 @@ const store = createStore(
       getPlantByNameRequest:getPlantByNameRequestReducer,
       getPlantsByType:getPlantsByTypeReducer,
       updatePlantStock:updatePlantStockReducer,
+
       addPlanter: addPlanterReducer,
       fetchAllPlanters: fetchAllPlantersReducer,
       getPlanterOnRequest: getPlanterOnRequestReducer,
       fetchAllPlantersByShape: fetchPlanterByShapeReducer,
       fetchAllPlantersByCost: fetchPlanterByCostReducer,
-      fetchPlanterById: fetchPlanterByIdReducer
+      fetchPlanterById: fetchPlanterByIdReducer,
+
+      addSeed: addSeedReducer,
+      fetchAllSeeds: fetchAllSeedsReducer,
+      fetchAllSeedsByType: fetchAllSeedsByTypeReducer,
+      fetchSeed: fetchSeedByIdReducer,
+      fetchSeedByCommonName: fetchSeedByNameReducer,
     }),
     composeWithDevTools(applyMiddleware(thunk))
 )
 export default store;
+
