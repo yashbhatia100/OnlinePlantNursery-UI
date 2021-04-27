@@ -19,7 +19,7 @@ export default function GetPlanterById(props) {
     console.log("inside fetch planter in getbplanterby id", id);
     dispatch(fetchPlanterById(id));
   };
-  useEffect(fetchPlanterOnRender);
+  useEffect(fetchPlanterOnRender,[]);
 
   return (
     <div>
