@@ -61,9 +61,9 @@ export default function GetAllPlantsByType() {
                             onChange={changeHandler}
                             ref={typeRef}
                             className="form-control"
-                            required = "true" 
+                            required = {true} 
                             list="plantTypeList"
-                            autocomplete="off"
+                            autoComplete="off"
                         />
                         <datalist id="plantTypeList">
                             <option value="Herb" />

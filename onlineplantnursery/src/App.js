@@ -5,11 +5,11 @@ import GetPlantByName from './component/plant/GetPlantByName';
 import GetPlantByNameRequest from './component/plant/GetPlantByNameRequest';
 import GetPlantToUpdate from './component/plant/GetPlantToUpdate';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Navbar from './component/plant/Navbar';
 import plantHome from './component/plant/plantHome';
 import GetAllPlantsByType from './component/plant/GetAllPlantsByType';
 import store from './redux/store';
 import { Provider } from 'react-redux';
+import Navbar from './component/Navbar';
 
 function App() {
 
