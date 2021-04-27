@@ -17,8 +17,15 @@ import GetPlantToUpdate from "./component/plant/GetPlantToUpdate";
 import plantHome from "./component/plant/plantHome";
 import GetAllPlantsByType from "./component/plant/GetAllPlantsByType";
 
+import AddSeed from "./component/seed/AddSeed";
+import GetAllSeeds from "./component/seed/GetAllSeeds";
+import GetAllSeedsByType from "./component/seed/GetAllSeedsByType";
+import GetSeedById from "./component/seed/GetSeedById";
+import GetSeedByName from "./component/seed/GetSeedByName";
+
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import SeedHome from "./component/seed/SeedHome";
 
 function App() {
   return (
@@ -75,6 +82,25 @@ function App() {
                     exact
                     path="/planttoupdate"
                     component={GetPlantToUpdate}
+                  />
+                  <Route exact path="/seedHome" component={SeedHome} />
+
+                  <Route exact path="/addseed" component={AddSeed} />
+                  <Route
+                    exact
+                    path="/seedbyid/:seedId"
+                    component={GetSeedById}
+                  />
+                  <Route
+                    exact
+                    path="/seedbyname/:commonName"
+                    component={GetSeedByName}
+                  />
+                  <Route exact path="/allseeds" component={GetAllSeeds} />
+                  <Route
+                    exact
+                    path="/seedsbytype"
+                    component={GetAllSeedsByType}
                   />
                 </Switch>
               </div>

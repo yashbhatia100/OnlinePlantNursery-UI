@@ -15,11 +15,19 @@ export default function Navbar() {
               </Link>
             </li>
 
+            
+
             <li className="nav-item">
               <Link to="/plantHome" className="nav-link">
                 <span>Plant Module</span>
               </Link>
             </li>
+            <li className="nav-item">
+              <Link to="/seedHome" className="nav-link">
+                <span>Seed Module</span>
+              </Link>
+            </li>
+
           </ul>
         </div>
       </nav>
