@@ -1,14 +1,14 @@
 import "./App.css";
-import AddPlanter from "./component/Planter/AddPlanter";
-import GetAllPlanters from "./component/Planter/GetAllPlanters";
-import GetPlanterByShape from "./component/Planter/GetPlanterByShape";
-import GetPlanterById from "./component/Planter/GetPlanterById";
+import AddPlanter from "./component/planter/AddPlanter";
+import GetAllPlanters from "./component/planter/GetAllPlanters";
+import GetPlanterByShape from "./component/planter/GetPlanterByShape";
+import GetPlanterById from "./component/planter/GetPlanterById";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import PlanterHome from "./component/Planter/PlanterHome";
+import PlanterHome from "./component/planter/PlanterHome";
 import Navbar from "./component/Navbar";
-import GetPlanterByIdRequest from "./component/Planter/GetPlanterByIdRequest";
-import GetPlanterByCost from "./component/Planter/GetPlanterByCost";
-import {addPlanter,fetchPlanter,fetchPlanterByShape,fetchPlanterByCost,fetchAll} from "./service/PlanterService";
+import GetPlanterByIdRequest from "./component/planter/GetPlanterByIdRequest";
+import GetPlanterByCost from "./component/planter/GetPlanterByCost";
+
 import { Provider } from "react-redux";
 import store from "./redux/store";
 
