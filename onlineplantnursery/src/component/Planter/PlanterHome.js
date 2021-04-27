@@ -1,4 +1,4 @@
-export default function Home(){
+export default function PlanterHome(){
     return(
         <div>
             <h3>Online Plant Nursery</h3>

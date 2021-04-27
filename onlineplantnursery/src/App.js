@@ -1,16 +1,17 @@
 import "./App.css";
-import AddPlanter from "./component/planter/AddPlanter";
-import GetAllPlanters from "./component/planter/GetAllPlanters";
-import GetPlanterByShape from "./component/planter/GetPlanterByShape";
-import GetPlanterById from "./component/planter/GetPlanterById";
+import AddPlanter from "./component/Planter/AddPlanter";
+import GetAllPlanters from "./component/Planter/GetAllPlanters";
+import GetPlanterByShape from "./component/Planter/GetPlanterByShape";
+import GetPlanterById from "./component/Planter/GetPlanterById";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Home from "./component/planter/Home";
-import Navbar from "./component/planter/Navbar";
-import GetPlanterByIdRequest from "./component/planter/GetPlanterByIdRequest";
-import GetPlanterByCost from "./component/planter/GetPlanterByCost";
-// import {addPlanter,fetchPlanter,fetchPlanterByShape,fetchPlanterByCost,fetchAll} from "./service/PlanterService";
+import PlanterHome from "./component/Planter/PlanterHome";
+import Navbar from "./component/Planter/Navbar";
+import GetPlanterByIdRequest from "./component/Planter/GetPlanterByIdRequest";
+import GetPlanterByCost from "./component/Planter/GetPlanterByCost";
+import {addPlanter,fetchPlanter,fetchPlanterByShape,fetchPlanterByCost,fetchAll} from "./service/PlanterService";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+
 
 function App() {
 
@@ -58,7 +59,7 @@ function App() {
           <div className="row">
             <div className="col-md-9">
               <Switch>
-                <Route exact path ="/" component={Home} />
+                <Route exact path ="/" component={PlanterHome} />
                 <Route exact path ="/all" component={GetAllPlanters}/>
                 <Route exact path ="/addplanter" component={AddPlanter}/>
                 <Route exact path ="/planterbyid/:planterId" component={GetPlanterById}/>
