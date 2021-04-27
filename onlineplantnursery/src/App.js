@@ -8,7 +8,7 @@ import Home from "./component/planter/Home";
 import Navbar from "./component/planter/Navbar";
 import GetPlanterByIdRequest from "./component/planter/GetPlanterByIdRequest";
 import GetPlanterByCost from "./component/planter/GetPlanterByCost";
-import {addPlanter,fetchPlanter,fetchPlanterByShape,fetchPlanterByCost,fetchAll} from "./service/PlanterService";
+// import {addPlanter,fetchPlanter,fetchPlanterByShape,fetchPlanterByCost,fetchAll} from "./service/PlanterService";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 

@@ -24,7 +24,7 @@ function fetchAllPlantersByShape(planterShape){
             const planters=response.data;
             store.dispatch(fetchPlanterByShapeSuccess(planters));
         }).catch(error=>{
-            store.dispatch(fetchPlanterByShapeFail(error.message));
+            store.dispatch(fetchPlanterByShapeFail(error.response.data));
         })
     }
 }

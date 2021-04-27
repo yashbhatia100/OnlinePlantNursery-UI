@@ -1,20 +1,19 @@
-import fetchPlanterByCostConstants from "./fetchPlanterByCostConstants"
+import fetchPlanterByCostConstants from "./fetchPlanterByCostConstants";
 
-const initialState={
-    planters:[],
-    error:""
+const initialState = {
+  planters: [],
+  error: "",
+};
 
-}
-
-function fetchPlanterByCostReducer(state=initialState,action){
-
-    if(action.type ===fetchPlanterByCostConstants.fetchByCostSuccess||
-        action.type ===fetchPlanterByCostConstants.fetchByCostFail){
-            let newstate={...state,...action}
-            return newstate;
-        }
-        return state;
-
+function fetchPlanterByCostReducer(state = initialState, action) {
+  if (
+    action.type === fetchPlanterByCostConstants.fetchByCostSuccess ||
+    action.type === fetchPlanterByCostConstants.fetchByCostFail
+  ) {
+    let newstate = { ...state, ...action };
+    return newstate;
+  }
+  return state;
 }
 
 export default fetchPlanterByCostReducer;

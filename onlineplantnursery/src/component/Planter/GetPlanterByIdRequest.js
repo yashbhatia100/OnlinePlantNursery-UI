@@ -3,22 +3,9 @@ import DisplayPlanter from "./DisplayPlanter";
 import commonStyle from "./commonStyle.module.css";
 import validationMessage from "./validationMessage";
 import { useDispatch, useSelector } from "react-redux";
-import {getPlanterOnRequest} from "../../redux/getPlanterOnRequest/getPlanterOnRequestAction";
+import { getPlanterOnRequest } from "../../redux/getPlanterOnRequest/getPlanterOnRequestAction";
 
 export default function GetPlanterByIdRequest() {
-  // const mockplanter = {
-  //   planterId: 1,
-  //   planterHeight: 10,
-  //   planterCapacity: 100,
-  //   planterColor: 2,
-  //   planterDrainageHoles: 1,
-  //   planterShape: "Square",
-  //   planterStock: 100,
-  //   planterCost: 200,
-  //   plantId: 1,
-  //   seedId: 1,
-  // };
-
   const planterIdRef = React.createRef();
   const initialState = {
     planterId: undefined,
@@ -26,27 +13,23 @@ export default function GetPlanterByIdRequest() {
   };
   const [state, setNewState] = useState(initialState);
 
+  const response = useSelector((state) => {
+    return {
+      planter: state.getPlanterOnRequest.planter,
+      error: state.getPlanterOnRequest.error,
+    };
+  });
+  const dispatch = useDispatch();
 
-  const response=useSelector(state=>{
-    return({
-      planter:state.getPlanterOnRequest.planter,
-      error:state.getPlanterOnRequest.error
-
-    });
-
-    })
-    const dispatch=useDispatch();
-
-    const submitHandler = (event) => {
-      event.preventDefault();
-      console.log("Inside Submit Handler");
-      const planterId=planterIdRef.current.value;
-      if(state.validations.planterId) {
-        return;
-      }
-      dispatch(getPlanterOnRequest(planterId));
+  const submitHandler = (event) => {
+    event.preventDefault();
+    console.log("Inside Submit Handler");
+    const planterId = planterIdRef.current.value;
+    if (state.validations.planterId) {
+      return;
     }
-  
+    dispatch(getPlanterOnRequest(planterId));
+  };
 
   const setIdHandler = () => {
     console.log("Inside setId Handler");
@@ -64,7 +47,7 @@ export default function GetPlanterByIdRequest() {
     };
     setNewState(newState);
   };
-  
+
   const validatePlanterId = (planterId) => {
     if (planterId < 0) {
       console.log("inside validate planterId");

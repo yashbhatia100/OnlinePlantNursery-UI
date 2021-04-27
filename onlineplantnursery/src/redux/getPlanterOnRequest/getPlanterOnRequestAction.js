@@ -5,7 +5,7 @@ import getPlanterOnRequestConstant from "./getPlanterOnRequestConstants";
 function getPlanterOnRequestSuccess(planter) {
   return {
     type: getPlanterOnRequestConstant.success,
-    planter:planter,
+    planter: planter,
     error: "",
   };
 }
@@ -13,7 +13,7 @@ function getPlanterOnRequestSuccess(planter) {
 function getPlanterOnRequestFail(error) {
   return {
     type: getPlanterOnRequestConstant.fail,
-    planter:undefined,
+    planter: undefined,
     error: error,
   };
 }
@@ -22,14 +22,18 @@ function getPlanterOnRequest(id) {
     const promise = fetchPlanter(id);
     promise
       .then((response) => {
-          const planter=response.data;
+        const planter = response.data;
         const actionObj = getPlanterOnRequestSuccess(planter);
         store.dispatch(actionObj);
       })
       .catch((error) => {
-        const actionObj = getPlanterOnRequestFail(error.message);
+        const actionObj = getPlanterOnRequestFail(error.response.data);
         store.dispatch(actionObj);
       });
   };
 }
-export {getPlanterOnRequest,getPlanterOnRequestSuccess,getPlanterOnRequestFail};
+export {
+  getPlanterOnRequest,
+  getPlanterOnRequestSuccess,
+  getPlanterOnRequestFail,
+};

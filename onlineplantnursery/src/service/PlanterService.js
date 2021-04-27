@@ -1,7 +1,7 @@
 import axios from "axios";
 const baseUrl = "http://localhost:8585";
 
-  function fetchPlanter(id) {
+function fetchPlanter(id) {
   const url = baseUrl + "/planter/fetch/byid/" + id;
   console.log("Inside fetch by planter Service with Id", +id);
   const promise = axios.get(url);
@@ -33,8 +33,8 @@ function fetchPlanterByShape(planterShape) {
   const promise = axios.get(url);
   return promise;
 }
-function fetchPlanterByCost(minCost,maxCost) {
-  const url = baseUrl + "/planter/fetch/bycost/" +minCost+"/"+maxCost;
+function fetchPlanterByCost(minCost, maxCost) {
+  const url = baseUrl + "/planter/fetch/bycost/" + minCost + "/" + maxCost;
   console.log("Inside fetch by PlanterCost " + url);
   const promise = axios.get(url);
   return promise;

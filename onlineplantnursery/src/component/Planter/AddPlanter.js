@@ -21,20 +21,7 @@ export default function AddPlanter() {
     { id: 2, name: "Carrot" },
   ];
 
-  const mockplanter = {
-    planterId: 1,
-    planterHeight: 10,
-    planterCapacity: 100,
-    planterColor: 2,
-    drainageHoles: 1,
-    planterShape: "Square",
-    planterStock: 100,
-    planterCost: 200,
-    plantId: 1,
-    seedId: 1,
-  };
-  let errMsg = "Cannot add the Planter";
-
+ 
   const planterHeightRef = React.createRef();
   const planterCapacityRef = React.createRef();
   const drainageHolesRef = React.createRef();

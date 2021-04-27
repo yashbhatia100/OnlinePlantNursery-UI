@@ -3,74 +3,47 @@ import validationMessage from "./validationMessage";
 import commonStyle from "./commonStyle.module.css";
 import DisplayPlanterList from "./DisplayPlanterList";
 import { useDispatch, useSelector } from "react-redux";
-import {fetchAllPlantersByCost} from "../../redux/fetchplanterbycost/fetchPlanterByCostAction";
+import { fetchAllPlantersByCost } from "../../redux/fetchplanterbycost/fetchPlanterByCostAction";
 
 export default function GetPlanterByCost() {
-  // const planter1 = {
-  //   planterId: 1,
-  //   planterHeight: 10,
-  //   planterCapacity: 100,
-  //   planterColor: 2,
-  //   planterDrainageHoles: 1,
-  //   planterShape: "Square",
-  //   planterStock: 100,
-  //   planterCost: 300,
-  //   plantId: 1,
-  //   seedId: 2,
-  // };
+  const initialState = {
+    minCost: undefined,
+    maxCost: undefined,
+    validations: {
+      minCost: undefined,
+      maxCost: undefined,
+    },
+  };
 
-  // const planter2 = {
-  //   planterId: 2,
-  //   planterHeight: 10,
-  //   planterCapacity: 100,
-  //   planterColor: 2,
-  //   planterDrainageHoles: 1,
-  //   planterShape: "Rectangle",
-  //   planterStock: 100,
-  //   planterCost: 200,
-  //   plantId: 3,
-  //   seedId: 4,
-  // };
-  // let planterList = [planter1, planter2];
-  
- 
-  const initialState={minCost:undefined, maxCost:undefined,validations:{
-    minCost:undefined,
-    maxCost:undefined,
-  }};
-  
   const [state, setNewState] = useState(initialState);
   const minCostRef = React.createRef();
   const maxCostRef = React.createRef();
 
-  const response = useSelector(state=>{
-    return({
-      planters:state.fetchAllPlantersByCost.planters,
-      error:state.fetchAllPlantersByCost.error
-    });
-  })
-  const dispatch=useDispatch();
+  const response = useSelector((state) => {
+    return {
+      planters: state.fetchAllPlantersByCost.planters,
+      error: state.fetchAllPlantersByCost.error,
+    };
+  });
+  const dispatch = useDispatch();
 
-  
   const submitHandler = (event) => {
     event.preventDefault();
     console.log("Inside Submit Handler");
 
-    if(state.validations.maxCost && state.validations.minCost) {
+    if (state.validations.maxCost && state.validations.minCost) {
       return;
     }
-    const minCost=minCostRef.current.value;
-    const maxCost=maxCostRef.current.value;
-    dispatch(fetchAllPlantersByCost(minCost,maxCost));
-    
-  }
+    const minCost = minCostRef.current.value;
+    const maxCost = maxCostRef.current.value;
+    dispatch(fetchAllPlantersByCost(minCost, maxCost));
+  };
 
   const changeHandler = (ref) => {
-    console.log("In change Handler")
+    console.log("In change Handler");
     const field = ref.current;
     const fieldName = field.name;
     const fieldValue = field.value;
-
 
     let validationMsg;
     if (ref === minCostRef) {
@@ -90,7 +63,6 @@ export default function GetPlanterByCost() {
     setNewState(newState);
   };
 
-
   const validateMinCost = (minCost) => {
     if (minCost < 0) {
       console.log("inside validate Min Cost");
@@ -102,12 +74,12 @@ export default function GetPlanterByCost() {
   const validateMaxCost = (maxCost) => {
     if (maxCost < 0) {
       console.log("inside validate Max Cost");
-      return validationMessage.invalidMaxCost
+      return validationMessage.invalidMaxCost;
     }
     return undefined;
   };
 
-  return(
+  return (
     <div>
       <h3>Get Planters By Cost Range</h3>
       <form onSubmit={(event) => submitHandler(event)}>
@@ -123,9 +95,7 @@ export default function GetPlanterByCost() {
             required
           />
           {state.validations.minCost ? (
-            <div className={commonStyle.error}>
-              {state.validations.minCost}
-            </div>
+            <div className={commonStyle.error}>{state.validations.minCost}</div>
           ) : (
             ""
           )}
@@ -143,15 +113,13 @@ export default function GetPlanterByCost() {
             required
           />
           {state.validations.maxCost ? (
-            <div className={commonStyle.error}>
-              {state.validations.maxCost}
-            </div>
+            <div className={commonStyle.error}>{state.validations.maxCost}</div>
           ) : (
             ""
           )}
         </div>
 
-        <button className ="btn btn-primary" type="submit">
+        <button className="btn btn-primary" type="submit">
           {" "}
           Get Planters
         </button>
