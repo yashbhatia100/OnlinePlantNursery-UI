@@ -4,25 +4,15 @@ import validationMessage from "./validationMessage";
 import commonStyle from "./commonStyle.module.css";
 import { addPlanterAction } from "../../redux/addplanter/addPlanterActions";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllPlantsAction } from "../../redux/getAllPlants.js/getAllPlantsActions";
+import { getAllPlantsAction } from "../../redux/getAllPlants/getAllPlantsActions";
+import { fetchAllSeeds } from "../../redux/fetchallseeds/fetchAllSeedsAction";
 export default function AddPlanter() {
-  const plants = [
-    { id: 1, name: "Mango" },
-    { id: 2, name: "Lily" },
-  ];
-
   const colors = [
     { id: 1, name: "Red" },
     { id: 2, name: "Green" },
     { id: 3, name: "Yellow" },
   ];
-
-  const seeds = [
-    { id: 1, name: "Rose" },
-    { id: 2, name: "Carrot" },
-  ];
-
- 
+  
   const planterHeightRef = React.createRef();
   const planterCapacityRef = React.createRef();
   const drainageHolesRef = React.createRef();
@@ -44,7 +34,7 @@ export default function AddPlanter() {
     product: undefined,
     errMsg: undefined,
     planter: undefined,
-    plantId:0,
+    plantId: 0,
     seedId: 0,
     validations: {
       planterHeight: undefined,
@@ -67,22 +57,34 @@ export default function AddPlanter() {
     };
   });
 
-  const plantList = useSelector((state)=>{
-    return(
-      {
-        plants: state.getAllPlants.plants,
-        error: state.getAllPlants.error
-      }
-    );
-  })
+  const plantList = useSelector((state) => {
+    return {
+      plants: state.getAllPlants.plants,
+      error: state.getAllPlants.error,
+    };
+  });
+
+  const seedList = useSelector((state) => {
+    return {
+      seeds: state.fetchAllSeeds.seeds,
+      error: state.fetchAllSeeds.error,
+    };
+  });
 
   const dispatch = useDispatch();
 
-  const getPlantList=()=>{
+  const getPlantList = () => {
     dispatch(getAllPlantsAction());
-  }
+  };
 
-  useEffect(getPlantList,[]);
+  useEffect(getPlantList, []);
+
+  const getSeedList = () => {
+    console.log("inside use state function");
+    dispatch(fetchAllSeeds());
+  };
+
+  useEffect(getSeedList, []);
 
   const submitHandler = (event) => {
     console.log("Inside submit Handler");
@@ -194,6 +196,7 @@ export default function AddPlanter() {
             ref={planterHeightRef}
             onChange={() => changeHandler(planterHeightRef)}
             className="form-control"
+            autoComplete="off"
             required
           />
           {state.validations.planterHeight ? (
@@ -214,6 +217,7 @@ export default function AddPlanter() {
             ref={planterCapacityRef}
             onChange={() => changeHandler(planterCapacityRef)}
             className="form-control"
+            autoComplete="off"
             required
           />
           {state.validations.planterCapacity ? (
@@ -234,6 +238,7 @@ export default function AddPlanter() {
             ref={drainageHolesRef}
             onChange={() => changeHandler(drainageHolesRef)}
             className="form-control"
+            autoComplete="off"
             required
           />
           {state.validations.drainageHoles ? (
@@ -270,8 +275,15 @@ export default function AddPlanter() {
             ref={planterShapeRef}
             onChange={() => changeHandler(planterShapeRef)}
             className="form-control"
+            list="planterShapeList"
+            autoComplete="off"
             required
           />
+          <datalist id="planterShapeList">
+            <option value="Square" />
+            <option value="Rectangular" />
+            <option value="Cylinderical" />
+          </datalist>
           {state.validations.planterShape ? (
             <div className={commonStyle.error}>
               {state.validations.planterShape}
@@ -290,6 +302,7 @@ export default function AddPlanter() {
             ref={planterStockRef}
             onChange={() => changeHandler(planterStockRef)}
             className="form-control"
+            autoComplete="off"
             required
           />
           {state.validations.planterStock ? (
@@ -310,6 +323,7 @@ export default function AddPlanter() {
             ref={planterCostRef}
             onChange={() => changeHandler(planterCostRef)}
             className="form-control"
+            autoComplete="off"
             required
           />
           {state.validations.planterCost ? (
@@ -351,7 +365,7 @@ export default function AddPlanter() {
                 let newState = {
                   ...state,
                   product: "seed",
-                  plantId:0,
+                  plantId: 0,
                 };
                 setNewState(newState);
               }}
@@ -387,9 +401,9 @@ export default function AddPlanter() {
                 <option disabled selected>
                   select seed
                 </option>
-                {seeds.map((seed) => (
-                  <option key={seed.id} value={seed.id}>
-                    {seed.name}
+                {seedList.seeds.map((seed) => (
+                  <option key={seed.seedId} value={seed.seedId}>
+                    {seed.commonName}
                   </option>
                 ))}
               </select>

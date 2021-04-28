@@ -13,12 +13,6 @@ export default function SeedHome(){
             </li>
 
             <li className="list-group-item bg-light mb-4 border-0">
-              <Link to="/seedbyid/:seedId" className="nav-link">
-                Get Seed By Id
-              </Link>
-            </li>
-
-            <li className="list-group-item bg-light mb-4 border-0">
               <Link to="/seedbyname/:commonName" className="nav-link">
                 Get Seed By name
               </Link>
