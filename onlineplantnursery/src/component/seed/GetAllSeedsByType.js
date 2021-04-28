@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllSeedsByType } from "../../redux/fetchallseedsbytype/fetchAllSeedsByTypeAction";
 
 export default function GetAllSeedsByType() {
- 
   const typeOfSeedsRef = React.createRef();
 
   const [state, setNewState] = useState({ typeOfSeeds: undefined });
@@ -34,12 +33,12 @@ export default function GetAllSeedsByType() {
   };
 
   return (
-    <div>
+    <div className="mt-5 md-5">
       <h3>Get Seeds By Type</h3>
-      <div>
+      <div className="mt-5">
         <form onSubmit={submitHandler}>
           <div className="form-group">
-            <label>Enter type of seeds</label>
+            <label>Enter type of seeds:</label>
             <input
               type="text"
               name="typeOfSeeds"
@@ -52,19 +51,14 @@ export default function GetAllSeedsByType() {
           <button className="btn btn-primary">Get Seeds</button>
         </form>
       </div>
-      <div className="mt-5">
+      <div className="mt-5 md-5">
         <div>
           <ul>
-            {response.seeds ? (
-              <DisplaySeedList seeds={response.seeds} />
-            ) : (
-              ""
-            )}
+            {response.seeds ? <DisplaySeedList seeds={response.seeds} /> : ""}
           </ul>
         </div>
         {response.error ? (
           <div className={commonStyle.error}>
-            
             <br />
             {response.error}
           </div>
