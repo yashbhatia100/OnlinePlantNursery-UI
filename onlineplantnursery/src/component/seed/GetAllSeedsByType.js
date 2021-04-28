@@ -64,7 +64,7 @@ export default function GetAllSeedsByType() {
         </div>
         {response.error ? (
           <div className={commonStyle.error}>
-            Request cannot be successfull
+            
             <br />
             {response.error}
           </div>

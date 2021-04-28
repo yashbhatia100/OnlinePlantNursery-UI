@@ -1,23 +1,22 @@
 import fetchSeedByIdConstants from "./fetchSeedByIdConstants";
 
-const initialState={
-    progress:false,
-    seed:undefined,
-    error:''
-}
+const initialState = {
+  progress: false,
+  seed: undefined,
+  error: "",
+};
 
- function  fetchSeedByIdReducer(state =initialState, action){
+function fetchSeedByIdReducer(state = initialState, action) {
+  if (
+    action.type === fetchSeedByIdConstants.fetchSeedByIdRequest ||
+    action.type === fetchSeedByIdConstants.fetchSeedByIdSuccess ||
+    action.type === fetchSeedByIdConstants.fetchSeedByIdFail
+  ) {
+    let newState = { ...state, ...action };
+    return newState;
+  }
 
-  if(action.type===fetchSeedByIdConstants.fetchSeedByIdRequest ||
-     action.type===fetchSeedByIdConstants.fetchSeedByIdSuccess ||
-     action.type===fetchSeedByIdConstants.fetchSeedByIdFail
-    ){
-        let newState={...state, ...action};
-        return newState;
-    }
-
-    return state ;
-
+  return state;
 }
 
 export default fetchSeedByIdReducer;
