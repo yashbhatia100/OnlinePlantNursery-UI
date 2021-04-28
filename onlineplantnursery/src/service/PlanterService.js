@@ -47,12 +47,15 @@ function fetchAll() {
   return promise;
 }
 
-function updatePlanterStockService(data){
-  const url=baseUrl + "/planter/updatestock";
-  let requestData={planterId:data.planterId,planterStock:data.planterStock};
+function updatePlanterStockService(data) {
+  const url = baseUrl + "/planter/updatestock";
+  let requestData = {
+    planterId: data.planterId,
+    planterStock: data.planterStock,
+  };
   console.log("Inside update Planter Stock");
 
-  const promise = axios.put(url,requestData);
+  const promise = axios.put(url, requestData);
   return promise;
 }
 
@@ -61,5 +64,6 @@ export {
   addPlanter,
   fetchPlanterByShape,
   fetchPlanterByCost,
-  fetchAll,updatePlanterStockService
+  fetchAll,
+  updatePlanterStockService,
 };

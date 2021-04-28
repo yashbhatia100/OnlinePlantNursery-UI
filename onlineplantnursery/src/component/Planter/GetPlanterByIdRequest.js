@@ -5,6 +5,12 @@ import validationMessage from "./validationMessage";
 import { useDispatch, useSelector } from "react-redux";
 import { getPlanterOnRequest } from "../../redux/getPlanterOnRequest/getPlanterOnRequestAction";
 
+/**
+ * 
+ * Get Planter By Planter Id on Request Component
+ * 
+ */
+
 export default function GetPlanterByIdRequest() {
   const planterIdRef = React.createRef();
   const initialState = {
@@ -21,6 +27,12 @@ export default function GetPlanterByIdRequest() {
   });
   const dispatch = useDispatch();
 
+  /**
+   * 
+   * Submit Handler 
+   * 
+   */
+
   const submitHandler = (event) => {
     event.preventDefault();
     console.log("Inside Submit Handler");
@@ -30,6 +42,12 @@ export default function GetPlanterByIdRequest() {
     }
     dispatch(getPlanterOnRequest(planterId));
   };
+
+/**
+   * 
+   * Change/Set Id Handler
+   * 
+   */
 
   const setIdHandler = () => {
     console.log("Inside setId Handler");
@@ -47,6 +65,11 @@ export default function GetPlanterByIdRequest() {
     };
     setNewState(newState);
   };
+
+/**
+   * 
+   *Validating Planter Id 
+   */
 
   const validatePlanterId = (planterId) => {
     if (planterId < 0) {

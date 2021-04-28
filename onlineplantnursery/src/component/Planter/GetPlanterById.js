@@ -4,6 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchPlanterById } from "../../redux/fetchplanterbyid/fetchPlanterByIdAction";
 import DisplayPlanter from "./DisplayPlanter";
 
+/**
+ * 
+ * Get Planter Details By Planter Id Component
+ * 
+ */
+
 export default function GetPlanterById(props) {
   const currentState = useSelector((state) => {
     return {

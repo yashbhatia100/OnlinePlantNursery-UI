@@ -3,6 +3,11 @@ import DisplayPlanterList from "./DisplayPlanterList";
 import commonStyle from "./commonStyle.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllPlanters } from "../../redux/fetchallplanters/fetchAllPlantersAction";
+
+ /**
+   * Get All Planters Component
+   */
+
 export default function GetAllPlanters() {
   const currentState = useSelector((state) => {
     return {

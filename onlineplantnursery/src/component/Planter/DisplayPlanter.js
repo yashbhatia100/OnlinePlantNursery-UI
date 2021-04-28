@@ -1,3 +1,7 @@
+ /**
+   * Displaying Planter
+   */
+
 export default function DisplayPlanter({ planter }) {
   return (
     <div>

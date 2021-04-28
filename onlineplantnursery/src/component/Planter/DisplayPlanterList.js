@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
-import DisplayPlanter from "./DisplayPlanter";
+ /**
+   * Displaying All the Planters
+   */
 export default function DisplayPlanterList({ planters }) {
   return (
     <div>

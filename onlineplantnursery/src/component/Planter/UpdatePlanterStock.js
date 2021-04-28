@@ -5,6 +5,10 @@ import commonStyle from "./commonStyle.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {updateStock} from "../../redux/updatePlanterStock/updatePlanterStockAction";
 
+/**
+   * 
+   * Updating Planter Stock Component
+   */
 
 export default function UpdatePlanterStock() {
 
@@ -28,7 +32,10 @@ export default function UpdatePlanterStock() {
  const dispatch=useDispatch();
 
 
-
+/**
+   * 
+   * change/update Stock Handler
+   */
   const setUpdateStockHandler = (ref) => {
   
     const fieldName = ref.current.name;
@@ -54,6 +61,11 @@ const newValidations={...state.validations,[fieldName]:validationMsg};
     setNewState(newState);
   };
 
+/**
+   * 
+   * Validating Planter Id
+   */
+
   const validatePlanterId=(planterId)=>{
       if(planterId<0){
           return validationMessage.invalidPlanterId;
@@ -61,12 +73,24 @@ const newValidations={...state.validations,[fieldName]:validationMsg};
       return undefined;
   }
 
+/**
+   * 
+   * Validating Planter Stock
+   * 
+   */
+
   const validatePlanterStock=(planterStock)=>{
       if(planterStock<0){
           return validationMessage.invalidPlanterStock;
       }
       return undefined;
   }
+
+/**
+   * 
+   * Submit Handler
+   * 
+   */
 
   const submitHandler = (event) => {
       console.log("inside submit Handler");
