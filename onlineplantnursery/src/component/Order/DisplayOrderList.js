@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import DisplayOrder from './DisplayOrder';
+
 
 export default function DisplayOrderList({orders}) {
     
@@ -9,7 +9,7 @@ export default function DisplayOrderList({orders}) {
                 {
                     orders.map(order=><li key={order.bookingOrderId} className="list-group-item">
                         <Link to={`/orderbyid/${order.bookingOrderId}`}>
-                            <span>{order.bookingOrderId} - {order.orderDescription}</span>
+                            <span>Order ID is {order.bookingOrderId} quantity is {order.quantity} </span>
                         </Link>
                     </li>)
                 }

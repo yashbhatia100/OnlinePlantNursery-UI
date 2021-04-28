@@ -2,81 +2,96 @@ import React, { useState } from "react";
 import DisplayOrder from "./DisplayOrder";
 import commonStyle from './commonStyle.module.css';
 import validationMessage from './validationMessage';
+import { useDispatch, useSelector } from 'react-redux';
+import { addOrderAction } from '../../redux/addOrder/addOrderActions';
 
 
 export default function AddOrder() {
-  let order = {
+ /* const order = {
     bookingOrderId: 1,
     transactionMode: "Square",
     quantity: 10,
     totalCost: 207,
     planterId: 1
     
-  };
+  };*/
 
 
-  const bookingOrderIdRef = React.createRef();
+  
   const transactionModeRef = React.createRef();
   const quantityRef = React.createRef();
-  const totalCostRef = React.createRef();
+
   const  planterIdRef= React.createRef();
   
   const initialState = {
-    bookingOrderId: undefined,
     transactionMode: undefined,
     quantity: undefined,
-    totalCost: undefined,
+   
     planterId: undefined,
-    validations: {bookingOrderId: undefined,
+    validations: {
+        
       transactionMode: undefined,
       quantity: undefined,
-      totalCost: undefined,
-      planterId: undefined,}
+     
+      planterId: undefined}
   };
-  const response = { order: order, errMsg: undefined };
-  const [currentState, setNewState] = useState(initialState);
+  const response = useSelector(state=>{ 
+    return (
+        {
+            order: state.addOrder.order,
+            errMsg: state.addOrder.error
+        }
+    );
+});
+console.log("response",response.order);
+const [currentState, setNewState] = useState(initialState);
+
+const dispatch = useDispatch();
 
   const submitHandler = (event) => {
     event.preventDefault();
-    if(currentState.validations.bookingOrderId 
-    || currentState.validations.transactionMode 
+    if(
+    currentState.validations.transactionMode 
     || currentState.validations.quantity
-    || currentState.validations.totalCost 
+    
     || currentState.validations.planterId
     ){
         return;
     }
-    const data = { ...currentState };
-    console.log("Order data:", data)
-}
+    
+    let data = { ...currentState };
+    console.log("submithandler",data);
+    dispatch(addOrderAction(data));
+};
 
 const changeHandler = (ref) => {
   const fieldName = ref.current.name;
   const fieldValue = ref.current.value;
-  let validationMessage;
+  let validationMessage
 
-  const integerFieldRefs = [bookingOrderIdRef, transactionModeRef, quantityRef, totalCostRef, planterIdRef]
+  const integerFieldRefs = [ quantityRef, planterIdRef]/////////
   if(integerFieldRefs.includes(ref)){
-      validationMessage = validateIntegerField(fieldValue);
+    validationMessage = validateIntegerField(fieldValue);
   }
   if(ref === transactionModeRef){
-      validationMessage = validateTransactionModeRef(fieldValue);
+    validationMessage = validateTransactionMode(fieldValue);
   }
   
-  const newValidations = {...currentState.validations, [fieldName]:validationMessage};
+  const newValidations = { ...currentState.validations, [fieldName]: validationMessage };
   const newState = { ...currentState, [fieldName]: fieldValue, validations: newValidations };
-  setNewState(newState);
-}
+        setNewState(newState);
+};
+
 
 const validateIntegerField = (field) =>{
-  if(field!="" && field<=0){
+  if(field!=="" && field<=0){
       return validationMessage.lessThanZero
   }
   return undefined;
 }
 
-const validateTransactionModeRef=(transactionMode)=>{
-  const valid=["Cash","Online","UPI"];
+const validateTransactionMode=(transactionMode)=>{
+  const valid=["Cash","Online","Upi"];
   if(valid.includes(transactionMode)){
       return undefined;
   }
@@ -89,23 +104,7 @@ return (
       <h3>Add Order</h3>
       <div className="mt-5">
           <form onSubmit={submitHandler}>
-              <div className="form-group">
-                  <label>Enter OrderBookingId : </label>
-                  <input 
-                      type="number"
-                      name="bookingOrderId"
-                      ref={bookingOrderIdRef} 
-                      onChange={() => changeHandler(bookingOrderIdRef)}
-                      required = {true} 
-                      className="form-control" 
-                  />
-                  {currentState.validations.bookingOrderId?(
-                      <div className={commonStyle.error}>
-                         {currentState.validations.bookingOrderId} 
-                      </div>
-                  ):''}
-
-              </div>
+              
               
               
               <div className="form-group">
@@ -122,8 +121,8 @@ return (
                   />
                   <datalist id="transactionModeList">
                       <option value="Cash" />
-                      <option value="online" />
-                      <option value="Upi" />
+                      <option value="Online" />
+                      <option value="UPI" />
                   </datalist>
                   {currentState.validations.transactionMode?(
                       <div className={commonStyle.error}>
@@ -141,29 +140,11 @@ return (
                       required = {true} 
                       className="form-control" 
                   />
-                  {currentState.validations.quantity?(
-                      <div className={commonStyle.error}>
-                         {currentState.validations.quantity} 
-                      </div>
-                  ):''}
+            
               </div>
               
-              <div className="form-group">
-                  <label>Enter totalCost: </label>
-                  <input 
-                      type="number" 
-                      name="totalCost" 
-                      ref={totalCostRef} 
-                      onChange={() => changeHandler(totalCostRef)} 
-                      required = {true} 
-                      className="form-control" 
-                  />
-                  {currentState.validations.totalCost?(
-                      <div className={commonStyle.error}>
-                         {currentState.validations.totalCost} 
-                      </div>
-                  ):''}
-              </div>
+             
+              
               <div className="form-group">
                   <label>Enter planterId: </label>
                   <input 
@@ -174,30 +155,31 @@ return (
                       required = {true} 
                       className="form-control" 
                   />
-                  {currentState.validations.planterId?(
-                      <div className={commonStyle.error}>
-                         {currentState.validations.planterId} 
-                      </div>
-                  ):''}
+                
               </div>
               <button className="btn btn-primary">Add Order</button>
-          </form>
-      </div>
-      <div className="mt-5">
-      {response.order ? (
-          <div>
-              <DisplayOrder order={order} />
-          </div>
-      ) : ''}
+                </form>
+            </div>
+            <div className="mt-5 mb-5">
+            {response.order ? (
+                <div>
+                    <div className="alert alert-success">
+                        Order added successfully!
+                    </div>
+                    <div>
+                        <DisplayOrder order={response.order} />
+                    </div>
+                </div>
+            ) : ''}
 
-      {response.errMsg ? (
-          <div className={commonStyle.error}>
-              Request cannot be processed
-              <br />
-              {currentState.errMsg}
-          </div>
-      ) : ''}
-      </div>
+            {response.errMsg ? (
+                <div className="alert alert-danger">
+                    Request cannot be processed! 
+                    <br/>
+                    Error: {response.errMsg}
+                </div>
+            ) : ''}
+    </div>
 
   </div >
 );

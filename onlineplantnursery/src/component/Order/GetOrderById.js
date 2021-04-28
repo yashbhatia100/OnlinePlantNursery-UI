@@ -1,22 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import DisplayOrder from "./DisplayOrder";
-import commonStyle from './commonStyle.module.css';
-import DisplayOrder from "./DisplayOrder";
+import { useDispatch, useSelector } from "react-redux";
+import { getOrderByIdAction } from "../../redux/getOrderById/getOrderByIdActions";
 
 export default function GetOrderById(props){
 
-    let mockOrder={
-        bookingOrderId: 1,
-        transactionMode: "online",
-        quantity: 10,
-        totalCost: 207,
-        planterId: 1,
+    const response = useSelector(state=>{
+        return(
+            {
+                order: state.getOrderById.order, 
+                errMsg: state.getOrderById.error
+            }
+        );
+    })
+    console.log("response",response);
+    const dispatch = useDispatch();
+
+    const getOrderById=()=>{
+        let id=props.match.params.id;
+        dispatch(getOrderByIdAction(id));
     }
-    
-    const response = {order:mockOrder, errMsg:undefined};
-
-    //const [currentState, setNewState]=useState({name:undefined});
-
+    useEffect(getOrderById, []);
     return(
         <div>
             <h3>Order Details</h3>
@@ -24,16 +28,22 @@ export default function GetOrderById(props){
             {response.order?(
                 <div>
                     <div>
-                        <DisplayOrder order={response.order}/>
+                        <div className="alert alert-success">
+                            Order details fetched successfully!
+                        </div>
+                        <div>
+                            <DisplayOrder order={response.order}/>
+                        </div>
+                       
                     </div>
                 </div>
             ):''}
 
-            {response.errMsg?(
-                <div className={commonStyle.error}>
+            {response.error?(
+                <div className="alert alert-danger">
                     Request cannot be processed
                     <br/>
-                    {response.errMsg}
+                    Error: {response.errMsg}
                 </div>
             ):''}
             </div>

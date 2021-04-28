@@ -1,23 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import DisplayOrder from "./DisplayOrder";
 import commonStyle from './commonStyle.module.css';
 import validationMessage from "./validationMessage";
+import { useDispatch, useSelector } from "react-redux";
+import { getOrderByIdRequestAction } from "../../redux/getOrderByIdRequest/getOrderByIdRequestActions";
 
 export default function GetOrderByIdRequest() {
 
-    let mockOrder = {
-        bookingOrderId: 1,
-    transactionMode: "Square",
-    quantity: 10,
-    totalCost: 207,
-    planterId: 1
-    }
+    const bookingOrderIdRef = React.createRef();
 
-    const nameRef = React.createRef();
+    const response = useSelector(state=>{
+        return(
+            {
+                order: state.getOrderByIdRequest.order, 
+                errMsg: state.getOrderByIdRequest.error
+            }
+        );
+    })
+    console.log("response",response.order);
+    const dispatch = useDispatch();
 
-    const response = {order: mockOrder, errMsg: undefined};
-
-    const initialState = { name: undefined, validations:{name:undefined} };
+    const initialState = { bookingOrderId: undefined, validations:{bookingOrderId:undefined} };
 
     const [currentState, setNewState] = useState(initialState);
 
@@ -26,12 +29,13 @@ export default function GetOrderByIdRequest() {
         if(currentState.validations.bookingOrderId){
             return;
         }
-        console.log(currentState.bookingOrderId);
+        dispatch(getOrderByIdRequestAction(currentState.bookingOrderId));
         
     }
+   
 
     const changeHandler = () => {
-        const fieldValue = nameRef.current.value;
+        const fieldValue = bookingOrderIdRef.current.value;
         let validationMessage = validateIntegerField(fieldValue);
         
         const newValidations = {bookingOrderId:validationMessage};
@@ -40,8 +44,8 @@ export default function GetOrderByIdRequest() {
     }
 
     const validateIntegerField=(bookingOrderId)=>{
-        if(bookingOrderId!="" && bookingOrderId<=0){
-            return validationMessage.lessThanZero
+        if(bookingOrderId<=0){
+            return validationMessage.lessThanZero;
         }
         return undefined;
     }
@@ -51,11 +55,11 @@ export default function GetOrderByIdRequest() {
             <div>
                 <form onSubmit={submitHandler}>
                     <div className="form-group">
-                        <label>Enter Order Id to view: </label>
+                        <label>Enter order name to view: </label>
                         <input 
                             type="number" 
                             name="bookingOrderId" 
-                            ref={nameRef} 
+                            ref={bookingOrderIdRef} 
                             onChange={changeHandler} 
                             required = "true"
                             className="form-control" 
@@ -73,14 +77,20 @@ export default function GetOrderByIdRequest() {
             <div className="mt-5">
                 {response.order ? (
                     <div>
-                        <DisplayOrder order={response.order} />
+                        <div className="alert alert-success">
+                            Order details fetched successfully!
+                        </div>
+                        <div>
+                            <DisplayOrder order={response.order} />
+                        </div>
+                        
                     </div>
                 ) : ''}
                 {response.errMsg ? (
-                    <div className={commonStyle.error}>
+                    <div className="alert alert-danger">
                         Request cannot be processed
                         <br />
-                        {response.errMsg}
+                        Error: {response.errMsg}
                     </div>
                 ) : ''}
             </div>
