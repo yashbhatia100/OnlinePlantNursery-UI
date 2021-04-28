@@ -22,6 +22,7 @@ import GetPlanterById from "./component/Planter/GetPlanterById";
 import PlanterHome from "./component/Planter/PlanterHome";
 import GetPlanterByIdRequest from "./component/Planter/GetPlanterByIdRequest";
 import GetPlanterByCost from "./component/Planter/GetPlanterByCost";
+import UpdatePlanterStock from './component/Planter/UpdatePlanterStock';
 
 import SeedHome from "./component/seed/SeedHome";
 import AddSeed from "./component/seed/AddSeed";
@@ -34,6 +35,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import store from './redux/store';
 import { Provider } from 'react-redux';
 import Navbar from './component/Navbar';
+
 
 function App() {
 
@@ -59,6 +61,7 @@ function App() {
               <Route exact path="/planterbyidonrequest" component={GetPlanterByIdRequest} />
               <Route exact path="/planterbyshape" component={GetPlanterByShape} />
               <Route exact path="/planterbycost" component={GetPlanterByCost} />
+              <Route exact path="/planterstockupdate" component={UpdatePlanterStock} />
               
               <Route exact path="/seedHome" component={SeedHome} />
               <Route exact path="/addseed" component={AddSeed} />

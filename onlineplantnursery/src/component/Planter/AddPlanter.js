@@ -282,7 +282,7 @@ export default function AddPlanter() {
           <datalist id="planterShapeList">
             <option value="Square" />
             <option value="Rectangular" />
-            <option value="Cylinderical" />
+            <option value="Cylindrical" />
           </datalist>
           {state.validations.planterShape ? (
             <div className={commonStyle.error}>

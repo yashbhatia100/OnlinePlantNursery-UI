@@ -33,7 +33,7 @@ export default function GetPlanterByShape() {
     dispatch(fetchAllPlantersByShape(planterShape));
   };
   return (
-    <div>
+    <div className="container">
       <h3>Get Planters By Shape</h3>
       <form onSubmit={submitHandler}>
         <div className="form-group">
@@ -49,9 +49,9 @@ export default function GetPlanterByShape() {
             autoComplete="off"
           />
           <datalist id="planterShapeList">
-            <option value="Cylinderical" />
-            <option value="Square" />
-            <option value="Recatngualr" />
+            <option value="cylindrical" />
+            <option value="square" />
+            <option value="recatngualr" />
           </datalist>
         </div>
         <button className="btn btn-primary">Get Planters</button>

@@ -34,6 +34,11 @@ export default function PlanterHome() {
               <span>Get planter by Cost </span>
             </Link>
           </li>
+          <li className="list-group-item bg-light mb-4 border-0">
+            <Link to="/planterstockupdate" className="nav-link">
+              <span>Update Planetr Stock </span>
+            </Link>
+          </li>
         </ul>
       </div>
     </div>

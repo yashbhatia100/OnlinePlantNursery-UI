@@ -25,6 +25,7 @@ import getCustomerByIdReducer from "./getCustomerById/getCustomerByIdReducer";
 import getCustomerByIdRequestReducer from "./getCustomerByIdRequest/getCustomerByIdRequestReducer";
 
 import { composeWithDevTools } from "redux-devtools-extension";
+import updatePlanterStockReducer from './updatePlanterStock/updatePlanterStockReducer';
 
 const store = createStore(
     combineReducers({
@@ -41,6 +42,7 @@ const store = createStore(
       fetchAllPlantersByShape: fetchPlanterByShapeReducer,
       fetchAllPlantersByCost: fetchPlanterByCostReducer,
       fetchPlanterById: fetchPlanterByIdReducer,
+      updatePlanterStock:updatePlanterStockReducer,
 
       addSeed: addSeedReducer,
       fetchAllSeeds: fetchAllSeedsReducer,
