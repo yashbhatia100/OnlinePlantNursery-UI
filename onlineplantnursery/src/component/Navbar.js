@@ -32,6 +32,12 @@ export default function Navbar() {
                 <span>Customer Module</span>
               </Link>
             </li>
+
+            <li className="nav-item">
+              <Link to="/orderhome" className="nav-link">
+                <span>Order Module</span>
+              </Link>
+            </li>
           </ul>
         </div>
       </nav>

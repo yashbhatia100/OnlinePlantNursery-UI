@@ -33,14 +33,20 @@ import GetSeedById from "./component/seed/GetSeedById";
 import GetSeedByName from "./component/seed/GetSeedByName";
 import GetSeedToUpdate from './component/seed/GetSeedToUpdate';
 
+import GetOrderById from './component/Order/GetOrderById';
+import AddOrder from './component/Order/AddOrder';
+import GetAllOrders from './component/Order/GetAllOrders';
+import orderHome from './component/Order/orderHome';
+import GetOrderByIdOnRequest from './component/Order/GetOrderByIdOnRequest';
+
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import store from './redux/store';
 import { Provider } from 'react-redux';
 import Navbar from './component/Navbar';
 import Home from './component/Home';
 
-
 function App() {
+
   return (
     <div>
       <Provider store={store}>
@@ -49,6 +55,7 @@ function App() {
           <div className="container mt-5">
             <Switch>
               <Route exact path="/" component={Home} />
+
               <Route exact path="/planthome" component={plantHome} />
               <Route exact path="/allplants" component={GetAllPlants} />
               <Route exact path="/addplant" component={AddPlant} />
@@ -82,6 +89,12 @@ function App() {
               <Route exact path="/getcustomerbyid/:id" component = {GetCustomerById} />
               <Route exact path="/changecustomername/:id" component = {ChangeCustomerName} />
               <Route exact path="/getallcustomers" component={GetAllCustomers}/>
+
+              <Route exact path="/orderhome" component={orderHome} />
+              <Route exact path="/allorders" component={GetAllOrders} />
+              <Route exact path="/addorder" component={AddOrder} />
+              <Route exact path="/getorderbyid/:bookingorderid" component={GetOrderById} />
+              <Route exact path="/getorderbyidonrequest" component={GetOrderByIdOnRequest} />
             </Switch>
           </div>
         </Router>
@@ -90,3 +103,4 @@ function App() {
   );
 }
 export default App;
+
