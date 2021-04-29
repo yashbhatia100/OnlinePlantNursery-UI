@@ -272,8 +272,8 @@ export default function AddSeed() {
             autoComplete="off"
           />
           <datalist id="seedType">
-            <option value="Monocotyledonous" />
-            <option value="Dicotyledonous" />
+            <option value="monocotyledonous" />
+            <option value="dicotyledonous" />
           </datalist>
           {state.validations.typeOfSeeds ? (
             <div className={commonStyle.error}>

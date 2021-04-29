@@ -62,8 +62,8 @@ export default function GetAllSeedsByType() {
             />
           </div>
           <datalist id="seedType">
-            <option value="Monocotyledonous" />
-            <option value="Dicotyledonous" />
+            <option value="monocotyledonous" />
+            <option value="dicotyledonous" />
           </datalist>
           <button className="btn btn-primary">Get Seeds</button>
         </form>

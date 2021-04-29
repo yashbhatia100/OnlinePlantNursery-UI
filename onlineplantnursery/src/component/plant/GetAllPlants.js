@@ -5,6 +5,7 @@ import DisplayPlantList from "./DisplayPlantList";
 
 export default function GetAllPlants() {
 
+    // response object for holding global state data
     const response = useSelector(state=>{
         return(
             {
@@ -14,12 +15,15 @@ export default function GetAllPlants() {
         );
     })
 
+    // useDispatch hook is used to dispatch actions
     const dispatch = useDispatch();
 
+    // method to dispatch action
     const getAllPlants =()=>{
         dispatch(getAllPlantsAction());
     };
 
+    // useEffeect hook is used ro call getAllPlants() when the component is rendered
     useEffect(getAllPlants, []);
 
     return (

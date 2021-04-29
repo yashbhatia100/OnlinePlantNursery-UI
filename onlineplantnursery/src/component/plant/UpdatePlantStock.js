@@ -6,8 +6,10 @@ import validationMessage from "./validationMessage";
 
 export default function UpdatePlantStock(){
 
+    // ref to fetch from form field
     const stockRef = React.createRef();
 
+    // response object for holding global state data
     const response = useSelector(state => {
         return (
             {
@@ -17,12 +19,20 @@ export default function UpdatePlantStock(){
         );
     })
 
+    // Initial state object specific to this component
     const initialState={plantStock:undefined, updated:undefined, validations:{plantStock:undefined}};
 
+    // useState hook for managing state specific to the component
     const [currentState, setNewState] = useState(initialState);
 
+    // useDispatch hook is used to dispatch actions
     const dispatch=useDispatch();
 
+    /* 
+    submitHandler is called when form is submitted.
+    It checks if there is any validation error and if not, 
+    then dispatches the action to update global state.
+    */
     const submitHandler = (event)=>{
         event.preventDefault();
         if(currentState.validations.plantStock){
@@ -35,7 +45,11 @@ export default function UpdatePlantStock(){
         stockRef.current.value="";
     }
 
-
+    /*
+    It is called whenever an input field is changed.
+    It takes the input field values and updates the
+    local state accordingly.
+    */
     const changeHandler = ()=>{
         const fieldValue = stockRef.current.value;
         let validationMessage = validateStock(fieldValue);
@@ -44,6 +58,7 @@ export default function UpdatePlantStock(){
         setNewState(newState);
     }
 
+    // method to validate plant stock
     const validateStock=(plantStock)=>{
         if(plantStock!=="" && plantStock<=0){
             return validationMessage.lessThanZero;

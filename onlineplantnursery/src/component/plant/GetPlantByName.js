@@ -5,6 +5,7 @@ import { getPlantByNameAction } from "../../redux/getPlantByName/getPlantByNameA
 
 export default function GetPlantByName(props){
 
+    // response object for holding global state data
     const response = useSelector(state=>{
         return(
             {
@@ -14,13 +15,16 @@ export default function GetPlantByName(props){
         );
     })
 
+    // useDispatch hook is used to dispatch actions
     const dispatch = useDispatch();
 
+    // method to dispatch action
     const getPlantByName=()=>{
         let name=props.match.params.name;
         dispatch(getPlantByNameAction(name));
     }
 
+    // useEffeect hook is used ro call getPlantByName() when the component is rendered
     useEffect(getPlantByName, []);
 
     return(

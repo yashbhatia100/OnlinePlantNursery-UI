@@ -7,21 +7,8 @@ import {useDispatch,useSelector} from "react-redux";
 
 
 export default function  AddCustomer(){
-const customer = {
 
-
-    customerName : "Saurabh",
-    customerEmail : "abc@gmail.com",
-    username: "abckg",
-    password : "xyz421",
-    houseNo : 119,
-    colony : "ipsum",
-    city  : "chennai",
-    state: "TamilNadu",
-    pincode : 600001,
-
-};
-
+// Refs for fetching value from form fields
 const    customerNameref = React.createRef();     
 const   customerEmailref = React.createRef();     
 const   userNameref = React.createRef();     
@@ -32,6 +19,7 @@ const   cityref = React.createRef();
 const    stateref = React.createRef();     
 const    pincoderef = React.createRef();
 
+// Initial state object specific to this component
 const initialState = {
     customerNameref: undefined,
     customerEmailref: undefined,
@@ -47,6 +35,7 @@ const initialState = {
     
 };
 
+// response object for holding global state data
 const response = useSelector(state=>{ 
   return (
       {
@@ -56,10 +45,17 @@ const response = useSelector(state=>{
   );
 });
 
+// useState hook for managing state specific to the component
 const [state, setNewState] = useState(initialState);
 
+// useDispatch hook is used to dispatch actions
 const dispatch = useDispatch();
 
+/* 
+  submitHandler is called when form is submitted.
+  It checks if there is any validation error and if not, 
+  then dispatches the action to update global state.
+*/
 const submitHandler = (event) => {
   event.preventDefault();
   if(
@@ -72,6 +68,11 @@ const submitHandler = (event) => {
   dispatch(addCustomerAction(data));
 };
 
+/*
+  It is called whenever an input field is changed.
+  It takes the input field values and updates the
+  local state accordingly.
+*/
 const changeHandler = (ref) => {
     const field = ref.current;
     const fieldName = field.name;
@@ -97,12 +98,16 @@ const changeHandler = (ref) => {
     setNewState(newState);
    
   };
+
+ //method to validate customer name
   const validateCustomerName = (customerName) => {
     if (customerName.length < 1) {
       return validationMessage.invalidName;
     }
     return undefined;
   }
+
+  //method to validate pincode
   const validatePincode = (pincode) => {
     if (pincode.length < 6) {
       return validationMessage.invalidPincode;

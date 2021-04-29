@@ -4,6 +4,8 @@ import {getAllCustomersAction} from "../../redux/getAllCustomers/getAllCustomers
 import DisplayCustomerList from "./DisplayCustomerList";
 
 export default function GetAllCustomers(){
+
+    // response object for holding global state data
     const response = useSelector(state=>{
         return(
             {
@@ -13,13 +15,16 @@ export default function GetAllCustomers(){
         );
     })
 
+    // useDispatch hook is used to dispatch actions
     const dispatch = useDispatch();
 
+    // method to dispatch action
     const getAllCustomers =()=>{
         dispatch(getAllCustomersAction());
     };
 
 
+    // useEffect hook is used to call getAllCustomers() when page is rendered
     useEffect(getAllCustomers,[]);
 
     return(

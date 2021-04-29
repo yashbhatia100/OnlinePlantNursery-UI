@@ -6,8 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import {getCustomerByIdRequestActions} from '../../redux/getCustomerByIdRequest/getCustomerByIdRequestActions';
 export default function GetCustomerDetailsOnRequest() {
 
+  //ref to fetch customer id from form field
   const idRef = React.createRef();
 
+  // response object for holding global state data
   const response = useSelector(state=>{
     return(
       {
@@ -17,18 +19,23 @@ export default function GetCustomerDetailsOnRequest() {
     );
   })
 
+  // useDispatch hook is used to dispatch actions
   const dispatch = useDispatch();
 
+  // Initial state object specific to this component
   const initialState = {
     id: undefined,
     validations: {id:undefined },
   };
 
+  // useState hook for managing state specific to the component
   const [currentState, setNewState] = useState(initialState);
   
-
-  
-
+   /* 
+    submitHandler is called when form is submitted.
+    It checks if there is any validation error and if not, 
+    then dispatches the action to update global state.
+    */
   const submitHandler = (event) => {
     event.preventDefault();
     if (currentState.validations.id){
@@ -37,6 +44,11 @@ export default function GetCustomerDetailsOnRequest() {
     dispatch (getCustomerByIdRequestActions(currentState.id));
   }
 
+  /*
+    This method called whenever an input field is changed.
+    It takes the input field values and updates the
+    local state accordingly.
+  */
   const setFieldState = (ref) => {
     const idValue = idRef.current.value;
 
@@ -53,6 +65,7 @@ export default function GetCustomerDetailsOnRequest() {
     setNewState(newState);
   };
 
+  //method to validate id
   const validateId = (id) =>{
     if (id<0){
       return validationMessage.idSmallThanZero;

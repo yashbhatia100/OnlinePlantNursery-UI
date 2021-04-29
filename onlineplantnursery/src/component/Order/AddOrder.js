@@ -8,10 +8,8 @@ import { addOrder } from "../../service/OrderService";
 
 export default function AddOrder() {
  /* const order = {
-    bookingOrderId: 1,
     transactionMode: "Square",
     quantity: 10,
-    totalCost: 207,
     planterId: 1
     
   };*/

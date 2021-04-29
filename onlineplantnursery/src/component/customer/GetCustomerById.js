@@ -5,6 +5,8 @@ import DisplayCustomer from "./DisplayCustomer";
 import { getCustomerByIdActions } from "../../redux/getCustomerById/getCustomerByIdActions";
 
 export default function GetCustomerById(props) {
+
+  // response object for holding global state data
   const response = useSelector(state => {
     return( {
       customer: state.getCustomerById.customer,
@@ -13,13 +15,16 @@ export default function GetCustomerById(props) {
     );
   })
 
+  // useDispatch hook is used to dispatch actions
   const dispatch = useDispatch();
 
+  // method to dispatch action
   const getCustomerById = () => {
     let id = props.match.params.id;
     dispatch(getCustomerByIdActions(id));
   }
 
+  // useEffect hook is used to call getCustomerById() when page is rendered
   useEffect(getCustomerById, []);
 
   return (

@@ -7,8 +7,10 @@ import { getPlantByNameRequestAction } from "../../redux/getPlantByNameRequest/g
 
 export default function GetPlantByNameRequest() {
 
+    //ref to fetch from form field
     const nameRef = React.createRef();
 
+    // response object for holding global state data
     const response = useSelector(state=>{
         return(
             {
@@ -18,12 +20,20 @@ export default function GetPlantByNameRequest() {
         );
     })
 
+    // useDispatch hook is used to dispatch actions
     const dispatch = useDispatch();
 
+    // Initial state object specific to this component
     const initialState = { name: undefined, validations:{name:undefined} };
 
+    // useState hook for managing state specific to the component
     const [currentState, setNewState] = useState(initialState);
 
+    /* 
+    submitHandler is called when form is submitted.
+    It checks if there is any validation error and if not, 
+    then dispatches the action to update global state.
+    */
     const submitHandler = (event) => {
         event.preventDefault();
         if(currentState.validations.name){
@@ -33,6 +43,11 @@ export default function GetPlantByNameRequest() {
         
     }
 
+    /*
+    It is called whenever an input field is changed.
+    It takes the input field values and updates the
+    local state accordingly.
+    */
     const changeHandler = () => {
         const fieldValue = nameRef.current.value;
         let validationMessage = validateName(fieldValue);
@@ -42,12 +57,14 @@ export default function GetPlantByNameRequest() {
         setNewState(newState);
     }
 
+    // method to validate plant common name
     const validateName=(name)=>{
         if(name!="" & name.length<3){
             return validationMessage.invalidNameLength;
         }
         return undefined;
     }
+    
     return (
         <div>
             <h3>Get Plant By Name On Request</h3>

@@ -7,6 +7,7 @@ import { addPlantAction } from '../../redux/addPlant/addPlantActions';
 
 export default function AddPlant() {
 
+    // Refs for fetching value from form fields
     const plantHeightRef = React.createRef();
     const plantSpreadRef = React.createRef();
     const commonNameRef = React.createRef();
@@ -19,6 +20,7 @@ export default function AddPlant() {
     const plantStockRef = React.createRef();
     const plantCostRef = React.createRef();
 
+    // Initial state object specific to this component
     const initialState = {
         plantHeight: undefined,
         plantSpread: undefined,
@@ -42,6 +44,7 @@ export default function AddPlant() {
                       plantCost: undefined,}
     };
 
+    // response object for holding global state data
     const response = useSelector(state=>{ 
         return (
             {
@@ -51,10 +54,17 @@ export default function AddPlant() {
         );
     });
 
+    // useState hook for managing state specific to the component
     const [currentState, setNewState] = useState(initialState);
 
+    // useDispatch hook is used to dispatch actions
     const dispatch = useDispatch();
 
+    /* 
+    submitHandler is called when form is submitted.
+    It checks if there is any validation error and if not, 
+    then dispatches the action to update global state.
+    */
     const submitHandler = (event) => {
         event.preventDefault();
         if(currentState.validations.plantHeight 
@@ -72,6 +82,11 @@ export default function AddPlant() {
         dispatch(addPlantAction(data));
     }
 
+    /*
+    It is called whenever an input field is changed.
+    It takes the input field values and updates the
+    local state accordingly.
+    */
     const changeHandler = (ref) => {
         const fieldName = ref.current.name;
         const fieldValue = ref.current.value;
@@ -95,6 +110,7 @@ export default function AddPlant() {
         setNewState(newState);
     }
 
+    //method to validate integer form fields
     const validateIntegerField = (field) =>{
         if(field!="" && field<=0){
             return validationMessage.lessThanZero
@@ -102,6 +118,7 @@ export default function AddPlant() {
         return undefined;
     }
 
+    //method to validate plant difficulty level
     const validateDifficultyLevel=(difficultyLevel)=>{
         const valid=["Easy","Medium","Hard",""];
         if(valid.includes(difficultyLevel)){
@@ -110,6 +127,7 @@ export default function AddPlant() {
         return validationMessage.invalidValue;
     }
 
+    //method to validate plant type
     const validatePlantType=(plantType)=>{
         const valid=["Herb", "Shrub", "Ferns", "Fruit", "Climbers",""]
         if(valid.includes(plantType)){
@@ -118,6 +136,7 @@ export default function AddPlant() {
         return validationMessage.invalidValue;
     }
 
+    //method to validate plant common name
     const validateName=(name)=>{
         if(name!="" & name.length<3){
             return validationMessage.invalidNameLength;
@@ -130,6 +149,22 @@ export default function AddPlant() {
             <h3>Add Plant</h3>
             <div className="mt-5">
                 <form onSubmit={submitHandler}>
+                <div className="form-group">
+                        <label>Enter plant common name: </label>
+                        <input 
+                            type="text" 
+                            name="commonName" 
+                            ref={commonNameRef} 
+                            onChange={() => changeHandler(commonNameRef)} 
+                            required = {true} 
+                            className="form-control" 
+                        />
+                        {currentState.validations.commonName?(
+                            <div className={commonStyle.error}>
+                                {currentState.validations.commonName}
+                            </div>
+                        ):''}
+                    </div>
                     <div className="form-group">
                         <label>Enter plant height in centimeter: </label>
                         <input 
@@ -160,22 +195,6 @@ export default function AddPlant() {
                         {currentState.validations.plantSpread?(
                             <div className={commonStyle.error}>
                                {currentState.validations.plantSpread} 
-                            </div>
-                        ):''}
-                    </div>
-                    <div className="form-group">
-                        <label>Enter plant common name: </label>
-                        <input 
-                            type="text" 
-                            name="commonName" 
-                            ref={commonNameRef} 
-                            onChange={() => changeHandler(commonNameRef)} 
-                            required = {true} 
-                            className="form-control" 
-                        />
-                        {currentState.validations.commonName?(
-                            <div className={commonStyle.error}>
-                                {currentState.validations.commonName}
                             </div>
                         ):''}
                     </div>

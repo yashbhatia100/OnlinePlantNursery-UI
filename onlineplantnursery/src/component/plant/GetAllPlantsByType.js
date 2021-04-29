@@ -7,6 +7,7 @@ import validationMessage from './validationMessage';
 
 export default function GetAllPlantsByType() {
 
+    // response object for holding global state data
     const response = useSelector(state=>{
         return(
             {
@@ -16,14 +17,23 @@ export default function GetAllPlantsByType() {
         );
     })
 
+    // useDispatch hook is used to dispatch actions
     const dispatch = useDispatch();
 
+    // Initial state object specific to this component
     const initialState = { typeOfPlant: undefined, validations:{typeOfPlant:undefined} };
 
+    // useState hook for managing state specific to the component
     const [currentState, setNewState] = useState(initialState);
 
+    // ref to fetch value from form field
     const typeRef = React.createRef();
 
+    /* 
+    submitHandler is called when form is submitted.
+    It checks if there is any validation error and if not, 
+    then dispatches the action to update global state.
+    */
     const submitHandler = (event) => {
         event.preventDefault();
         if(currentState.validations.typeOfPlant){
@@ -32,6 +42,11 @@ export default function GetAllPlantsByType() {
         dispatch(getPlantsByTypeAction(currentState.typeOfPlant));
     }
 
+    /*
+    It is called whenever an input field is changed.
+    It takes the input field values and updates the
+    local state accordingly.
+    */
     const changeHandler = () => {
         const fieldValue = typeRef.current.value;
         let validationMessage = validatePlantType(fieldValue);
@@ -40,6 +55,7 @@ export default function GetAllPlantsByType() {
         setNewState(newState);
     }
 
+    // method to validate plant type
     const validatePlantType=(plantType)=>{
         const valid=["Herb", "Shrub", "Ferns", "Fruit", "Climbers",""]
         if(valid.includes(plantType)){

@@ -56,9 +56,9 @@ export default function GetPlanterByShape() {
             autoComplete="off"
           />
           <datalist id="planterShapeList">
-            <option value="Cylindrical" />
-            <option value="Square" />
-            <option value="Rectangular" />
+            <option value="cylindrical" />
+            <option value="square" />
+            <option value="rectangular" />
           </datalist>
         </div>
         <button className="btn btn-primary">Get Planters</button>

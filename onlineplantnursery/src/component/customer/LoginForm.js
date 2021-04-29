@@ -17,11 +17,14 @@ export default function LoginForm (){
         pincode: 123456,
       };
 
+      // ref to fetch data from form fields
       const usernameRef=React.createRef();
       const passwordRef=React.createRef();
 
+      // response object for holding global state data
       const response = {customer: customer1, errMsg: undefined};
 
+      // Initial state object specific to this component
       const initialState={
           username:undefined,
           password:undefined,
@@ -29,8 +32,14 @@ export default function LoginForm (){
           validations: {username: undefined, password:undefined}
       };
 
+      // useState hook for managing state specific to the component
       const [currentState, setNewState]=useState(initialState);
 
+    /* 
+    submitHandler is called when form is submitted.
+    It checks if there is any validation error and if not, 
+    then dispatches the action to update global state.
+    */
       const submitHandler = (event) => {
           event.preventDefault();
           if(currentState.validations.username || currentState.validations.password){
@@ -38,6 +47,11 @@ export default function LoginForm (){
           }
       };
 
+      /*
+        This method called whenever an input field is changed.
+        It takes the input field values and updates the
+        local state accordingly.
+      */
       const setFieldState = (ref)=> {
         const fieldName = ref.current.name;
         const fieldValue = ref.current.value;
@@ -62,6 +76,7 @@ export default function LoginForm (){
    
   };
 
+  // method to validate user name field
   const validateUsername = (username) =>{
     if (username.length < 5){
       return validationMessage.usernameSmall;
@@ -69,6 +84,7 @@ export default function LoginForm (){
     return undefined;
   }
 
+  // method to validate password field
   const validatePassword = (password) =>{
     if (password.length < 6){
       return validationMessage.passwordSmall;
