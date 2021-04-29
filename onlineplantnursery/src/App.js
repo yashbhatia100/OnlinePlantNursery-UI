@@ -34,16 +34,17 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import store from './redux/store';
 import { Provider } from 'react-redux';
 import Navbar from './component/Navbar';
+import Home from './component/Home';
 
 function App() {
-
   return (
     <div>
       <Provider store={store}>
         <Router>
-          <Navbar />
+          <Navbar />         
           <div className="container mt-5">
             <Switch>
+              <Route exact path="/" component={Home} />
               <Route exact path="/planthome" component={plantHome} />
               <Route exact path="/allplants" component={GetAllPlants} />
               <Route exact path="/addplant" component={AddPlant} />

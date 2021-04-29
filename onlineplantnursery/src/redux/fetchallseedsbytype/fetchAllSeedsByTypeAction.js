@@ -49,7 +49,7 @@ function fetchAllSeedsByType(typeOfSeeds){
            const seeds=response.data;
            store.dispatch(fetchAllSeedsByTypeSuccess(seeds));
        }).catch(error=>{
-           store.dispatch(fetchAllSeedsByTypeFail(error.message));
+           store.dispatch(fetchAllSeedsByTypeFail(error.response.data));
        }) 
 
     }

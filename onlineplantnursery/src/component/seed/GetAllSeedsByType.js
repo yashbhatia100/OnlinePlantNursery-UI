@@ -18,17 +18,17 @@ export default function GetAllSeedsByType() {
   });
   const dispatch = useDispatch();
 
-  const changeHandler = (ref) => {
+  const changeHandler = () => {
     console.log("Inside Change Handler");
     const fieldVal = typeOfSeedsRef.current.value;
-    const newState = { typeOfSeeds: undefined };
+    const newState = { typeOfSeeds: fieldVal };
     setNewState(newState);
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
     console.log("Inside Submit Handler");
-    const typeOfSeeds = typeOfSeedsRef.current.value;
+    const typeOfSeeds = state.typeOfSeeds;
 
     dispatch(fetchAllSeedsByType(typeOfSeeds));
   };
