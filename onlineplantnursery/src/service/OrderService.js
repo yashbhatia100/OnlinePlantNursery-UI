@@ -1,7 +1,7 @@
   
 import axios from 'axios';
 
-const baseUrl = "http://localhost:8585/orders";
+const baseUrl = "http://localhost:8585/orders";//////////////
 
 function addOrder(data){
     const url = baseUrl+"/add";
@@ -20,12 +20,12 @@ function addOrder(data){
 function getOrderById(bookingOrderId){
     const url=baseUrl+"/fetch/byid/"+bookingOrderId;
     const promise = axios.get(url);
-    return {promise};
+    return promise;
 }
 
 
 function getAllOrder(){
-    const url=baseUrl+"/fetch";
+    const url=baseUrl+"/fetch";////
     const promise = axios.get(url);
     return promise;
 }

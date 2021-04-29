@@ -17,10 +17,11 @@ export default function orderHome(){
                         </Link>
                     </li>
                     <li className="list-group-item bg-light mb-4 border-0">
-                        <Link to="/orderbyidonrequest">
-                            Get Order By Id On Request
+                        <Link to="/getorderbyidonrequest">
+                            GetOrderByIdOnRequest
                         </Link>
                     </li>
+                    
                 </ul>
         </div>
     );

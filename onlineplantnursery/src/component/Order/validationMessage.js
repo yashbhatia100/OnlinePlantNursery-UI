@@ -1,8 +1,11 @@
+
 const validationMessage = {
 
-    lessThanZero: "Enter a value greater than zero",
-    invalidValue: "Enter a valid value",
+    planterIdSmallThanZero: "age can't be smaller than zero",
     
+    SmallthanLengthTwo: "name can't be smaller than 2 letters"
+
+
 }
 
 export default validationMessage;

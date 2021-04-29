@@ -1,32 +1,46 @@
+
 import './App.css';
-import AddOrder from './component/Order/AddOrder';
-import GetAllOrder from './component/Order/GetAllOrder';
+
+
 import GetOrderById from './component/Order/GetOrderById';
-import GetOrderByIdRequest from './component/Order/GetOrderByIdRequest';
+import AddOrder from './component/Order/AddOrder';
+
+import GetAllOrders from './component/Order/GetAllOrders';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Navbar from './component/Order/Navbar';
 import orderHome from './component/Order/orderHome';
-import { Provider } from 'react-redux';
-import Navbar from './component/Navbar';
-import store from './redux/store';
+import GetOrderByIdOnRequest from './component/Order/GetOrderByIdOnRequest';
+
+
 
 function App() {
 
+
+
   return (
     <div>
-      <Provider store={store}>
       <Router>
         <Navbar />
-        <div className="container mt-5">
-        <Switch>
-          <Route exact path="/" component={orderHome} />
-          <Route exact path="/all" component={GetAllOrder} />
-          <Route exact path="/addorder" component={AddOrder} />
-          <Route exact path="/orderbyid/:id" component={GetOrderById} />
-          <Route exact path="/orderbyidonrequest" component={GetOrderByIdRequest} />
-        </Switch>
+        <div className="container" style={{ marginTop: '50px' }}>
+
+          <div className="row">
+
+            <div className="col-md-9">
+
+              <Switch>
+                <Route exact path="/" component={orderHome} />
+                <Route exact path="/all" component={GetAllOrders} />
+                <Route exact path="/addorder" component={AddOrder} />
+                <Route exact path="/getorderbyid/:bookingorderid" component={GetOrderById} />
+                <Route exact path="/getorderbyidonrequest" component={GetOrderByIdOnRequest} />
+
+              </Switch>
+
+            </div>
+          </div>
         </div>
+
       </Router>
-      </Provider>
     </div>
   );
 }
