@@ -15,7 +15,7 @@ export default function SeedHome(){
             </li>
 
             <li className={`list-group-item mb-4 border-0 ${commonStyle.listStyle}`}>
-              <Link to="/seedbyname/:commonName">
+              <Link to="/seedbyname">
                 Get Seed By name
               </Link>
               <span> - Fetch a seed by name from the database</span>
