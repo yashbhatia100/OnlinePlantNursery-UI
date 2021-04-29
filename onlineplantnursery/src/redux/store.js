@@ -25,10 +25,12 @@ import updateSeedsStockReducer from "./getSeedToUpdate/updateSeedsStockReducer";
 import addCustomerReducer from "./addCustomer/addCustomerReducer";
 import getCustomerByIdReducer from "./getCustomerById/getCustomerByIdReducer";
 import getCustomerByIdRequestReducer from "./getCustomerByIdRequest/getCustomerByIdRequestReducer";
+import getAllCustomersReducer from "./getAllCustomers/getAllCustomersReducer";
 
 import { composeWithDevTools } from "redux-devtools-extension";
 
 const store = createStore(
+
   combineReducers({
     addPlant: addPlantReducer,
     getAllPlants: getAllPlantsReducer,
@@ -51,10 +53,12 @@ const store = createStore(
     fetchSeedByCommonName: fetchSeedByNameReducer,
     updateSeedsStock: updateSeedsStockReducer,
 
-    addCustomer: addCustomerReducer,
-    getCustomerById: getCustomerByIdReducer,
-    getCustomerByIdRequest: getCustomerByIdRequestReducer,
+      addCustomer:addCustomerReducer,
+      getCustomerById:getCustomerByIdReducer,
+      getCustomerByIdRequest: getCustomerByIdRequestReducer,
+      getAllCustomers: getAllCustomersReducer
   }),
   composeWithDevTools(applyMiddleware(thunk))
 );
+
 export default store;

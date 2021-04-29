@@ -20,10 +20,10 @@ export default function customerHome(){
                         <span> - Register a user in the database</span>
                     </li>
                     <li className={`list-group-item mb-4 border-0 ${commonStyle.listStyle}`}>
-                    <Link to="/getcustomerbyid/:id">
-                        Get Customer Details
+                    <Link to="/getallcustomers">
+                        Get All Customers
                     </Link>
-                    <span> - Fetch customer details from the database</span>
+                    <span> - Fetch all customers from database</span>
                     </li>
                     <li className={`list-group-item mb-4 border-0 ${commonStyle.listStyle}`}>
                     <Link to="/getcustomerdetailsonrequest">
