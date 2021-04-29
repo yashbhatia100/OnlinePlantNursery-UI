@@ -5,6 +5,10 @@ import commonStyle from "./commonStyle.module.css";
 import validationMessage from "./validationMessage";
 import { fetchSeedByCommonName } from "../../redux/fetchseedbyname/fetchSeedByNameAction";
 
+/**
+ * Component to get seed details by its common name on request
+ *
+ */
 export default function GetSeedByName() {
   const nameRef = React.createRef();
 
@@ -24,6 +28,9 @@ export default function GetSeedByName() {
 
   const [currentState, setNewState] = useState(initialState);
 
+  /**
+   * Submit handler
+   */
   const submitHandler = (event) => {
     event.preventDefault();
     if (currentState.validations.commonName) {
@@ -31,7 +38,9 @@ export default function GetSeedByName() {
     }
     dispatch(fetchSeedByCommonName(currentState.commonName));
   };
-
+  /**
+   * Change handler to set name
+   */
   const changeHandler = () => {
     const fieldValue = nameRef.current.value;
     let validationMessage = validateName(fieldValue);
@@ -40,7 +49,9 @@ export default function GetSeedByName() {
     const newState = { commonName: fieldValue, validations: newValidations };
     setNewState(newState);
   };
-
+  /**
+   *  Validating common name length
+   */
   const validateName = (commonName) => {
     if (commonName.length < 3) {
       return validationMessage.commonNameNotFound;

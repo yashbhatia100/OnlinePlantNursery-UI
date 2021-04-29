@@ -4,6 +4,9 @@ import commonStyle from "./commonStyle.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllSeedsByType } from "../../redux/fetchallseedsbytype/fetchAllSeedsByTypeAction";
 
+/**
+ * Component to get all seeds by its type
+ */
 export default function GetAllSeedsByType() {
   const typeOfSeedsRef = React.createRef();
 
@@ -17,6 +20,10 @@ export default function GetAllSeedsByType() {
   });
   const dispatch = useDispatch();
 
+  /**
+   * change handler to set type of seeds
+   *
+   */
   const changeHandler = (ref) => {
     console.log("Inside Change Handler");
     const fieldVal = typeOfSeedsRef.current.value;
@@ -24,6 +31,10 @@ export default function GetAllSeedsByType() {
     setNewState(newState);
   };
 
+  /**
+   * Submit Handler
+   *
+   */
   const submitHandler = (event) => {
     event.preventDefault();
     console.log("Inside Submit Handler");

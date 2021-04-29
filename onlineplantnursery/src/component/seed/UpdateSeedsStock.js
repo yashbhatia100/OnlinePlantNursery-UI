@@ -4,6 +4,9 @@ import { updateSeedsStockAction } from "../../redux/getSeedToUpdate/updateSeedsS
 import commonStyle from "./commonStyle.module.css";
 import validationMessage from "./validationMessage";
 
+/**
+ * Component to update seeds stock
+ */
 export default function UpdateSeedsStock() {
   const stockRef = React.createRef();
 
@@ -23,7 +26,9 @@ export default function UpdateSeedsStock() {
   const [currentState, setNewState] = useState(initialState);
 
   const dispatch = useDispatch();
-
+  /**
+   * submitHandler
+   */
   const submitHandler = (event) => {
     event.preventDefault();
     if (currentState.validations.seedsStock) {
@@ -39,6 +44,9 @@ export default function UpdateSeedsStock() {
     stockRef.current.value = "";
   };
 
+  /**
+   * changeHandler to set seeds stock
+   */
   const changeHandler = () => {
     const fieldValue = stockRef.current.value;
     let validationMessage = validateStock(fieldValue);
@@ -47,6 +55,10 @@ export default function UpdateSeedsStock() {
     setNewState(newState);
   };
 
+  /**
+   * Validating seeds stock
+   * seeds stock cannot be less than zero
+   */
   const validateStock = (seedsStock) => {
     if (seedsStock <= 0) {
       return validationMessage.seedsStockLessThanZero;

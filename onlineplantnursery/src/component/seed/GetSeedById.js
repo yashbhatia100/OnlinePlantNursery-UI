@@ -4,6 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import commonStyle from "./commonStyle.module.css";
 import { fetchSeed } from "../../redux/fetchseedbyid/fetchSeedByIdAction";
 
+/**
+ * Get seed by seedId
+ *
+ */
 export default function GetSeedById(props) {
   const currentState = useSelector((state) => {
     return {

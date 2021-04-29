@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllSeeds } from "../../redux/fetchallseeds/fetchAllSeedsAction";
 
+/**
+ * component to get all seeds
+ */
 export default function GetAllSeeds() {
   const currentState = useSelector((state) => {
     return {

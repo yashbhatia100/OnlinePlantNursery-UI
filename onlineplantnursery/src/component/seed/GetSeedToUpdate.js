@@ -5,6 +5,9 @@ import validationMessage from "./validationMessage";
 import UpdateSeedsStock from "./UpdateSeedsStock";
 import { getSeedsStockAction } from "../../redux/getSeedToUpdate/updateSeedsStockActions";
 
+/**
+ * get seed current name and stock to update
+ */
 export default function GetSeedToUpdate() {
   const nameRef = React.createRef();
 
@@ -21,6 +24,9 @@ export default function GetSeedToUpdate() {
 
   const [currentState, setNewState] = useState(initialState);
 
+  /**
+   * submitHandler
+   */
   const submitHandler = (event) => {
     event.preventDefault();
     if (currentState.validations.name) {
@@ -28,7 +34,9 @@ export default function GetSeedToUpdate() {
     }
     dispatch(getSeedsStockAction(currentState.name));
   };
-
+  /**
+   * changeHandler
+   */
   const changeHandler = () => {
     const fieldValue = nameRef.current.value;
     let validationMessage = validateName(fieldValue);

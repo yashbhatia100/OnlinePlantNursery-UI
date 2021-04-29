@@ -5,6 +5,9 @@ import validateMessage from "./validationMessage";
 import { useDispatch, useSelector } from "react-redux";
 import { addSeedAction } from "../../redux/addseed/addSeedAction";
 
+/**
+ * Add Seed Component
+ */
 export default function AddSeed() {
   let seed = {
     seedId: 30,
@@ -62,6 +65,9 @@ export default function AddSeed() {
 
   const dispatch = useDispatch();
 
+  /**
+   * Submit Handler
+   */
   const submitHandler = (event) => {
     console.log("Inside submitHandler");
     event.preventDefault();
@@ -112,7 +118,9 @@ export default function AddSeed() {
     };
     setNewState(newState);
   };
-
+  /**
+   * common name validation
+   */
   const validationCommonName = (commonName) => {
     console.log("inside validate common name");
     if (commonName.length < 3) {
@@ -120,7 +128,10 @@ export default function AddSeed() {
     }
     return undefined;
   };
-
+  /**
+   * bloomTime validation
+   * time period cannot be less than 0
+   */
   const validationBloomTime = (bloomTime) => {
     console.log("inside validate bloomTime");
     if (bloomTime < 0) {
@@ -129,6 +140,9 @@ export default function AddSeed() {
     return undefined;
   };
 
+  /**
+   * typeOfSeeds validation
+   */
   const validationTypeOfSeeds = (typeOfSeeds) => {
     console.log("inside validate typeOfSeeds");
     if (typeOfSeeds.length < 3) {
@@ -136,7 +150,10 @@ export default function AddSeed() {
     }
     return undefined;
   };
-
+  /**
+   * seeds stock validation
+   * seeds stock cannot be less than 0
+   */
   const validationSeedsStock = (seedsStock) => {
     console.log("inside validate seeds Stock");
     if (seedsStock < 0) {
@@ -144,7 +161,10 @@ export default function AddSeed() {
     }
     return undefined;
   };
-
+  /**
+   * seeds cost validation
+   * seeds cost cannot be less than 0
+   */
   const validationSeedsCost = (seedsCost) => {
     console.log("inside validate seeds cost");
     if (seedsCost < 0) {
@@ -152,7 +172,9 @@ export default function AddSeed() {
     }
     return undefined;
   };
-
+  /**
+   * returns a form and add seed if response.seed is true
+   */
   return (
     <div>
       <form onSubmit={(event) => submitHandler(event)}>
