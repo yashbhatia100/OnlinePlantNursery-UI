@@ -1,11 +1,11 @@
-import {applyMiddleware, combineReducers, createStore} from 'redux';
-import thunk from 'redux-thunk';
-import addPlantReducer from './addPlant/addPlantReducer';
-import getAllPlantsReducer from './getAllPlants.js/getAllPlantsReducer';
-import getPlantByNameReducer from './getPlantByName/getPlantByNameReducer';
-import getPlantByNameRequestReducer from './getPlantByNameRequest/getPlantByNameRequestReducer';
-import getPlantsByTypeReducer from './getPlantsByType/getPlantsByTypeReducer';
-import updatePlantStockReducer from './getPlantToUpdate/updatePlantStockReducer';
+import { applyMiddleware, combineReducers, createStore } from "redux";
+import thunk from "redux-thunk";
+import addPlantReducer from "./addPlant/addPlantReducer";
+import getAllPlantsReducer from "./getAllPlants.js/getAllPlantsReducer";
+import getPlantByNameReducer from "./getPlantByName/getPlantByNameReducer";
+import getPlantByNameRequestReducer from "./getPlantByNameRequest/getPlantByNameRequestReducer";
+import getPlantsByTypeReducer from "./getPlantsByType/getPlantsByTypeReducer";
+import updatePlantStockReducer from "./getPlantToUpdate/updatePlantStockReducer";
 
 import addPlanterReducer from "./addplanter/addPlanterReducer";
 import fetchAllPlantersReducer from "./fetchallplanters/fetchAllPlantersReducer";
@@ -19,6 +19,7 @@ import fetchAllSeedsReducer from "./fetchallseeds/fetchAllSeedsReducer";
 import fetchAllSeedsByTypeReducer from "./fetchallseedsbytype/fetchAllSeedsByTypeReducer";
 import fetchSeedByIdReducer from "./fetchseedbyid/fetchSeedByIdReducer";
 import fetchSeedByNameReducer from "./fetchseedbyname/fetchSeedByNameReducer";
+import updateSeedsStockReducer from "./getSeedToUpdate/updateSeedsStockReducer";
 
 import addCustomerReducer from "./addCustomer/addCustomerReducer";
 import getCustomerByIdReducer from "./getCustomerById/getCustomerByIdReducer";
@@ -27,31 +28,32 @@ import getCustomerByIdRequestReducer from "./getCustomerByIdRequest/getCustomerB
 import { composeWithDevTools } from "redux-devtools-extension";
 
 const store = createStore(
-    combineReducers({
-      addPlant:addPlantReducer,
-      getAllPlants:getAllPlantsReducer,
-      getPlantByName:getPlantByNameReducer,
-      getPlantByNameRequest:getPlantByNameRequestReducer,
-      getPlantsByType:getPlantsByTypeReducer,
-      updatePlantStock:updatePlantStockReducer,
+  combineReducers({
+    addPlant: addPlantReducer,
+    getAllPlants: getAllPlantsReducer,
+    getPlantByName: getPlantByNameReducer,
+    getPlantByNameRequest: getPlantByNameRequestReducer,
+    getPlantsByType: getPlantsByTypeReducer,
+    updatePlantStock: updatePlantStockReducer,
 
-      addPlanter: addPlanterReducer,
-      fetchAllPlanters: fetchAllPlantersReducer,
-      getPlanterOnRequest: getPlanterOnRequestReducer,
-      fetchAllPlantersByShape: fetchPlanterByShapeReducer,
-      fetchAllPlantersByCost: fetchPlanterByCostReducer,
-      fetchPlanterById: fetchPlanterByIdReducer,
+    addPlanter: addPlanterReducer,
+    fetchAllPlanters: fetchAllPlantersReducer,
+    getPlanterOnRequest: getPlanterOnRequestReducer,
+    fetchAllPlantersByShape: fetchPlanterByShapeReducer,
+    fetchAllPlantersByCost: fetchPlanterByCostReducer,
+    fetchPlanterById: fetchPlanterByIdReducer,
 
-      addSeed: addSeedReducer,
-      fetchAllSeeds: fetchAllSeedsReducer,
-      fetchAllSeedsByType: fetchAllSeedsByTypeReducer,
-      fetchSeed: fetchSeedByIdReducer,
-      fetchSeedByCommonName: fetchSeedByNameReducer,
+    addSeed: addSeedReducer,
+    fetchAllSeeds: fetchAllSeedsReducer,
+    fetchAllSeedsByType: fetchAllSeedsByTypeReducer,
+    fetchSeed: fetchSeedByIdReducer,
+    fetchSeedByCommonName: fetchSeedByNameReducer,
+    updateSeedsStock: updateSeedsStockReducer,
 
-      addCustomer:addCustomerReducer,
-      getCustomerById:getCustomerByIdReducer,
-      getCustomerByIdRequest: getCustomerByIdRequestReducer
-    }),
-    composeWithDevTools(applyMiddleware(thunk))
-)
+    addCustomer: addCustomerReducer,
+    getCustomerById: getCustomerByIdReducer,
+    getCustomerByIdRequest: getCustomerByIdRequestReducer,
+  }),
+  composeWithDevTools(applyMiddleware(thunk))
+);
 export default store;

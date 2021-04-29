@@ -34,10 +34,17 @@ export default function SeedHome(){
               </Link>
               <span> - Fetch seeds of a particular type</span>
             </li>
+
+            <li className={`list-group-item mb-4 border-0 ${commonStyle.listStyle}`}>
+            <Link to="/seedtoupdate">
+              Update Seeds Stock
+            </Link>
+            <span> - update seed stock in database</span>
+          </li>
+
           </ul>
         </div>
         </div>
 
-
-    );
+  );
 }

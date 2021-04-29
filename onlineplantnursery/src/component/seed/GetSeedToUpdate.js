@@ -1,71 +1,64 @@
-import React, { useState } from "react";
-import DisplaySeedDetails from "./DisplaySeedDetails";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import commonStyle from "./commonStyle.module.css";
 import validationMessage from "./validationMessage";
-import { fetchSeedByCommonName } from "../../redux/fetchseedbyname/fetchSeedByNameAction";
+import UpdateSeedsStock from "./UpdateSeedsStock";
+import { getSeedsStockAction } from "../../redux/getSeedToUpdate/updateSeedsStockActions";
 
 /**
- * Component to get seed details by its common name on request
- *
+ * get seed current name and stock to update
  */
-export default function GetSeedByName() {
+export default function GetSeedToUpdate() {
   const nameRef = React.createRef();
 
   const response = useSelector((state) => {
     return {
-      seed: state.fetchSeedByCommonName.seed,
-      error: state.fetchSeedByCommonName.error,
+      seed: state.updateSeedsStock.seed,
+      errMsg: state.updateSeedsStock.error,
     };
   });
 
   const dispatch = useDispatch();
 
-  const initialState = {
-    commonName: undefined,
-    validations: { commonName: undefined },
-  };
+  const initialState = { name: undefined, validations: { name: undefined } };
 
   const [currentState, setNewState] = useState(initialState);
 
   /**
-   * Submit handler
+   * submitHandler
    */
   const submitHandler = (event) => {
     event.preventDefault();
-    if (currentState.validations.commonName) {
+    if (currentState.validations.name) {
       return;
     }
-    dispatch(fetchSeedByCommonName(currentState.commonName));
+    dispatch(getSeedsStockAction(currentState.name));
   };
   /**
-   * Change handler to set name
+   * changeHandler
    */
   const changeHandler = () => {
     const fieldValue = nameRef.current.value;
     let validationMessage = validateName(fieldValue);
 
-    const newValidations = { commonName: validationMessage };
-    const newState = { commonName: fieldValue, validations: newValidations };
+    const newValidations = { name: validationMessage };
+    const newState = { name: fieldValue, validations: newValidations };
     setNewState(newState);
   };
-  /**
-   *  Validating common name length
-   */
-  const validateName = (commonName) => {
-    if (commonName.length < 3) {
-      return validationMessage.commonNameNotFound;
+
+  const validateName = (name) => {
+    if (name.length < 3) {
+      return validationMessage.InvalidNameLength;
     }
     return undefined;
   };
-
   return (
-    <div className="mt-5 mb-5">
-      <h3> Get seed details on Request</h3>
+    <div>
+      <h3>Update Seeds Stock</h3>
       <div>
         <form onSubmit={submitHandler}>
           <div className="form-group">
-            <label>Enter seed name to get details: </label>
+            <label>Enter seed name to update: </label>
             <input
               type="text"
               name="commonName"
@@ -74,9 +67,9 @@ export default function GetSeedByName() {
               required="true"
               className="form-control"
             />
-            {currentState.validations.commonName ? (
+            {currentState.validations.name ? (
               <div className={commonStyle.error}>
-                {currentState.validations.commonName}
+                {currentState.validations.name}
               </div>
             ) : (
               ""
@@ -89,17 +82,22 @@ export default function GetSeedByName() {
       <div className="mt-5 md-5">
         {response.seed ? (
           <div>
-            <h3> Seed details are fetched successfully</h3>
-            <DisplaySeedDetails seed={response.seed} />
+            <h3> Current stock is fetched</h3>
+            Common Name is {response.seed.commonName}
+            <br />
+            Seeds Stock is {response.seed.seedsStock}
+            <div>
+              <UpdateSeedsStock />
+            </div>
           </div>
         ) : (
           ""
         )}
-        {response.error ? (
-          <div className={commonStyle.error}>
-            Request is not processing
+        {response.errMsg ? (
+          <div className="alert alert-danger">
+            Request cannot be processed!
             <br />
-            {response.error}
+            {response.errMsg}
           </div>
         ) : (
           ""

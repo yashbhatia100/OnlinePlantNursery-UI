@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
-
+/**
+ * Displaying all the seed details
+ */
 export default function DisplaySeedList({ seeds }) {
   return (
     <div>

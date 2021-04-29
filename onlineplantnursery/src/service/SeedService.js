@@ -43,3 +43,13 @@ export function fetchSeedsByType(typeOfSeeds) {
   const promise = axios.get(url);
   return promise;
 }
+
+export function updateSeedsStock(data) {
+  const url = baseUrl + "/changestock";
+  let requestData = {
+    seedId: data.seedId,
+    seedsStock: data.seedsStock,
+  };
+  const promise = axios.put(url, requestData);
+  return promise;
+}

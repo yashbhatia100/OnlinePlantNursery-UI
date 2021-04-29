@@ -29,6 +29,7 @@ import GetAllSeeds from "./component/seed/GetAllSeeds";
 import GetAllSeedsByType from "./component/seed/GetAllSeedsByType";
 import GetSeedById from "./component/seed/GetSeedById";
 import GetSeedByName from "./component/seed/GetSeedByName";
+import GetSeedToUpdate from './component/seed/GetSeedToUpdate';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import store from './redux/store';
@@ -64,9 +65,10 @@ function App() {
               <Route exact path="/seedHome" component={SeedHome} />
               <Route exact path="/addseed" component={AddSeed} />
               <Route exact path="/seedbyid/:seedId" component={GetSeedById} />
-              <Route exact path="/seedbyname/:commonName" component={GetSeedByName} />
+              <Route exact path="/seedbyname" component={GetSeedByName} />
               <Route exact path="/allseeds" component={GetAllSeeds} />
               <Route exact path="/seedsbytype" component={GetAllSeedsByType} />
+              <Route exact path="/seedtoupdate" component={GetSeedToUpdate} />
 
               <Route exact path="/customerhome" component = {customerHome} />
               <Route exact path="/addcustomer" component = {Addcustomer} />

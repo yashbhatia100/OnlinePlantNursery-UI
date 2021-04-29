@@ -2,42 +2,31 @@ import { fetchSeedsByType } from "../../service/SeedService";
 import store from "../store";
 import fetchAllSeedsByTypeConstants from "./fetchAllSeedsByTypeConstants";
 
-
-function fetchAllSeedsByTypeRequest(){
- return (
-     {
-      progress: true,
-      seeds:[],
-      error:'',
-      type:fetchAllSeedsByTypeConstants.fetchAllSeedsByTypeRequest
-     }
- );
-
+function fetchAllSeedsByTypeRequest() {
+  return {
+    progress: true,
+    seeds: [],
+    error: "",
+    type: fetchAllSeedsByTypeConstants.fetchAllSeedsByTypeRequest,
+  };
 }
 
-function fetchAllSeedsByTypeSuccess(seeds){
-
-    return (
-        {
-         progress: false,
-         seeds:seeds,
-         error:'',
-         type:fetchAllSeedsByTypeConstants.fetchAllSeedsByTypeSuccess
-        });
+function fetchAllSeedsByTypeSuccess(seeds) {
+  return {
+    progress: false,
+    seeds: seeds,
+    error: "",
+    type: fetchAllSeedsByTypeConstants.fetchAllSeedsByTypeSuccess,
+  };
 }
 
-
-function fetchAllSeedsByTypeFail(error){
-
-    return (
-        {
-            progress: false,
-            seeds:[],
-            error:error,
-            type:fetchAllSeedsByTypeConstants.fetchAllSeedsByTypeFail
-           });
-   
-
+function fetchAllSeedsByTypeFail(error) {
+  return {
+    progress: false,
+    seeds: [],
+    error: error,
+    type: fetchAllSeedsByTypeConstants.fetchAllSeedsByTypeFail,
+  };
 }
 
 function fetchAllSeedsByType(typeOfSeeds){
@@ -55,5 +44,10 @@ function fetchAllSeedsByType(typeOfSeeds){
     }
 
 }
- 
-export {fetchAllSeedsByType, fetchAllSeedsByTypeFail, fetchAllSeedsByTypeSuccess, fetchAllSeedsByTypeRequest};
+
+export {
+  fetchAllSeedsByType,
+  fetchAllSeedsByTypeFail,
+  fetchAllSeedsByTypeSuccess,
+  fetchAllSeedsByTypeRequest,
+};
