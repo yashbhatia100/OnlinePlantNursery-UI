@@ -6,6 +6,7 @@ import LoginForm from './component/customer/LoginForm';
 import customerHome from './component/customer/customerHome';
 import ChangeCustomerName from './component/customer/ChangeCustomerName';
 import GetCustomerById from './component/customer/GetCustomerById';
+import GetAllCustomers from './component/customer/GetAllCustomers';
 
 import AddPlant from './component/plant/AddPlant';
 import GetAllPlants from './component/plant/GetAllPlants';
@@ -74,6 +75,8 @@ function App() {
               <Route exact path="/changecustomername" component = {ChangeCustomerName} />
               <Route exact path="/getcustomerbyid/:id" component = {GetCustomerById} />
               <Route exact path="/changecustomername/:id" component = {ChangeCustomerName} />
+              <Route exact path="/getallcustomers" component={GetAllCustomers}/>
+              <GetAllCustomers/>
             </Switch>
           </div>
         </Router>

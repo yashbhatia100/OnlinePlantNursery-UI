@@ -40,4 +40,10 @@ function updateCustomerName(data){
     return promise;
 
 }
-export {addCustomer,getCustomer, updateCustomerName};
+
+function getAllCustomers(){
+    const url = baseUrl + "/customer/fetch";
+    const promise = axios.get(url);
+    return promise;
+}
+export {addCustomer,getCustomer, updateCustomerName,getAllCustomers};

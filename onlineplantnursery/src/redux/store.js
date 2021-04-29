@@ -23,6 +23,7 @@ import fetchSeedByNameReducer from "./fetchseedbyname/fetchSeedByNameReducer";
 import addCustomerReducer from "./addCustomer/addCustomerReducer";
 import getCustomerByIdReducer from "./getCustomerById/getCustomerByIdReducer";
 import getCustomerByIdRequestReducer from "./getCustomerByIdRequest/getCustomerByIdRequestReducer";
+import getAllCustomersReducer from "./getAllCustomers/getAllCustomersReducer";
 
 import { composeWithDevTools } from "redux-devtools-extension";
 
@@ -50,7 +51,8 @@ const store = createStore(
 
       addCustomer:addCustomerReducer,
       getCustomerById:getCustomerByIdReducer,
-      getCustomerByIdRequest: getCustomerByIdRequestReducer
+      getCustomerByIdRequest: getCustomerByIdRequestReducer,
+      getAllCustomers: getAllCustomersReducer
     }),
     composeWithDevTools(applyMiddleware(thunk))
 )

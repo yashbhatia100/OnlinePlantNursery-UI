@@ -1,4 +1,4 @@
-import {getCustomer, updateCustomerName} from "../../service/CustomerService";
+import {getCustomer, updateCustomerName} from "../../service/customerService";
 import store from '../store';
 import getCustomerByIdRequestConstants from "./getCustomerByIdRequestConstants";
 

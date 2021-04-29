@@ -32,6 +32,11 @@ export default function customerHome(){
                         Change Customer Name
                     </Link>
                     </li>
+                    <li className="list-group-item bg-light mb-4 border-0">
+                    <Link to="/getallcustomers" className="nav-link">
+                        Get All Customers
+                    </Link>
+                    </li>
                 </ul>
             </div>
         </div>

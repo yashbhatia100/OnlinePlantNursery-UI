@@ -5,12 +5,13 @@ import DisplayCustomer from "./DisplayCustomer";
 import { getCustomerByIdActions } from "../../redux/getCustomerById/getCustomerByIdActions";
 
 export default function GetCustomerById(props) {
-  const response = useSelector((state) => {
-    return {
+  const response = useSelector(state => {
+    return( {
       customer: state.getCustomerById.customer,
       error: state.getCustomerById.error,
-    };
-  });
+    }
+    );
+  })
 
   const dispatch = useDispatch();
 
