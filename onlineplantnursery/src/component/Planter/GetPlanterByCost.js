@@ -5,6 +5,11 @@ import DisplayPlanterList from "./DisplayPlanterList";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllPlantersByCost } from "../../redux/fetchplanterbycost/fetchPlanterByCostAction";
 
+/**
+ * 
+ * Get The Planter By Cost Component
+ */
+
 export default function GetPlanterByCost() {
   const initialState = {
     minCost: undefined,
@@ -26,7 +31,10 @@ export default function GetPlanterByCost() {
     };
   });
   const dispatch = useDispatch();
-
+/**
+ * 
+ * Submit Handler Function
+ */
   const submitHandler = (event) => {
     event.preventDefault();
     console.log("Inside Submit Handler");
@@ -39,6 +47,11 @@ export default function GetPlanterByCost() {
     dispatch(fetchAllPlantersByCost(minCost, maxCost));
   };
 
+
+  /**
+   * 
+   * Change Handler Function 
+   */
   const changeHandler = (ref) => {
     console.log("In change Handler");
     const field = ref.current;
@@ -62,7 +75,10 @@ export default function GetPlanterByCost() {
     };
     setNewState(newState);
   };
-
+/**
+ * 
+ * Validating Planter minimum Cost
+ */
   const validateMinCost = (minCost) => {
     if (minCost < 0) {
       console.log("inside validate Min Cost");
@@ -70,6 +86,11 @@ export default function GetPlanterByCost() {
     }
     return undefined;
   };
+
+  /**
+   * 
+   * Validating Planter maximum Cost
+   */
 
   const validateMaxCost = (maxCost) => {
     if (maxCost < 0) {

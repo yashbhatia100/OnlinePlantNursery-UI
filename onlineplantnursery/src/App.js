@@ -1,4 +1,4 @@
-import './App.css';
+import "./App.css";
 
 import Addcustomer from './component/customer/Addcustomer';
 import GetCustomerDetailsOnRequest from './component/customer/GetCustomerDetailsOnRequest';
@@ -8,13 +8,13 @@ import ChangeCustomerName from './component/customer/ChangeCustomerName';
 import GetCustomerById from './component/customer/GetCustomerById';
 import GetAllCustomers from './component/customer/GetAllCustomers';
 
-import AddPlant from './component/plant/AddPlant';
-import GetAllPlants from './component/plant/GetAllPlants';
-import GetPlantByName from './component/plant/GetPlantByName';
-import GetPlantByNameRequest from './component/plant/GetPlantByNameRequest';
-import GetPlantToUpdate from './component/plant/GetPlantToUpdate';
-import plantHome from './component/plant/plantHome';
-import GetAllPlantsByType from './component/plant/GetAllPlantsByType';
+import AddPlant from "./component/plant/AddPlant";
+import GetAllPlants from "./component/plant/GetAllPlants";
+import GetPlantByName from "./component/plant/GetPlantByName";
+import GetPlantByNameRequest from "./component/plant/GetPlantByNameRequest";
+import GetPlantToUpdate from "./component/plant/GetPlantToUpdate";
+import plantHome from "./component/plant/plantHome";
+import GetAllPlantsByType from "./component/plant/GetAllPlantsByType";
 
 import AddPlanter from "./component/Planter/AddPlanter";
 import GetAllPlanters from "./component/Planter/GetAllPlanters";
@@ -23,6 +23,7 @@ import GetPlanterById from "./component/Planter/GetPlanterById";
 import PlanterHome from "./component/Planter/PlanterHome";
 import GetPlanterByIdRequest from "./component/Planter/GetPlanterByIdRequest";
 import GetPlanterByCost from "./component/Planter/GetPlanterByCost";
+import UpdatePlanterStock from "./component/Planter/UpdatePlanterStock";
 
 import SeedHome from "./component/seed/SeedHome";
 import AddSeed from "./component/seed/AddSeed";
@@ -37,6 +38,7 @@ import store from './redux/store';
 import { Provider } from 'react-redux';
 import Navbar from './component/Navbar';
 import Home from './component/Home';
+
 
 function App() {
   return (
@@ -62,7 +64,8 @@ function App() {
               <Route exact path="/planterbyidonrequest" component={GetPlanterByIdRequest} />
               <Route exact path="/planterbyshape" component={GetPlanterByShape} />
               <Route exact path="/planterbycost" component={GetPlanterByCost} />
-              
+              <Route exact path="/planterstockupdate" component={UpdatePlanterStock} />
+
               <Route exact path="/seedHome" component={SeedHome} />
               <Route exact path="/addseed" component={AddSeed} />
               <Route exact path="/seedbyid/:seedId" component={GetSeedById} />
@@ -79,18 +82,11 @@ function App() {
               <Route exact path="/getcustomerbyid/:id" component = {GetCustomerById} />
               <Route exact path="/changecustomername/:id" component = {ChangeCustomerName} />
               <Route exact path="/getallcustomers" component={GetAllCustomers}/>
-              <GetAllCustomers/>
             </Switch>
           </div>
         </Router>
       </Provider>
-    </div >
+    </div>
   );
 }
-export default App; 
-
-
- 
-     
-
-
+export default App;

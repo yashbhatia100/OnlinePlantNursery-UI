@@ -39,6 +39,12 @@ export default function PlanterHome() {
             </Link>
             <span> - Fetch all planters in a cost range</span>
           </li>
+          <li className={`list-group-item mb-4 border-0 ${commonStyle.listStyle}`}>
+            <Link to="/planterstockupdate">
+              <span>Update Planter Stock </span>
+            </Link>
+            <span> - Update Planter stock in database</span>
+          </li>
         </ul>
       </div>
     </div>

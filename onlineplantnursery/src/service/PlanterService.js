@@ -1,4 +1,5 @@
 import axios from "axios";
+import { data } from "jquery";
 const baseUrl = "http://localhost:8585";
 
 function fetchPlanter(id) {
@@ -46,10 +47,23 @@ function fetchAll() {
   return promise;
 }
 
+function updatePlanterStockService(data) {
+  const url = baseUrl + "/planter/updatestock";
+  let requestData = {
+    planterId: data.planterId,
+    planterStock: data.planterStock,
+  };
+  console.log("Inside update Planter Stock");
+
+  const promise = axios.put(url, requestData);
+  return promise;
+}
+
 export {
   fetchPlanter,
   addPlanter,
   fetchPlanterByShape,
   fetchPlanterByCost,
   fetchAll,
+  updatePlanterStockService,
 };

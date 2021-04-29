@@ -28,6 +28,7 @@ import getCustomerByIdRequestReducer from "./getCustomerByIdRequest/getCustomerB
 import getAllCustomersReducer from "./getAllCustomers/getAllCustomersReducer";
 
 import { composeWithDevTools } from "redux-devtools-extension";
+import updatePlanterStockReducer from './updatePlanterStock/updatePlanterStockReducer';
 
 const store = createStore(
 
@@ -45,6 +46,7 @@ const store = createStore(
     fetchAllPlantersByShape: fetchPlanterByShapeReducer,
     fetchAllPlantersByCost: fetchPlanterByCostReducer,
     fetchPlanterById: fetchPlanterByIdReducer,
+    updatePlanterStock:updatePlanterStockReducer,
 
     addSeed: addSeedReducer,
     fetchAllSeeds: fetchAllSeedsReducer,
@@ -53,10 +55,10 @@ const store = createStore(
     fetchSeedByCommonName: fetchSeedByNameReducer,
     updateSeedsStock: updateSeedsStockReducer,
 
-      addCustomer:addCustomerReducer,
-      getCustomerById:getCustomerByIdReducer,
-      getCustomerByIdRequest: getCustomerByIdRequestReducer,
-      getAllCustomers: getAllCustomersReducer
+    addCustomer:addCustomerReducer,
+    getCustomerById:getCustomerByIdReducer,
+    getCustomerByIdRequest: getCustomerByIdRequestReducer,
+    getAllCustomers: getAllCustomersReducer
   }),
   composeWithDevTools(applyMiddleware(thunk))
 );

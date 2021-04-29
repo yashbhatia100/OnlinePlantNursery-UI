@@ -5,6 +5,12 @@ import commonStyle from "./commonStyle.module.css";
 import { fetchAllPlantersByShape } from "../../redux/fetchplanterbyshape/fetchPlanterByShapeAction";
 import { useDispatch, useSelector } from "react-redux";
 
+/**
+   * 
+   * Get Planter By Shape Component
+   * 
+   */
+
 export default function GetPlanterByShape() {
   const planterShapeRef = React.createRef();
 
@@ -22,6 +28,7 @@ export default function GetPlanterByShape() {
     console.log("Inside Change Handler");
     const fieldVal = planterShapeRef.current.value;
     const newState = { planterShape: fieldVal };
+
     setNewState(newState);
   };
 
@@ -33,7 +40,7 @@ export default function GetPlanterByShape() {
     dispatch(fetchAllPlantersByShape(planterShape));
   };
   return (
-    <div>
+    <div className="container">
       <h3>Get Planters By Shape</h3>
       <form onSubmit={submitHandler}>
         <div className="form-group">

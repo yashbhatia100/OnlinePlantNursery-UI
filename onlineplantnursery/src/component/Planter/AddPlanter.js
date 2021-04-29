@@ -6,13 +6,19 @@ import { addPlanterAction } from "../../redux/addplanter/addPlanterActions";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPlantsAction } from "../../redux/getAllPlants/getAllPlantsActions";
 import { fetchAllSeeds } from "../../redux/fetchallseeds/fetchAllSeedsAction";
+
+/**
+ * Add Planter Componenet
+ *
+ */
+
 export default function AddPlanter() {
   const colors = [
     { id: 1, name: "Red" },
     { id: 2, name: "Green" },
     { id: 3, name: "Yellow" },
   ];
-  
+
   const planterHeightRef = React.createRef();
   const planterCapacityRef = React.createRef();
   const drainageHolesRef = React.createRef();
@@ -86,6 +92,10 @@ export default function AddPlanter() {
 
   useEffect(getSeedList, []);
 
+  /**
+   * Submit Handler
+   */
+
   const submitHandler = (event) => {
     console.log("Inside submit Handler");
     event.preventDefault();
@@ -102,6 +112,11 @@ export default function AddPlanter() {
     let data = { ...state };
     dispatch(addPlanterAction(data));
   };
+
+  /**
+   *
+   * Change Handler
+   */
 
   const changeHandler = (ref) => {
     const field = ref.current;
@@ -140,7 +155,9 @@ export default function AddPlanter() {
     };
     setNewState(newState);
   };
-
+  /**
+   * validating Planter Height
+   */
   const validatePlanterHeight = (planterHeight) => {
     if (planterHeight < 0) {
       console.log("inside validate Planter Height");
@@ -149,18 +166,29 @@ export default function AddPlanter() {
     return undefined;
   };
 
+  /**
+   * validating Planter Capacity
+   */
+
   const validatePlanterCapacity = (planterCapacity) => {
     if (planterCapacity < 0) {
       return validationMessage.invalidPlanterCapacity;
     }
     return undefined;
   };
+  /**
+   * validating Planter Drainage Holes
+   */
   const validateDraingeHoles = (drainageHoles) => {
     if (drainageHoles < 0) {
       return validationMessage.invalidPlatnterDrainageHoles;
     }
     return undefined;
   };
+
+  /**
+   * validating Planter Shape
+   */
 
   const validatePlanterShape = (planterShape) => {
     if (planterShape.length < 5) {
@@ -169,12 +197,20 @@ export default function AddPlanter() {
     return undefined;
   };
 
+  /**
+   * validating Planter Cost
+   */
+
   const validatePlanterCost = (planterCost) => {
     if (planterCost < 0) {
       return validationMessage.invalidPlanterCost;
     }
     return undefined;
   };
+
+  /**
+   * validating Planter Stock
+   */
 
   const validatePlanterStock = (planterStock) => {
     if (planterStock < 0) {
@@ -282,7 +318,7 @@ export default function AddPlanter() {
           <datalist id="planterShapeList">
             <option value="Square" />
             <option value="Rectangular" />
-            <option value="Cylinderical" />
+            <option value="Cylindrical" />
           </datalist>
           {state.validations.planterShape ? (
             <div className={commonStyle.error}>

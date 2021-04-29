@@ -1,4 +1,8 @@
 import { Link } from "react-router-dom";
+
+ /**
+   * Displaying All the Planters
+   */
 export default function DisplayPlanterList({ planters }) {
   return (
     <div className="mt-5">
