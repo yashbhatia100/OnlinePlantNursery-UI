@@ -5,7 +5,7 @@ import store from "../store";
 function fetchPlanterByCostFail(error) {
   return {
     type: fetchPlanterByCostConstants.fetchByCostFail,
-    planters: [],
+    planters: '',
     error: error,
   };
 }

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllPlantsAction } from '../../redux/getAllPlants.js/getAllPlantsActions';
+import { getAllPlantsAction } from '../../redux/getAllPlants/getAllPlantsActions';
 import DisplayPlantList from "./DisplayPlantList";
 
 export default function GetAllPlants() {

@@ -1,7 +1,7 @@
 import fetchPlanterByCostConstants from "./fetchPlanterByCostConstants";
 
 const initialState = {
-  planters: [],
+  planters: undefined,
   error: "",
 };
 

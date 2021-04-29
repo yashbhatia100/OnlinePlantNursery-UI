@@ -1,11 +1,12 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import thunk from "redux-thunk";
 import addPlantReducer from "./addPlant/addPlantReducer";
-import getAllPlantsReducer from "./getAllPlants.js/getAllPlantsReducer";
+import getAllPlantsReducer from "./getAllPlants/getAllPlantsReducer";
 import getPlantByNameReducer from "./getPlantByName/getPlantByNameReducer";
 import getPlantByNameRequestReducer from "./getPlantByNameRequest/getPlantByNameRequestReducer";
 import getPlantsByTypeReducer from "./getPlantsByType/getPlantsByTypeReducer";
 import updatePlantStockReducer from "./getPlantToUpdate/updatePlantStockReducer";
+
 
 import addPlanterReducer from "./addplanter/addPlanterReducer";
 import fetchAllPlantersReducer from "./fetchallplanters/fetchAllPlantersReducer";

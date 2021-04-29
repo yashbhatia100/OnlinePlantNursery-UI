@@ -1,8 +1,8 @@
 import fetchPlanterByShapeConstants from "./fetchPlanterByShapeConstants";
 
 const initialState = {
-  planters: [],
-  error: [],
+  planters: undefined,
+  error: '',
 };
 
 function fetchPlanterByShapeReducer(state = initialState, action) {

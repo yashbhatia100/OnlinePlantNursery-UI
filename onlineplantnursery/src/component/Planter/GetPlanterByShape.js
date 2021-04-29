@@ -11,24 +11,24 @@ export default function GetPlanterByShape() {
   const [state, setNewState] = useState({ planterShape: undefined });
 
   const response = useSelector((state) => {
-    return {
+    return ({
       planters: state.fetchAllPlantersByShape.planters,
       error: state.fetchAllPlantersByShape.error,
-    };
+    });
   });
   const dispatch = useDispatch();
 
-  const changeHandler = (ref) => {
+  const changeHandler = () => {
     console.log("Inside Change Handler");
     const fieldVal = planterShapeRef.current.value;
-    const newState = { planterShape: undefined };
+    const newState = { planterShape: fieldVal };
     setNewState(newState);
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
     console.log("Inside Submit Handler");
-    const planterShape = planterShapeRef.current.value;
+    const planterShape = state.planterShape;
    
     dispatch(fetchAllPlantersByShape(planterShape));
   };
@@ -49,9 +49,9 @@ export default function GetPlanterByShape() {
             autoComplete="off"
           />
           <datalist id="planterShapeList">
-            <option value="Cylinderical" />
+            <option value="Cylindrical" />
             <option value="Square" />
-            <option value="Recatngualr" />
+            <option value="Rectangular" />
           </datalist>
         </div>
         <button className="btn btn-primary">Get Planters</button>
@@ -69,7 +69,7 @@ export default function GetPlanterByShape() {
 
       {response.error ? (
         <div className={commonStyle.error}>
-          Request was unsuccessfull
+          Request was unsuccessful
           <br />
           {response.error}
         </div>

@@ -4,7 +4,7 @@ import fetchPlanterByShapeConstants from "./fetchPlanterByShapeConstants";
 function fetchPlanterByShapeFail(error) {
   return {
     type: fetchPlanterByShapeConstants.fetchByShapeFail,
-    planters: [],
+    planters: '',
     error: error
   };
 }
