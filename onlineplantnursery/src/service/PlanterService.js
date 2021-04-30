@@ -2,12 +2,27 @@ import axios from "axios";
 import { data } from "jquery";
 const baseUrl = "http://localhost:8585";
 
+/**
+ * fetching planter from the database using id
+ * 
+ * @param  id 
+ * @returns promise
+ */
+
+
 function fetchPlanter(id) {
   const url = baseUrl + "/planter/fetch/byid/" + id;
   console.log("Inside fetch by planter Service with Id", +id);
   const promise = axios.get(url);
   return promise;
 }
+
+/**
+ * adding the planter in the database
+ * 
+ * @param  data 
+ * @returns promise 
+ */
 
 function addPlanter(data) {
   const url = baseUrl + "/planter/add";
@@ -28,12 +43,26 @@ function addPlanter(data) {
   return promise;
 }
 
+/**
+ * fetching the planter using planter Shape
+ * 
+ * @param  planterShape 
+ * @returns promise 
+ */
 function fetchPlanterByShape(planterShape) {
   const url = baseUrl + "/planter/fetch/byshape/" + planterShape;
   console.log("Inside fetch by PlanterShape with shape " + planterShape);
   const promise = axios.get(url);
   return promise;
 }
+
+/**
+ * fetching the planter based on the range of the Cost
+ * 
+ * @param  minCost 
+ * @param  maxCost 
+ * @returns promise 
+ */
 function fetchPlanterByCost(minCost, maxCost) {
   const url = baseUrl + "/planter/fetch/bycost/" + minCost + "/" + maxCost;
   console.log("Inside fetch by PlanterCost " + url);
@@ -41,11 +70,23 @@ function fetchPlanterByCost(minCost, maxCost) {
   return promise;
 }
 
+/**
+ * fetching all the planters
+ * 
+ * @returns promise
+ */
 function fetchAll() {
   const url = baseUrl + "/planter/fetch";
   const promise = axios.get(url);
   return promise;
 }
+
+/**
+ * updating the planter stock in the database
+ * 
+ * @param  data 
+ * @returns promise 
+ */
 
 function updatePlanterStockService(data) {
   const url = baseUrl + "/planter/updatestock";
